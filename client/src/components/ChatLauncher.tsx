@@ -101,7 +101,7 @@ export default function ChatLauncher() {
           className="transition-transform hover:scale-105 focus:outline-none"
           aria-label={isChatOpen ? "Close chat" : "Open chat"}
         >
-          <i className="fas fa-comments text-4xl text-primary"></i>
+          <img src="https://i.imgur.com/OzIqYPL.jpeg" alt="Chat with Yard Bros" className="w-full h-full rounded-full object-cover" />
         </button>
       </div>
     </div>

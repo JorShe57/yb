@@ -1,7 +1,10 @@
-import { useState } from "react";
-import ParallaxBackground from "./ParallaxBackground";
+import React, { useState } from "react";
+import AnimatedSection from "./AnimatedSection";
+import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 
 export default function CalculatorSection() {
+  const { ref: calculatorRef, isVisible: calculatorVisible } = useScrollAnimation({ threshold: 0.1 });
+  const { ref: helpSectionRef, isVisible: helpSectionVisible } = useScrollAnimation({ threshold: 0.1 });
   const [activeCalculator, setActiveCalculator] = useState<'lengthWidth' | 'area'>('lengthWidth');
   
   // Length & Width Calculator
@@ -85,10 +88,10 @@ export default function CalculatorSection() {
   };
   
   return (
-    <ParallaxBackground 
-      imageUrl="/images/backgrounds/quote-2-bg.png" 
-      className="section-fade py-16"
-      speed={0.1}
+    <AnimatedSection 
+      id="calculator" 
+      className="py-16 bg-gradient-to-tr from-gray-100 to-neutral"
+      animation="fade"
     >
       <div className="container mx-auto px-4 bg-white/80 backdrop-blur-sm p-6 rounded-lg shadow-lg">
         <div className="flex items-center mb-8">
@@ -117,7 +120,11 @@ export default function CalculatorSection() {
           </button>
         </div>
         
-        <div className="calculator-containers">
+        <div 
+          className="calculator-containers animate-from-bottom"
+          style={{ transitionDelay: '0.3s' }}
+          ref={calculatorRef as React.RefObject<HTMLDivElement>}
+        >
           {/* Length & Width Calculator */}
           <div className={`calculator-container bg-white p-6 rounded-lg shadow-md ${activeCalculator === 'lengthWidth' ? '' : 'hidden'}`}>
             <h3 className="text-xl font-heading font-semibold mb-4">Calculate by Length & Width</h3>
@@ -245,7 +252,10 @@ export default function CalculatorSection() {
           </div>
         </div>
         
-        <div className="mt-8 bg-white p-6 rounded-lg shadow-md">
+        <div 
+          className="mt-8 bg-white p-6 rounded-lg shadow-md animate-from-right"
+          style={{ transitionDelay: '0.5s' }}
+          ref={helpSectionRef as React.RefObject<HTMLDivElement>}>
           <h3 className="text-xl font-heading font-semibold mb-4">Need Help with Your Topsoil?</h3>
           <p className="mb-4">Once you've calculated your topsoil needs, let us handle the delivery and spreading. We provide premium topsoil that's perfect for establishing new lawns and gardens.</p>
           <a href="#quotes" className="bg-primary hover:bg-green-700 text-white font-semibold py-2 px-6 rounded-lg transition-colors inline-block">
@@ -253,6 +263,6 @@ export default function CalculatorSection() {
           </a>
         </div>
       </div>
-    </ParallaxBackground>
+    </AnimatedSection>
   );
 }

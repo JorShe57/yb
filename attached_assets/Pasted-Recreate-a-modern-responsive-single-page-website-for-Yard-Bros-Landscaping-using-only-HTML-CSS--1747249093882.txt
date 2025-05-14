@@ -1,0 +1,47 @@
+Recreate a modern, responsive single-page website for "Yard Bros Landscaping" using only HTML, CSS, and (if needed) vanilla JavaScript. The site should closely follow the structure, content, and interactive elements found in the provided index.html file. Here are the requirements:
+General Layout & Structure:
+The site should have a main wrapper with multiple sections: Home, Free Quotes, Our Services, Our Sod, Topsoil Calculator (with sub-sections for area and length/width).
+Use semantic HTML5 elements and ensure accessibility (ARIA roles, alt text, etc.).
+The navigation should be based on anchor links that scroll to each section.
+Header & Home Section:
+Prominently display the business name, tagline, and a hero image.
+Include a button group for navigation: Free Quotes, Our Services, Our Sod, Topsoil Calculator.
+Free Quotes Section:
+Include a form with fields for Name, Email, City, Service Address, Phone Number, and Additional Comments.
+The form should be styled and have required fields.
+Add a "Chevron Left" icon/button linking back to the main site.
+Our Services Section:
+Display a grid of interactive "flip cards" for each service (e.g., Site Preparation & Grading, Edging & Trimming, Premium Sod Installation, Fertilization & Soil Amendment, Old Turf Removal, Irrigation Consultation).
+Each card should have a front (image + title) and a back (description + "Get a Quote" button).
+Use CSS for the flip animation and card styling.
+Include a "Book Consultation" button and a "Chevron Left" icon/button.
+Our Sod Section:
+Show a grid of images representing different types of sod or related visuals.
+Include a "Chevron Left" icon/button.
+Topsoil Calculator Section:
+Provide two navigation buttons: "Length & Width" and "Area".
+Each button should scroll to a corresponding embedded calculator section.
+Topsoil Calculator Subsections:
+Embed calculators using iframes (as in the original), one for area and one for length/width.
+Footer:
+Add a fixed-position chat launcher in the bottom right, with a label and a circular image button.
+When clicked, the button toggles a chat iframe (embedded from an external URL).
+Style the chat launcher and chat window for both desktop and mobile.
+Assets:
+Use placeholder images or the same image URLs as in the original file.
+Reference icons and images as in the original, or use similar open-source alternatives if needed.
+Styling:
+Use modern, clean CSS for layout, cards, buttons, and forms.
+Ensure the site is mobile-friendly and responsive.
+Use the color palette and font styles similar to the original.
+Interactivity:
+Implement the flip card effect with CSS.
+The chat launcher should open/close the chat iframe with a simple JavaScript function.
+Meta & SEO:
+Include meta tags for title, description, viewport, and Open Graph as in the original.
+Deliverables:
+Provide a single HTML file (with embedded CSS and JS or linked to external files as needed).
+Ensure all sections and interactive elements are present and functional.
+Reference:
+Use the structure, content, and interactive elements as found in the provided index.html file. Recreate all sections, forms, cards, images, and the chat launcher as described.
+This prompt will guide an AI agent to faithfully recreate your site, section by section, using all the elements and layout from your original file

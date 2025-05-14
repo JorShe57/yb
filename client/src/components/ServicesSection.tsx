@@ -58,7 +58,6 @@ export default function ServicesSection() {
                   <div className="service-title">{service.title}</div>
                 </div>
                 <div className="flip-card-back">
-                  <h3 className="text-xl font-heading font-semibold mb-4 text-primary">{service.title}</h3>
                   <p>{service.description}</p>
                   <a href="#quotes" className="btn">Get a Quote</a>
                 </div>

@@ -3,13 +3,13 @@ export default function ServicesSection() {
   const services = [
     {
       title: "Site Preparation & Grading",
-      description: "We prepare your yard with expert grading techniques to ensure proper drainage and a solid foundation for your landscaping projects.",
+      description: "We level and grade your yard for perfect drainage and a smooth, even surface—getting the base just right before any new grass goes down.",
       image: "https://pixabay.com/get/gca02011192e898afeafc8e955c200c2b7e7cd5dfac8a88b06859600d7536c80ffa5ecdf51200caccaa02fb75fe9a014511025e080b886dd024d096c2feb1c93c_1280.jpg",
       alt: "Site Preparation & Grading"
     },
     {
       title: "Edging & Trimming",
-      description: "Our precision edging and trimming services create clean lines and defined spaces that enhance the overall appearance of your landscape.",
+      description: "Clean, crisp edges around sidewalks, driveways, and garden beds that enhance the overall appearance of your landscape.",
       image: "https://pixabay.com/get/gc86b3569c81517d00674c28d05cebd01f9f0be825b3c4088f6e451dababd6aa9a752c21c41d7d908975e10990d2557cd6c98868e04212b16b56545e5e2739a42_1280.jpg",
       alt: "Edging & Trimming"
     },
@@ -49,22 +49,18 @@ export default function ServicesSection() {
           <h2 className="text-3xl font-heading font-bold">Our Services</h2>
         </div>
         
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="flex flex-wrap justify-center">
           {services.map((service, index) => (
-            <div key={index} className="flip-card">
+            <div key={index} className="flip-card" tabIndex={0}>
               <div className="flip-card-inner">
-                <div className="flip-card-front bg-white shadow-lg rounded-lg overflow-hidden">
-                  <img src={service.image} alt={service.alt} className="w-full h-[200px] object-cover" />
-                  <div className="p-4">
-                    <h3 className="text-xl font-heading font-semibold text-primary">{service.title}</h3>
-                  </div>
+                <div className="flip-card-front">
+                  <img src={service.image} alt={service.alt} />
+                  <div className="service-title">{service.title}</div>
                 </div>
-                <div className="flip-card-back bg-primary text-white p-6 flex flex-col">
-                  <h3 className="text-xl font-heading font-semibold mb-4">{service.title}</h3>
-                  <p className="mb-6">{service.description}</p>
-                  <a href="#quotes" className="mt-auto bg-white text-primary hover:bg-gray-100 font-semibold py-2 px-4 rounded transition-colors self-start">
-                    Get a Quote
-                  </a>
+                <div className="flip-card-back">
+                  <h3 className="text-xl font-heading font-semibold mb-4 text-primary">{service.title}</h3>
+                  <p>{service.description}</p>
+                  <a href="#quotes" className="btn">Get a Quote</a>
                 </div>
               </div>
             </div>

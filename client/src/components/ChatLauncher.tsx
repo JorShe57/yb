@@ -46,7 +46,7 @@ export default function ChatLauncher() {
     <div className="fixed bottom-6 right-6 z-50">
       <div className={`chat-container bg-white rounded-lg shadow-xl overflow-hidden mb-4 w-80 h-96 ${isChatOpen ? 'open' : ''}`}>
         <div className="bg-primary text-white p-3 flex justify-between items-center">
-          <h3 className="font-heading font-semibold">Chat with Us</h3>
+          <h3 className="font-heading font-semibold">Chat with Yard Bros</h3>
           <button 
             onClick={toggleChat}
             className="text-white hover:text-accent focus:outline-none"
@@ -93,13 +93,17 @@ export default function ChatLauncher() {
         </div>
       </div>
       
-      <button 
-        onClick={toggleChat}
-        className="bg-primary hover:bg-green-700 text-white rounded-full w-16 h-16 flex items-center justify-center shadow-lg transition-colors focus:outline-none"
-        aria-label={isChatOpen ? "Close chat" : "Open chat"}
-      >
-        <i className="fas fa-comments text-2xl"></i>
-      </button>
+      <div id="chat-launcher-container">
+        {!isChatOpen && <div id="chat-launcher-label">Chat with us</div>}
+        <button 
+          id="chat-launcher"
+          onClick={toggleChat}
+          className="transition-transform hover:scale-105 focus:outline-none"
+          aria-label={isChatOpen ? "Close chat" : "Open chat"}
+        >
+          <i className="fas fa-comments text-4xl text-primary"></i>
+        </button>
+      </div>
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import ParallaxBackground from "./ParallaxBackground";
 
 export default function CalculatorSection() {
   const [activeCalculator, setActiveCalculator] = useState<'lengthWidth' | 'area'>('lengthWidth');
@@ -84,8 +85,12 @@ export default function CalculatorSection() {
   };
   
   return (
-    <section id="calculator" className="section-fade py-16 bg-gradient-to-br from-neutral to-green-50">
-      <div className="container mx-auto px-4">
+    <ParallaxBackground 
+      imageUrl="/images/backgrounds/quote-2-bg.png" 
+      className="section-fade py-16"
+      speed={0.1}
+    >
+      <div className="container mx-auto px-4 bg-white/80 backdrop-blur-sm p-6 rounded-lg shadow-lg">
         <div className="flex items-center mb-8">
           <a href="#home" className="text-primary hover:text-secondary mr-3" aria-label="Go back to home">
             <i className="fas fa-chevron-left text-xl"></i>
@@ -248,6 +253,6 @@ export default function CalculatorSection() {
           </a>
         </div>
       </div>
-    </section>
+    </ParallaxBackground>
   );
 }

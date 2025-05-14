@@ -1,24 +1,17 @@
+import sodImage from '@assets/Sod.png';
+import turfImage from '@assets/Turf.png';
+
 export default function SodSection() {
   const sodTypes = [
     {
-      name: "Kentucky Bluegrass",
-      description: "A lush, dense turf ideal for high-traffic areas with excellent winter hardiness.",
-      image: "https://images.unsplash.com/photo-1563911892437-1feda0179e1b?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400"
+      name: "YardBros SunGold Blend",
+      description: "Perfect for high-visibility areas, full sun exposure, and requires minimal maintenance. Offers exceptional disease resistance and a soft, luxurious texture for comfortable barefoot enjoyment.",
+      image: sodImage
     },
     {
-      name: "Bermuda Grass",
-      description: "Drought-resistant and heat-tolerant, perfect for sunny locations.",
-      image: "https://pixabay.com/get/gfcfa334888d5dad6ac5c98709d17546370eb791038762e8ce26d1fc70c93e483caa350325d53de87627c253b5fe7b15abb9a989be1f1cae4c1225119e545fb2c_1280.jpg"
-    },
-    {
-      name: "Zoysia Grass",
-      description: "Low-maintenance with excellent heat and drought tolerance.",
-      image: "https://pixabay.com/get/gf6de73d46e31a54c299277dc3be82721dc6d047487562120c7407dc12dc3a4bebd3dbd73586bf973ff0c5a6c9205343babe7e7cfbdbde60ae2072d9ff79517fd_1280.jpg"
-    },
-    {
-      name: "Tall Fescue",
-      description: "Excellent shade tolerance and year-round color in most climates.",
-      image: "https://images.unsplash.com/photo-1527847263472-aa5338d178b8?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400"
+      name: "YardBros Cool Shade Blend",
+      description: "Specially developed for shaded areas and cooler climates, thriving in various soil types. Features superior drought tolerance and provides excellent erosion control for sloped areas.",
+      image: turfImage
     }
   ];
   
@@ -33,16 +26,30 @@ export default function SodSection() {
         </div>
         
         <div className="mb-8">
-          <p className="text-lg max-w-4xl">We offer a variety of premium sod options to suit your specific needs and local climate conditions. All our sod is freshly harvested and delivered directly to your location.</p>
+          <p className="text-lg max-w-4xl">YardBros Landscaping offers two premium sod blends, carefully developed to thrive in different conditions. Our sod is freshly harvested, delivered directly to your location, and professionally installed for immediate curb appeal.</p>
+          <div className="flex items-center mt-4 bg-green-50 p-4 rounded-lg border border-green-100">
+            <div className="text-green-600 mr-3">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            </div>
+            <p className="text-sm text-gray-700">All YardBros sod varieties are backed by our 30-day establishment guarantee and include a complimentary post-installation care guide.</p>
+          </div>
         </div>
         
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid md:grid-cols-2 gap-8 mt-10">
           {sodTypes.map((sod, index) => (
-            <div key={index} className="bg-neutral rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
-              <img src={sod.image} alt={sod.name} className="w-full h-48 object-cover" />
-              <div className="p-4">
-                <h3 className="text-lg font-heading font-semibold text-primary">{sod.name}</h3>
-                <p className="mt-2 text-sm">{sod.description}</p>
+            <div key={index} className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow border border-gray-100">
+              <div className="relative h-64 overflow-hidden">
+                <img src={sod.image} alt={sod.name} className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end">
+                  <h3 className="text-xl font-heading font-bold text-white p-4">{sod.name}</h3>
+                </div>
+              </div>
+              <div className="p-5">
+                <p className="mt-2 text-gray-700 leading-relaxed">{sod.description}</p>
+                <div className="mt-5 flex items-center">
+                  <div className="h-2 w-2 rounded-full bg-green-500 mr-2"></div>
+                  <span className="text-sm text-green-600 font-medium">Premium Quality</span>
+                </div>
               </div>
             </div>
           ))}

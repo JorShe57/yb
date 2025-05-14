@@ -72,7 +72,7 @@ export default function QuotesSection() {
   
   return (
     <ParallaxBackground 
-      imageUrl="/images/backgrounds/fert-bg.png" 
+      imageUrl="/images/backgrounds/quote-bg.png" 
       className="section-fade py-16"
       speed={0.15}
     >

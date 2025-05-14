@@ -46,17 +46,20 @@ export default function ParallaxBackground({
   
   const backgroundStyle = {
     backgroundImage: `url(${imageUrl})`,
-    backgroundPosition: `center ${50 + (offset * 0.1)}%`,
-    transform: `translateY(${offset}px)`,
-    transition: 'transform 0.1s ease-out',
+    backgroundPosition: `center ${50 + (offset * 0.15)}%`,
+    backgroundSize: 'cover',
+    transform: `translateY(${offset * 0.5}px)`,
+    transition: 'transform 0.2s ease-out, background-position 0.2s ease-out',
+    filter: 'brightness(1.05)',
   };
   
   return (
-    <div ref={sectionRef} className={`relative ${className}`}>
+    <div ref={sectionRef} className={`relative overflow-hidden ${className}`}>
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={backgroundStyle}
       />
+      <div className="absolute inset-0 bg-black/10 backdrop-blur-[1px]" />
       <div className="relative z-10">
         {children}
       </div>

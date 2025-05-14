@@ -86,11 +86,11 @@ export default function CalculatorSection() {
   
   return (
     <ParallaxBackground 
-      imageUrl="/images/backgrounds/turf-bg.png" 
+      imageUrl="/images/backgrounds/quote-2-bg.png" 
       className="section-fade py-16"
       speed={0.1}
     >
-      <div className="container mx-auto px-4 bg-white/90 p-6 rounded-lg shadow-lg">
+      <div className="container mx-auto px-4 bg-white/80 backdrop-blur-sm p-6 rounded-lg shadow-lg">
         <div className="flex items-center mb-8">
           <a href="#home" className="text-primary hover:text-secondary mr-3" aria-label="Go back to home">
             <i className="fas fa-chevron-left text-xl"></i>

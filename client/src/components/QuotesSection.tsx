@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useMutation } from "@tanstack/react-query";
+import { apiRequest } from "@/lib/queryClient";
 
 export default function QuotesSection() {
   const [formData, setFormData] = useState({
@@ -12,6 +14,45 @@ export default function QuotesSection() {
   });
   
   const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState("");
+  
+  // Use React Query mutation for submitting the form
+  const quoteRequestMutation = useMutation({
+    mutationFn: async (data: typeof formData) => {
+      return apiRequest("/api/quotes", {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      });
+    },
+    onSuccess: () => {
+      // Show success message and reset form
+      setSubmitted(true);
+      setSubmitError("");
+      
+      // Reset form data
+      setFormData({
+        name: "",
+        email: "",
+        city: "",
+        address: "",
+        phone: "",
+        service: "",
+        comments: ""
+      });
+      
+      // Reset submission status after 5 seconds
+      setTimeout(() => {
+        setSubmitted(false);
+      }, 5000);
+    },
+    onError: (error) => {
+      console.error("Error submitting quote request:", error);
+      setSubmitError("Failed to submit your request. Please try again later.");
+    }
+  });
   
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -30,25 +71,8 @@ export default function QuotesSection() {
       return;
     }
     
-    // In a real application, you would send this data to a server
-    console.log('Form submitted:', formData);
-    
-    // Show success message and reset form
-    setSubmitted(true);
-    setFormData({
-      name: "",
-      email: "",
-      city: "",
-      address: "",
-      phone: "",
-      service: "",
-      comments: ""
-    });
-    
-    // Reset submission status after 5 seconds
-    setTimeout(() => {
-      setSubmitted(false);
-    }, 5000);
+    // Submit the form data using the mutation
+    quoteRequestMutation.mutate(formData);
   };
   
   return (
@@ -62,11 +86,19 @@ export default function QuotesSection() {
         </div>
         
         <div className="max-w-2xl mx-auto bg-neutral p-6 rounded-lg shadow-md">
-          {submitted ? (
+          {/* Success message */}
+          {submitted && (
             <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-6">
               <span className="block sm:inline">Thank you for your quote request! We will contact you shortly.</span>
             </div>
-          ) : null}
+          )}
+          
+          {/* Error message */}
+          {submitError && (
+            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-6">
+              <span className="block sm:inline">{submitError}</span>
+            </div>
+          )}
           
           <form id="quoteForm" className="space-y-6" onSubmit={handleSubmit}>
             <div className="grid md:grid-cols-2 gap-6">
@@ -79,6 +111,7 @@ export default function QuotesSection() {
                   value={formData.name}
                   onChange={handleChange}
                   required 
+                  disabled={quoteRequestMutation.isPending}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                 />
               </div>
@@ -91,6 +124,7 @@ export default function QuotesSection() {
                   value={formData.email}
                   onChange={handleChange}
                   required 
+                  disabled={quoteRequestMutation.isPending}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                 />
               </div>
@@ -103,6 +137,7 @@ export default function QuotesSection() {
                   value={formData.city}
                   onChange={handleChange}
                   required 
+                  disabled={quoteRequestMutation.isPending}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                 />
               </div>
@@ -115,6 +150,7 @@ export default function QuotesSection() {
                   value={formData.address}
                   onChange={handleChange}
                   required 
+                  disabled={quoteRequestMutation.isPending}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                 />
               </div>
@@ -127,6 +163,7 @@ export default function QuotesSection() {
                   value={formData.phone}
                   onChange={handleChange}
                   required 
+                  disabled={quoteRequestMutation.isPending}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                 />
               </div>
@@ -137,6 +174,7 @@ export default function QuotesSection() {
                   name="service" 
                   value={formData.service}
                   onChange={handleChange}
+                  disabled={quoteRequestMutation.isPending}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                 >
                   <option value="">Select a service</option>
@@ -157,6 +195,7 @@ export default function QuotesSection() {
                 rows={4} 
                 value={formData.comments}
                 onChange={handleChange}
+                disabled={quoteRequestMutation.isPending}
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
               ></textarea>
             </div>
@@ -164,9 +203,22 @@ export default function QuotesSection() {
             <div className="text-right">
               <button 
                 type="submit" 
-                className="bg-primary hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
+                disabled={quoteRequestMutation.isPending}
+                className={`${
+                  quoteRequestMutation.isPending ? 'bg-gray-400' : 'bg-primary hover:bg-green-700'
+                } text-white font-semibold py-3 px-6 rounded-lg transition-colors flex items-center justify-center ml-auto`}
               >
-                Submit Quote Request
+                {quoteRequestMutation.isPending ? (
+                  <>
+                    <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Processing...
+                  </>
+                ) : (
+                  'Submit Quote Request'
+                )}
               </button>
             </div>
           </form>

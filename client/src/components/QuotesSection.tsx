@@ -19,13 +19,7 @@ export default function QuotesSection() {
   // Use React Query mutation for submitting the form
   const quoteRequestMutation = useMutation({
     mutationFn: async (data: typeof formData) => {
-      return apiRequest("/api/quotes", {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: {
-          "Content-Type": "application/json"
-        }
-      });
+      return apiRequest("POST", "/api/quotes", data);
     },
     onSuccess: () => {
       // Show success message and reset form

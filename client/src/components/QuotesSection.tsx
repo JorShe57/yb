@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
+import AnimatedSection from "./AnimatedSection";
+import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 
 export default function QuotesSection() {
+  const { ref: formRef, isVisible: formVisible } = useScrollAnimation({ threshold: 0.2 });
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -70,9 +73,14 @@ export default function QuotesSection() {
   };
   
   return (
-    <section id="quotes" className="section-fade py-16 bg-gradient-to-br from-gray-100 to-neutral">
+    <AnimatedSection 
+      id="quotes" 
+      animation="from-bottom"
+      className="py-16 bg-gradient-to-br from-gray-100 to-neutral"
+      showTransitionToNext={true}
+    >
       <div className="container mx-auto px-4">
-        <div className="flex items-center mb-8">
+        <div className="flex items-center mb-8 animate-from-left" style={{ transitionDelay: '0.3s' }}>
           <a href="#home" className="text-primary hover:text-secondary mr-3" aria-label="Go back to home">
             <i className="fas fa-chevron-left text-xl"></i>
           </a>
@@ -94,7 +102,11 @@ export default function QuotesSection() {
             </div>
           )}
           
-          <form id="quoteForm" className="space-y-6" onSubmit={handleSubmit}>
+          <form 
+            id="quoteForm" 
+            className={`space-y-6 ${formVisible ? 'animate-show' : 'animate-hidden'}`}
+            ref={formRef as React.RefObject<HTMLFormElement>}
+            onSubmit={handleSubmit}>
             <div className="grid md:grid-cols-2 gap-6">
               <div>
                 <label htmlFor="name" className="block text-sm font-semibold mb-2">Name *</label>
@@ -218,6 +230,6 @@ export default function QuotesSection() {
           </form>
         </div>
       </div>
-    </section>
+    </AnimatedSection>
   );
 }

@@ -60,14 +60,107 @@
   }
 }
 
-/* Fade in animation for sections */
+/* Animation classes for sections */
 .section-fade {
   animation: fadeIn 0.5s ease-in-out;
 }
 
+/* Animation for elements that scroll into view */
+.animate-hidden {
+  opacity: 0;
+  filter: blur(5px);
+  transform: translateY(40px);
+  transition: all 1s ease;
+}
+
+.animate-show {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateY(0);
+}
+
+/* Direction-based scroll animations */
+.animate-from-left {
+  opacity: 0;
+  filter: blur(5px);
+  transform: translateX(-100px);
+  transition: all 1s ease;
+}
+
+.animate-from-right {
+  opacity: 0;
+  filter: blur(5px);
+  transform: translateX(100px);
+  transition: all 1s ease;
+}
+
+.animate-from-top {
+  opacity: 0;
+  filter: blur(5px);
+  transform: translateY(-100px);
+  transition: all 1s ease;
+}
+
+.animate-from-bottom {
+  opacity: 0;
+  filter: blur(5px);
+  transform: translateY(100px);
+  transition: all 1s ease;
+}
+
+/* Stagger children animations */
+.stagger-children > * {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
+}
+
+.stagger-children.animate-show > *:nth-child(1) { transition-delay: 0.1s; }
+.stagger-children.animate-show > *:nth-child(2) { transition-delay: 0.2s; }
+.stagger-children.animate-show > *:nth-child(3) { transition-delay: 0.3s; }
+.stagger-children.animate-show > *:nth-child(4) { transition-delay: 0.4s; }
+.stagger-children.animate-show > *:nth-child(5) { transition-delay: 0.5s; }
+.stagger-children.animate-show > *:nth-child(6) { transition-delay: 0.6s; }
+.stagger-children.animate-show > *:nth-child(7) { transition-delay: 0.7s; }
+.stagger-children.animate-show > *:nth-child(8) { transition-delay: 0.8s; }
+
+.stagger-children.animate-show > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Keyframes for basic animations */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(40px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Section transitions */
+.section-transition {
+  position: relative;
+  overflow: hidden;
+}
+
+.section-transition::after {
+  content: '';
+  position: absolute;
+  height: 100px;
+  bottom: -50px;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.8));
+  z-index: 1;
+  pointer-events: none;
 }
 
 /* Font settings */

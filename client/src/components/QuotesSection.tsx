@@ -104,7 +104,7 @@ export default function QuotesSection() {
           
           <form 
             id="quoteForm" 
-            className={`space-y-6 ${formVisible ? 'animate-show' : 'animate-hidden'}`}
+            className="space-y-6 animate-show"
             ref={formRef as React.RefObject<HTMLFormElement>}
             onSubmit={handleSubmit}>
             <div className="grid md:grid-cols-2 gap-6">

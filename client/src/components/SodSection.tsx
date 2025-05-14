@@ -5,10 +5,11 @@ import AnimatedSection from "./AnimatedSection";
 import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 
 export default function SodSection() {
-  const { ref: sodTypesRef, isVisible: sodTypesVisible } = useScrollAnimation({ threshold: 0.15 });
-  const { ref: compareRef, isVisible: compareVisible } = useScrollAnimation({ threshold: 0.1 });
-  const { ref: faqRef, isVisible: faqVisible } = useScrollAnimation({ threshold: 0.1 });
-  const { ref: galleryRef, isVisible: galleryVisible } = useScrollAnimation({ threshold: 0.1 });
+  // Keep refs but set visibility to true by default for all elements
+  const { ref: sodTypesRef } = useScrollAnimation({ threshold: 0.15 });
+  const { ref: compareRef } = useScrollAnimation({ threshold: 0.1 });
+  const { ref: faqRef } = useScrollAnimation({ threshold: 0.1 });
+  const { ref: galleryRef } = useScrollAnimation({ threshold: 0.1 });
   const sodTypes = [
     {
       name: "YardBros SunGold Blend",

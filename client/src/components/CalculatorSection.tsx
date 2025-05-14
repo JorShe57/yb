@@ -3,8 +3,9 @@ import AnimatedSection from "./AnimatedSection";
 import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 
 export default function CalculatorSection() {
-  const { ref: calculatorRef, isVisible: calculatorVisible } = useScrollAnimation({ threshold: 0.1 });
-  const { ref: helpSectionRef, isVisible: helpSectionVisible } = useScrollAnimation({ threshold: 0.1 });
+  // Keep refs but ensure content is visible by default
+  const { ref: calculatorRef } = useScrollAnimation({ threshold: 0.1 });
+  const { ref: helpSectionRef } = useScrollAnimation({ threshold: 0.1 });
   const [activeCalculator, setActiveCalculator] = useState<'lengthWidth' | 'area'>('lengthWidth');
   
   // Length & Width Calculator

@@ -1,7 +1,14 @@
+import React from 'react';
 import sodImage from '@assets/Sod.png';
 import turfImage from '@assets/Turf.png';
+import AnimatedSection from "./AnimatedSection";
+import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 
 export default function SodSection() {
+  const { ref: sodTypesRef, isVisible: sodTypesVisible } = useScrollAnimation({ threshold: 0.15 });
+  const { ref: compareRef, isVisible: compareVisible } = useScrollAnimation({ threshold: 0.1 });
+  const { ref: faqRef, isVisible: faqVisible } = useScrollAnimation({ threshold: 0.1 });
+  const { ref: galleryRef, isVisible: galleryVisible } = useScrollAnimation({ threshold: 0.1 });
   const sodTypes = [
     {
       name: "YardBros SunGold Blend",
@@ -16,7 +23,12 @@ export default function SodSection() {
   ];
   
   return (
-    <section id="sod" className="section-fade py-16 bg-gradient-to-tr from-white to-green-50">
+    <AnimatedSection 
+      id="sod" 
+      className="py-16 bg-gradient-to-tr from-white to-green-50"
+      animation="from-right"
+      showTransitionToNext={true}
+    >
       <div className="container mx-auto px-4">
         <div className="flex items-center mb-8">
           <a href="#home" className="text-primary hover:text-secondary mr-3" aria-label="Go back to home">
@@ -240,6 +252,6 @@ export default function SodSection() {
           </a>
         </div>
       </div>
-    </section>
+    </AnimatedSection>
   );
 }

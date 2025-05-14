@@ -1,5 +1,10 @@
 // ServicesSection.tsx
+import React from "react";
+import AnimatedSection from "./AnimatedSection";
+import { useScrollAnimation } from "@/hooks/use-scroll-animation";
+
 export default function ServicesSection() {
+  const { ref: cardsRef, isVisible: cardsVisible } = useScrollAnimation({ threshold: 0.1 });
   const services = [
     {
       title: "Site Preparation & Grading",
@@ -40,16 +45,24 @@ export default function ServicesSection() {
   ];
   
   return (
-    <section id="services" className="section-fade py-16 bg-gradient-to-br from-gray-50 to-neutral">
+    <AnimatedSection 
+      id="services" 
+      className="py-16 bg-gradient-to-br from-gray-50 to-neutral"
+      animation="from-left"
+      showTransitionToNext={true}
+    >
       <div className="container mx-auto px-4">
-        <div className="flex items-center mb-8">
+        <div className="flex items-center mb-8 animate-from-top" style={{ transitionDelay: '0.2s' }}>
           <a href="#home" className="text-primary hover:text-secondary mr-3" aria-label="Go back to home">
             <i className="fas fa-chevron-left text-xl"></i>
           </a>
           <h2 className="text-3xl font-heading font-bold">Our Services</h2>
         </div>
         
-        <div className="flex flex-wrap justify-center">
+        <div 
+          className={`flex flex-wrap justify-center stagger-children ${cardsVisible ? 'animate-show' : ''}`}
+          ref={cardsRef as React.RefObject<HTMLDivElement>}
+        >
           {services.map((service, index) => (
             <div key={index} className="flip-card" tabIndex={0}>
               <div className="flip-card-inner">
@@ -65,12 +78,12 @@ export default function ServicesSection() {
           ))}
         </div>
         
-        <div className="mt-12 text-center">
+        <div className="mt-12 text-center animate-from-bottom" style={{ transitionDelay: '0.6s' }}>
           <a href="#quotes" className="bg-accent hover:bg-yellow-500 text-white font-semibold py-3 px-8 rounded-lg transition-colors inline-block shadow-lg">
             Book a Consultation
           </a>
         </div>
       </div>
-    </section>
+    </AnimatedSection>
   );
 }

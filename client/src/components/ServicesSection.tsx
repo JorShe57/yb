@@ -4,37 +4,37 @@ export default function ServicesSection() {
     {
       title: "Site Preparation & Grading",
       description: "We level and grade your yard for perfect drainage and a smooth, even surface—getting the base just right before any new grass goes down.",
-      image: "https://i.imgur.com/6FeY54j.jpeg",
+      image: "/images/site-preparation.png",
       alt: "Site Preparation & Grading"
     },
     {
       title: "Edging & Trimming",
       description: "Clean, crisp edges around sidewalks, driveways, and garden beds that enhance the overall appearance of your landscape.",
-      image: "https://i.imgur.com/pPaLV0R.jpeg",
+      image: "/images/edging.png",
       alt: "Edging & Trimming"
     },
     {
       title: "Premium Sod Installation",
       description: "Transform your yard with our high-quality sod varieties, professionally installed for immediate and lasting results.",
-      image: "https://i.imgur.com/pBYg2uy.jpeg",
+      image: "/images/premium-sod.png",
       alt: "Premium Sod Installation"
     },
     {
       title: "Fertilization & Soil Amendment",
       description: "We enhance your soil with custom fertilization programs and amendments to create the perfect growing environment for your landscape.",
-      image: "https://i.imgur.com/suPUhEJ.png",
+      image: "/images/fertilization.png",
       alt: "Fertilization & Soil Amendment"
     },
     {
       title: "Old Turf Removal",
       description: "Our efficient turf removal services prepare your yard for a fresh start, eliminating old grass and weeds completely.",
-      image: "https://i.imgur.com/wzBRvp8.jpeg",
+      image: "/images/old-turf.png",
       alt: "Old Turf Removal"
     },
     {
       title: "Irrigation Consultation",
       description: "Get expert advice on water-efficient irrigation systems tailored to your landscape's specific needs.",
-      image: "https://i.imgur.com/gPHqRDW.jpeg",
+      image: "/images/irrigation.png",
       alt: "Irrigation Consultation"
     }
   ];
@@ -55,7 +55,6 @@ export default function ServicesSection() {
               <div className="flip-card-inner">
                 <div className="flip-card-front">
                   <img src={service.image} alt={service.alt} />
-                  <div className="service-title">{service.title}</div>
                 </div>
                 <div className="flip-card-back">
                   <p>{service.description}</p>

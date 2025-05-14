@@ -48,9 +48,27 @@ export default function SodSection() {
           </div>
         </div>
         
-        {/* Installation Process */}
+        {/* Installation Process with Video */}
         <div className="mb-12 bg-white p-6 rounded-xl shadow-md">
           <h3 className="text-xl font-heading font-bold text-primary mb-4">Our Installation Process</h3>
+          
+          {/* Process Video */}
+          <div className="relative overflow-hidden rounded-lg mb-6 aspect-video">
+            <video 
+              className="w-full h-full object-cover" 
+              autoPlay 
+              loop 
+              muted 
+              playsInline
+            >
+              <source src="/videos/sodding-process.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex items-end justify-center">
+              <p className="text-white text-center p-4 font-medium text-lg">Watch our professional installation process</p>
+            </div>
+          </div>
+          
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <div className="flex flex-col items-center text-center p-3 hover:bg-green-50 rounded-lg transition-colors">
               <div className="w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center mb-3">1</div>
@@ -160,7 +178,19 @@ export default function SodSection() {
                 ))}
               </div>
               <p className="text-gray-700 italic mb-4">"The YardBros team transformed our patchy lawn into a lush green space with their SunGold Blend. The quality of the sod and installation was exceptional!"</p>
-              <div className="font-medium">Client in [Location]</div>
+              <div className="flex items-center">
+                <div className="w-12 h-12 rounded-full mr-3 overflow-hidden">
+                  <img 
+                    src="/images/testimonials/person1.png" 
+                    alt="James R." 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div>
+                  <p className="font-medium">James R.</p>
+                  <p className="text-xs text-gray-500">Portland, OR</p>
+                </div>
+              </div>
             </div>
             <div className="bg-white p-5 rounded-xl shadow-md">
               <div className="flex items-center text-yellow-400 mb-3">
@@ -171,7 +201,19 @@ export default function SodSection() {
                 ))}
               </div>
               <p className="text-gray-700 italic mb-4">"We were struggling with growing grass in our heavily shaded yard until we tried the Cool Shade Blend. It's been thriving for months now with minimal maintenance."</p>
-              <div className="font-medium">Client in [Location]</div>
+              <div className="flex items-center">
+                <div className="w-12 h-12 rounded-full mr-3 overflow-hidden">
+                  <img 
+                    src="/images/testimonials/person2.png" 
+                    alt="Melissa T." 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div>
+                  <p className="font-medium">Melissa T.</p>
+                  <p className="text-xs text-gray-500">Seattle, WA</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>

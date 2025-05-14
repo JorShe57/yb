@@ -94,7 +94,7 @@ const AnimatedSection: React.FC<AnimatedSectionProps> = ({
       ref={ref as React.RefObject<HTMLElement>}
       className={cn(
         getAnimationClass(animation),
-        isVisible && 'animate-show',
+        'animate-show', // Always apply animate-show class regardless of visibility
         showTransitionToNext && 'section-transition',
         className
       )}

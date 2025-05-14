@@ -65,12 +65,12 @@
   animation: fadeIn 0.5s ease-in-out;
 }
 
-/* Animation for elements that scroll into view */
+/* Animation for elements that scroll into view - modified to be visible by default */
 .animate-hidden {
-  opacity: 0;
-  filter: blur(5px);
-  transform: translateY(40px);
-  transition: all 1s ease;
+  opacity: 1; /* Start visible */
+  filter: blur(0);
+  transform: translateY(0);
+  transition: all 0.5s ease;
 }
 
 .animate-show {
@@ -79,39 +79,39 @@
   transform: translateY(0);
 }
 
-/* Direction-based scroll animations */
+/* Direction-based scroll animations - made visible by default */
 .animate-from-left {
-  opacity: 0;
-  filter: blur(5px);
-  transform: translateX(-100px);
-  transition: all 1s ease;
+  opacity: 1; /* Start visible */
+  filter: blur(0);
+  transform: translateX(0);
+  transition: all 0.5s ease;
 }
 
 .animate-from-right {
-  opacity: 0;
-  filter: blur(5px);
-  transform: translateX(100px);
-  transition: all 1s ease;
+  opacity: 1; /* Start visible */
+  filter: blur(0);
+  transform: translateX(0);
+  transition: all 0.5s ease;
 }
 
 .animate-from-top {
-  opacity: 0;
-  filter: blur(5px);
-  transform: translateY(-100px);
-  transition: all 1s ease;
+  opacity: 1; /* Start visible */
+  filter: blur(0);
+  transform: translateY(0);
+  transition: all 0.5s ease;
 }
 
 .animate-from-bottom {
-  opacity: 0;
-  filter: blur(5px);
-  transform: translateY(100px);
-  transition: all 1s ease;
+  opacity: 1; /* Start visible */
+  filter: blur(0);
+  transform: translateY(0);
+  transition: all 0.5s ease;
 }
 
-/* Stagger children animations */
+/* Stagger children animations - modified to be visible by default */
 .stagger-children > * {
-  opacity: 0;
-  transform: translateY(20px);
+  opacity: 1; /* Start visible */
+  transform: translateY(0);
   transition: all 0.3s ease;
 }
 

@@ -18,7 +18,8 @@ export const useScrollAnimation = (options: ScrollAnimationOptions = {}) => {
   } = options;
   
   const ref = useRef<HTMLElement | null>(null);
-  const [isVisible, setIsVisible] = useState(false);
+  // Default to true to ensure content is visible by default
+  const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
     const observer = new IntersectionObserver(

@@ -60,7 +60,7 @@ export default function ServicesSection() {
         </div>
         
         <div 
-          className={`flex flex-wrap justify-center stagger-children ${cardsVisible ? 'animate-show' : ''}`}
+          className="flex flex-wrap justify-center stagger-children animate-show"
           ref={cardsRef as React.RefObject<HTMLDivElement>}
         >
           {services.map((service, index) => (

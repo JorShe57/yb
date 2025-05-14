@@ -245,35 +245,27 @@ export default function SodSection() {
         <div className="mb-12">
           <h3 className="text-xl font-heading font-bold text-primary mb-6">Recent Sod Installation Projects</h3>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {/* These are placeholder images - replace with actual project photos */}
+            {/* Gallery with real project photos */}
             <div className="group relative overflow-hidden rounded-lg shadow-md h-40 md:h-48">
-              <div className="bg-gray-200 h-full w-full flex items-center justify-center">
-                <span className="text-gray-500">Project 1</span>
-              </div>
+              <img src="/images/gallery/home-project.png" alt="Front Yard Renovation" className="h-full w-full object-cover" />
               <div className="absolute inset-0 bg-primary/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                 <span className="text-white font-medium">Front Yard Renovation</span>
               </div>
             </div>
             <div className="group relative overflow-hidden rounded-lg shadow-md h-40 md:h-48">
-              <div className="bg-gray-200 h-full w-full flex items-center justify-center">
-                <span className="text-gray-500">Project 2</span>
-              </div>
+              <img src="/images/gallery/turf-project.png" alt="Backyard Makeover" className="h-full w-full object-cover" />
               <div className="absolute inset-0 bg-primary/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                 <span className="text-white font-medium">Backyard Makeover</span>
               </div>
             </div>
             <div className="group relative overflow-hidden rounded-lg shadow-md h-40 md:h-48">
-              <div className="bg-gray-200 h-full w-full flex items-center justify-center">
-                <span className="text-gray-500">Project 3</span>
-              </div>
+              <img src="/images/gallery/sod-project.png" alt="Commercial Installation" className="h-full w-full object-cover" />
               <div className="absolute inset-0 bg-primary/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                 <span className="text-white font-medium">Commercial Installation</span>
               </div>
             </div>
             <div className="group relative overflow-hidden rounded-lg shadow-md h-40 md:h-48">
-              <div className="bg-gray-200 h-full w-full flex items-center justify-center">
-                <span className="text-gray-500">Project 4</span>
-              </div>
+              <img src="/images/gallery/edge-project.png" alt="Sports Field" className="h-full w-full object-cover" />
               <div className="absolute inset-0 bg-primary/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                 <span className="text-white font-medium">Sports Field</span>
               </div>

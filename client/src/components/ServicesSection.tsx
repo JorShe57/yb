@@ -1,4 +1,6 @@
 // ServicesSection.tsx
+import ParallaxBackground from "./ParallaxBackground";
+
 export default function ServicesSection() {
   const services = [
     {
@@ -40,8 +42,12 @@ export default function ServicesSection() {
   ];
   
   return (
-    <section id="services" className="section-fade py-16 bg-gradient-to-br from-neutral to-gray-200">
-      <div className="container mx-auto px-4">
+    <ParallaxBackground 
+      imageUrl="/images/backgrounds/site-preparation.png" 
+      className="section-fade py-16"
+      speed={0.18}
+    >
+      <div className="container mx-auto px-4 bg-white/90 p-6 rounded-lg shadow-lg">
         <div className="flex items-center mb-8">
           <a href="#home" className="text-primary hover:text-secondary mr-3" aria-label="Go back to home">
             <i className="fas fa-chevron-left text-xl"></i>
@@ -71,6 +77,6 @@ export default function ServicesSection() {
           </a>
         </div>
       </div>
-    </section>
+    </ParallaxBackground>
   );
 }

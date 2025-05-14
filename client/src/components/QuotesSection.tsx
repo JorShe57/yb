@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
+import ParallaxBackground from "./ParallaxBackground";
 
 export default function QuotesSection() {
   const [formData, setFormData] = useState({
@@ -70,9 +71,13 @@ export default function QuotesSection() {
   };
   
   return (
-    <section id="quotes" className="section-fade py-16 bg-white">
+    <ParallaxBackground 
+      imageUrl="/images/backgrounds/fert-bg.png" 
+      className="section-fade py-16"
+      speed={0.15}
+    >
       <div className="container mx-auto px-4">
-        <div className="flex items-center mb-8">
+        <div className="flex items-center mb-8 bg-white/90 p-4 rounded-t-lg shadow-md">
           <a href="#home" className="text-primary hover:text-secondary mr-3" aria-label="Go back to home">
             <i className="fas fa-chevron-left text-xl"></i>
           </a>
@@ -218,6 +223,6 @@ export default function QuotesSection() {
           </form>
         </div>
       </div>
-    </section>
+    </ParallaxBackground>
   );
 }

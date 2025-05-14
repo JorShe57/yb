@@ -1,3 +1,5 @@
+import ParallaxBackground from "./ParallaxBackground";
+
 export default function SodSection() {
   const sodTypes = [
     {
@@ -23,8 +25,12 @@ export default function SodSection() {
   ];
   
   return (
-    <section id="sod" className="section-fade py-16 bg-white">
-      <div className="container mx-auto px-4">
+    <ParallaxBackground 
+      imageUrl="/images/backgrounds/sod-bg.png" 
+      className="section-fade py-16"
+      speed={0.2}
+    >
+      <div className="container mx-auto px-4 bg-white/90 rounded-lg p-6 shadow-lg">
         <div className="flex items-center mb-8">
           <a href="#home" className="text-primary hover:text-secondary mr-3" aria-label="Go back to home">
             <i className="fas fa-chevron-left text-xl"></i>
@@ -54,6 +60,6 @@ export default function SodSection() {
           </a>
         </div>
       </div>
-    </section>
+    </ParallaxBackground>
   );
 }

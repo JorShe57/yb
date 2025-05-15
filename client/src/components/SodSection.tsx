@@ -203,9 +203,11 @@ export default function SodSection() {
                     loop 
                     muted 
                     playsInline
+                    poster="/images/sod-installation-poster.jpg"
                   >
-                    <source src="/videos/sod-installation-new2.mp4" type="video/mp4" />
-                    Your browser does not support the video tag.
+                    <source src="/videos/sod-installation-new.mp4" type="video/mp4" />
+                    <source src="/videos/sod-installation.mp4" type="video/mp4" />
+                    <img src="/images/sod-installation-poster.jpg" alt="Sod Installation" className="w-full h-full object-cover" />
                   </video>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
                 </div>
@@ -229,9 +231,11 @@ export default function SodSection() {
                     loop 
                     muted 
                     playsInline
+                    poster="/images/rolling-watering-poster.jpg"
                   >
+                    <source src="/videos/rolling-watering.mp4" type="video/mp4" />
                     <source src="/videos/rolling-watering-new.mp4" type="video/mp4" />
-                    Your browser does not support the video tag.
+                    <img src="/images/rolling-watering-poster.jpg" alt="Rolling and Watering" className="w-full h-full object-cover" />
                   </video>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
                 </div>

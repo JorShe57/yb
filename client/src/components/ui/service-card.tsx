@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown, Shield } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { GrassAnimation } from '@/components/ui/grass-animation';
 
 export interface ServiceCardProps {
   title: string;
@@ -68,10 +69,21 @@ export function ServiceCard({
             transform: isExpanded ? 'scale(1.15)' : 'scale(1)'
           }}
         />
+        
+        {/* Grass animation at the bottom of the image */}
+        <div className="absolute bottom-0 left-0 right-0 z-20 overflow-hidden">
+          <GrassAnimation
+            delay={staggerDelay * 1.5}
+            height="short"
+            density={isExpanded ? "sparse" : "medium"}
+            color={title.toLowerCase().includes('fertilization') ? 'dark' : 'medium'}
+            className="h-12"
+          />
+        </div>
 
         {/* Title always visible */}
         <motion.div 
-          className="absolute inset-x-0 z-20 p-4 flex flex-col items-start justify-end h-full"
+          className="absolute inset-x-0 z-30 p-4 flex flex-col items-start justify-end h-full" 
           animate={{ 
             bottom: isExpanded ? "auto" : 0
           }}

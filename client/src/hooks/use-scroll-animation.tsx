@@ -10,14 +10,14 @@ interface ScrollAnimationOptions {
  * A custom hook that detects when an element enters the viewport
  * and can be used to trigger animations based on scroll position.
  */
-export const useScrollAnimation = (options: ScrollAnimationOptions = {}) => {
+export const useScrollAnimation = <T extends HTMLElement = HTMLElement>(options: ScrollAnimationOptions = {}) => {
   const { 
     threshold = 0.1, 
     rootMargin = '0px', 
     triggerOnce = true 
   } = options;
   
-  const ref = useRef<HTMLElement | null>(null);
+  const ref = useRef<T | null>(null);
   // Default to true to ensure content is visible by default
   const [isVisible, setIsVisible] = useState(true);
 

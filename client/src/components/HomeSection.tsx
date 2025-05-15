@@ -137,10 +137,10 @@ export default function HomeSection() {
                 <ChevronDown className="ml-2 h-5 w-5" />
               </motion.a>
               
-              <div className="grid grid-cols-3 gap-2">
+              <div className="flex flex-col sm:flex-row justify-center gap-4 mt-4">
                 <motion.a 
                   href="#services" 
-                  className="bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white font-semibold py-3 px-4 rounded-lg transition-colors text-center flex items-center justify-center border border-white/10"
+                  className="bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white font-semibold py-3 px-8 rounded-lg transition-colors text-center flex items-center justify-center border border-white/10"
                   whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.2)" }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -148,7 +148,7 @@ export default function HomeSection() {
                 </motion.a>
                 <motion.a 
                   href="#sod" 
-                  className="bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white font-semibold py-3 px-4 rounded-lg transition-colors text-center flex items-center justify-center border border-white/10"
+                  className="bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white font-semibold py-3 px-8 rounded-lg transition-colors text-center flex items-center justify-center border border-white/10"
                   whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.2)" }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -156,7 +156,7 @@ export default function HomeSection() {
                 </motion.a>
                 <motion.a 
                   href="#calculator" 
-                  className="bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white font-semibold py-3 px-4 rounded-lg transition-colors text-center flex items-center justify-center border border-white/10"
+                  className="bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white font-semibold py-3 px-8 rounded-lg transition-colors text-center flex items-center justify-center border border-white/10"
                   whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.2)" }}
                   whileTap={{ scale: 0.95 }}
                 >

@@ -1,28 +1,29 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowUp } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import { useInView } from '@/hooks/use-smooth-scroll-animation';
 
-interface ScrollToTopProps {
-  showAfter?: number; // Number of pixels to scroll before showing button
-  className?: string;
-}
+export function ScrollToTop() {
+  const [showButton, setShowButton] = useState(false);
 
-export function ScrollToTop({ showAfter = 300, className }: ScrollToTopProps) {
-  const [isVisible, setIsVisible] = useState(false);
-
-  // Show button after scrolling down
+  // Throttle scroll events for better performance
   useEffect(() => {
-    const toggleVisibility = () => {
-      if (window.scrollY > showAfter) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
+    let lastScrollY = window.scrollY;
+    let ticking = false;
+
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setShowButton(window.scrollY > 300);
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
-    window.addEventListener('scroll', toggleVisibility);
-    return () => window.removeEventListener('scroll', toggleVisibility);
-  }, [showAfter]);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const scrollToTop = () => {
     window.scrollTo({
@@ -32,16 +33,26 @@ export function ScrollToTop({ showAfter = 300, className }: ScrollToTopProps) {
   };
 
   return (
-    <button
-      onClick={scrollToTop}
-      className={cn(
-        "fixed bottom-24 right-6 z-40 p-3 rounded-full bg-primary/90 text-white shadow-lg backdrop-blur-sm hover:bg-primary transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2",
-        isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0 pointer-events-none",
-        className
+    <AnimatePresence>
+      {showButton && (
+        <motion.button
+          onClick={scrollToTop}
+          className="fixed bottom-6 right-6 z-50 rounded-full bg-primary p-3 text-white shadow-lg hover:bg-primary/90 dark:bg-primary/80 dark:hover:bg-primary/70"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.8 }}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.95 }}
+          transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+          style={{
+            willChange: 'transform, opacity',
+            transformOrigin: 'center',
+          }}
+          aria-label="Scroll to top"
+        >
+          <ArrowUp size={20} strokeWidth={2.5} />
+        </motion.button>
       )}
-      aria-label="Scroll to top"
-    >
-      <ArrowUp className="h-5 w-5" />
-    </button>
+    </AnimatePresence>
   );
 }

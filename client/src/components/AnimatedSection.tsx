@@ -1,6 +1,6 @@
-import React, { ReactNode } from 'react';
-import { useScrollAnimation } from '@/hooks/use-scroll-animation';
+import React, { ReactNode, useRef, useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
+import { motion } from 'framer-motion';
 
 export type AnimationType = 
   | 'fade' 
@@ -25,6 +25,7 @@ interface AnimatedSectionProps {
 
 /**
  * A wrapper component that animates its children when they come into view.
+ * Uses Framer Motion for smoother animations.
  */
 const AnimatedSection: React.FC<AnimatedSectionProps> = ({
   children,
@@ -37,71 +38,139 @@ const AnimatedSection: React.FC<AnimatedSectionProps> = ({
   transition = 'regular',
   showTransitionToNext = false,
 }) => {
-  const { ref, isVisible } = useScrollAnimation({ threshold, triggerOnce: true });
+  const ref = useRef<HTMLDivElement>(null);
+  const [isInView, setIsInView] = useState(false);
 
-  // Map animation type to CSS classes
-  const getAnimationClass = (type: AnimationType): string => {
-    switch (type) {
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        // Use the first entry (our component)
+        const [entry] = entries;
+        
+        // Set state based on intersection
+        if (entry.isIntersecting) {
+          setIsInView(true);
+          // Once it's in view, we can stop observing if we want to trigger just once
+          observer.unobserve(entry.target);
+        }
+      },
+      {
+        // The threshold indicates what percentage of the element should be visible
+        threshold,
+        // Adding some margin to trigger a bit earlier or later
+        rootMargin: '0px',
+      }
+    );
+
+    // Start observing when component mounts
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    // Cleanup observer on unmount
+    return () => {
+      if (ref.current) {
+        observer.unobserve(ref.current);
+      }
+    };
+  }, [threshold]);
+
+  // Get animation variants based on animation type
+  const getAnimationVariants = () => {
+    switch (animation) {
       case 'fade':
-        return 'animate-hidden';
+        return {
+          hidden: { opacity: 0 },
+          visible: { opacity: 1 }
+        };
       case 'from-left':
-        return 'animate-from-left';
+        return {
+          hidden: { x: -100, opacity: 0 },
+          visible: { x: 0, opacity: 1 }
+        };
       case 'from-right':
-        return 'animate-from-right';
+        return {
+          hidden: { x: 100, opacity: 0 },
+          visible: { x: 0, opacity: 1 }
+        };
       case 'from-top':
-        return 'animate-from-top';
+        return {
+          hidden: { y: -100, opacity: 0 },
+          visible: { y: 0, opacity: 1 }
+        };
       case 'from-bottom':
-        return 'animate-from-bottom';
+        return {
+          hidden: { y: 100, opacity: 0 },
+          visible: { y: 0, opacity: 1 }
+        };
       case 'scale':
-        return 'scale-90 opacity-0 transition-all';
+        return {
+          hidden: { scale: 0.8, opacity: 0 },
+          visible: { scale: 1, opacity: 1 }
+        };
       case 'stagger':
-        return 'stagger-children';
+        return {
+          hidden: { opacity: 0 },
+          visible: (i = 1) => ({
+            opacity: 1,
+            transition: { 
+              staggerChildren: 0.1,
+              delayChildren: delay,
+              staggerDirection: 1
+            }
+          })
+        };
       default:
-        return 'animate-hidden';
+        return {
+          hidden: { opacity: 0 },
+          visible: { opacity: 1 }
+        };
     }
   };
-  
-  // Map transition type to ease function
-  const getTransitionStyle = (type: 'smooth' | 'regular' | 'sharp'): React.CSSProperties => {
-    const baseStyle: React.CSSProperties = {
-      transitionDelay: `${delay}s`,
-      transitionDuration: `${duration}s`,
-    };
+
+  // Get transition properties
+  const getTransitionProps = () => {
+    let easingFunction;
     
-    switch (type) {
+    switch (transition) {
       case 'smooth':
-        return {
-          ...baseStyle,
-          transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)', // ease-in-out
-        };
+        easingFunction = [0.4, 0, 0.2, 1]; // ease-in-out
+        break;
       case 'sharp':
-        return {
-          ...baseStyle,
-          transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.6, 1)', // ease-in
-        };
+        easingFunction = [0.4, 0, 0.6, 1]; // ease-in
+        break;
       case 'regular':
       default:
-        return {
-          ...baseStyle,
-          transitionTimingFunction: 'ease',
-        };
+        easingFunction = [0.25, 0.1, 0.25, 1]; // ease
+        break;
     }
+
+    return {
+      duration,
+      delay,
+      ease: easingFunction
+    };
   };
 
   return (
-    <section
+    <motion.section
       id={id}
-      ref={ref as React.RefObject<HTMLElement>}
+      ref={ref}
       className={cn(
-        getAnimationClass(animation),
-        'animate-show', // Always apply animate-show class regardless of visibility
         showTransitionToNext && 'section-transition',
         className
       )}
-      style={getTransitionStyle(transition)}
+      initial="hidden"
+      animate={isInView ? "visible" : "hidden"}
+      variants={getAnimationVariants()}
+      transition={getTransitionProps()}
+      style={{
+        willChange: 'transform, opacity',
+        transform: 'translateZ(0)'
+      }}
     >
       {children}
-    </section>
+    </motion.section>
   );
 };
 

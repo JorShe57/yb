@@ -2,6 +2,35 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .shadow-glow {
+    box-shadow: 0 0 15px 0 rgba(255, 255, 255, 0.1), 
+                0 5px 20px 0 rgba(0, 0, 0, 0.2);
+  }
+  
+  .shadow-glow-primary {
+    box-shadow: 0 0 15px 2px rgba(var(--primary), 0.15),
+                0 5px 20px 0 rgba(0, 0, 0, 0.1);
+  }
+  
+  .shadow-glow-accent {
+    box-shadow: 0 0 15px 2px rgba(var(--accent), 0.15),
+                0 5px 20px 0 rgba(0, 0, 0, 0.1);
+  }
+  
+  .text-shadow {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .text-shadow-lg {
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .backdrop-saturate-higher {
+    backdrop-filter: saturate(180%) blur(10px);
+  }
+}
+
 :root {
   --background: 0 0% 100%;
   --foreground: 20 14.3% 4.1%;

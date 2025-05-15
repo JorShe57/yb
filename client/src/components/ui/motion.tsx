@@ -177,6 +177,13 @@ export function MotionListItem({
   );
 }
 
+interface AnimatedButtonProps extends Omit<HTMLMotionProps<"button">, "ref"> {
+  children: ReactNode;
+  variant?: MotionVariant;
+  delay?: number;
+  duration?: number;
+}
+
 export function MotionButton({ 
   children, 
   variant = "fadeIn", 
@@ -184,7 +191,7 @@ export function MotionButton({
   duration = 0.3, 
   className = "", 
   ...props 
-}: AnimatedProps) {
+}: AnimatedButtonProps) {
   return (
     <motion.button
       initial="hidden"

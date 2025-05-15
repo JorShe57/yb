@@ -161,7 +161,7 @@ export default function SodSection() {
             </video>
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end justify-center">
               <p className="text-white text-center p-4 font-medium text-lg">
-                Watch our professional installation process
+                How We Do It
               </p>
             </div>
           </div>

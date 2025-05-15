@@ -110,7 +110,7 @@ export default function ServicesSection() {
           <Button 
             asChild
             variant="default" 
-            className="bg-accent hover:bg-yellow-500 text-white px-8 py-6 text-lg shadow-lg"
+            className="bg-accent hover:bg-yellow-500 hover:text-white text-white px-6 py-4 text-base shadow-lg"
           >
             <a href="#quotes">Book a Consultation</a>
           </Button>

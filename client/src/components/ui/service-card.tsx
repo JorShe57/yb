@@ -69,17 +69,6 @@ export function ServiceCard({
             transform: isExpanded ? 'scale(1.15)' : 'scale(1)'
           }}
         />
-        
-        {/* Grass animation at the bottom of the image */}
-        <div className="absolute bottom-0 left-0 right-0 z-20 overflow-hidden">
-          <GrassAnimation
-            delay={staggerDelay * 1.5}
-            height="short"
-            density={isExpanded ? "sparse" : "medium"}
-            color={title.toLowerCase().includes('fertilization') ? 'dark' : 'medium'}
-            className="h-12"
-          />
-        </div>
 
         {/* Title always visible */}
         <motion.div 

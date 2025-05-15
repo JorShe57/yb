@@ -398,6 +398,21 @@
   100% { opacity: 1; }
 }
 
+/* Content wrapper for smoother section transitions */
+.content-wrapper {
+  position: relative;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+  will-change: transform;
+}
+
+/* Prevent layout shift on image/video load */
+img, video {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
 /* Improved section transitions */
 .section-transition {
   position: relative;

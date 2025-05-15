@@ -51,63 +51,63 @@ export const GrassAnimation = ({
     }
   }, [isVisible, delay]);
   
-  // Generate different blade widths, heights, and positions
-  const generateBlades = () => {
-    const blades = [];
+  // Generate blades once and memoize them
+  const [blades] = useState(() => {
+    const generatedBlades = [];
     
-    for (let i = 0; i < bladeCount; i++) {
+    // Reduce the number of blades for better performance
+    const actualBladeCount = Math.min(bladeCount, 15);
+    
+    for (let i = 0; i < actualBladeCount; i++) {
       // Calculate random properties for each blade
       const bladeWidth = Math.random() * 2 + 2; // 2-4px
       const bladeHeight = Math.random() * (maxHeight * 0.4) + (maxHeight * 0.6); // 60-100% of maxHeight
-      const left = (i / bladeCount) * 100; // Distribute evenly with some randomness
+      const left = (i / actualBladeCount) * 100; // Distribute evenly
       const leftVariation = Math.random() * 5 - 2.5; // -2.5 to 2.5 variation
       const rotation = Math.random() * 10 - 5; // -5 to 5 degrees
-      const delay = i * 0.03 + Math.random() * 0.1; // Staggered delays
+      const delay = i * 0.02; // More consistent staggered delays
       
-      // Generate a slightly different shade for each blade for realism
-      const colorVariation = Math.random() * 15 - 7.5; // -7.5 to 7.5 variation
-      const r = parseInt(grassColor.slice(1, 3), 16);
-      const g = parseInt(grassColor.slice(3, 5), 16);
-      const b = parseInt(grassColor.slice(5, 7), 16);
+      // Use a set of pre-determined colors for better performance
+      const bladeColor = i % 2 === 0 ? grassColor : 
+                        i % 3 === 0 ? `${grassColor}cc` : `${grassColor}ee`;
       
-      // Adjust green component for most variation
-      const adjustedG = Math.min(255, Math.max(0, g + colorVariation));
-      const bladeColor = `rgb(${r}, ${adjustedG}, ${b})`;
-      
-      blades.push(
+      generatedBlades.push(
         <motion.div
           key={i}
-          className="absolute bottom-0 origin-bottom"
+          className="absolute bottom-0 origin-bottom will-change-transform"
           style={{ 
             left: `${left + leftVariation}%`,
             width: `${bladeWidth}px`,
             backgroundColor: bladeColor,
-            zIndex: Math.floor(Math.random() * 5),
-            rotateY: rotation
+            zIndex: Math.floor(i % 3)
           }}
-          initial={{ height: 0, rotateX: 0 }}
+          initial={{ height: 0 }}
           animate={isAnimating ? { 
-            height: bladeHeight, 
-            rotateX: rotation
+            height: bladeHeight,
+            rotateZ: rotation
           } : { height: 0 }}
           transition={{ 
-            duration: 1.2 + Math.random() * 0.6, 
+            duration: 0.8, 
             delay: delay, 
-            ease: [0.16, 1, 0.3, 1] 
+            ease: [0.2, 0.8, 0.2, 1] 
           }}
         />
       );
     }
     
-    return blades;
-  };
+    return generatedBlades;
+  });
   
   return (
     <div 
       ref={ref as React.RefObject<HTMLDivElement>}
       className={`relative h-16 w-full overflow-hidden ${className}`}
+      style={{ 
+        transform: 'translateZ(0)',
+        willChange: 'transform'
+      }}
     >
-      {generateBlades()}
+      {blades}
     </div>
   );
 };
@@ -116,7 +116,7 @@ export const GrassAnimation = ({
 export const LawnTransformAnimation = ({
   className = '',
   delay = 0,
-  duration = 4
+  duration = 3
 }: {
   className?: string;
   delay?: number;
@@ -124,6 +124,26 @@ export const LawnTransformAnimation = ({
 }) => {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 });
   const [isAnimating, setIsAnimating] = useState(false);
+  
+  // Pre-generate patches for better performance
+  const [patches] = useState(() => 
+    Array.from({ length: 10 }).map((_, i) => ({
+      width: `${Math.random() * 20 + 10}%`,
+      height: `${Math.random() * 20 + 10}%`,
+      left: `${Math.random() * 80}%`,
+      top: `${Math.random() * 80}%`,
+    }))
+  );
+
+  // Pre-generate blade positions for better performance
+  const [blades] = useState(() => 
+    Array.from({ length: 30 }).map((_, i) => ({
+      left: `${(i / 30) * 100 + (i % 3 === 0 ? 2 : -2)}%`,
+      width: `${(i % 3) + 1}px`,
+      height: `${20 + (i % 5) * 4}%`,
+      delay: 0.2 + i * 0.02,
+    }))
+  );
   
   useEffect(() => {
     if (isVisible) {
@@ -139,21 +159,25 @@ export const LawnTransformAnimation = ({
     <div 
       ref={ref as React.RefObject<HTMLDivElement>}
       className={`relative h-32 w-full overflow-hidden rounded-lg ${className}`}
+      style={{ 
+        transform: 'translateZ(0)',
+        willChange: 'transform'
+      }}
     >
       {/* Base ground */}
       <div className="absolute inset-0 bg-yellow-800/30" />
       
       {/* Patchy grass that's visible initially */}
       <div className="absolute inset-0">
-        {Array.from({ length: 15 }).map((_, i) => (
+        {patches.map((patch, i) => (
           <div
             key={`patch-${i}`}
             className="absolute bg-green-600/40"
             style={{
-              width: `${Math.random() * 30 + 10}%`,
-              height: `${Math.random() * 30 + 10}%`,
-              left: `${Math.random() * 80}%`,
-              top: `${Math.random() * 80}%`,
+              width: patch.width,
+              height: patch.height,
+              left: patch.left,
+              top: patch.top,
               borderRadius: '50%',
             }}
           />
@@ -165,27 +189,27 @@ export const LawnTransformAnimation = ({
         className="absolute inset-0 bg-gradient-to-b from-green-500 to-green-700"
         initial={{ opacity: 0 }}
         animate={isAnimating ? { opacity: 0.85 } : { opacity: 0 }}
-        transition={{ duration, ease: "easeOut" }}
+        transition={{ duration, ease: [0.2, 0.8, 0.2, 1] }}
       />
       
-      {/* Growing grass blades */}
+      {/* Growing grass blades - only render if animating for better performance */}
       {isAnimating && (
         <div className="absolute inset-0">
-          {Array.from({ length: 60 }).map((_, i) => (
+          {blades.map((blade, i) => (
             <motion.div
               key={`blade-${i}`}
-              className="absolute bottom-0 origin-bottom bg-green-500"
+              className="absolute bottom-0 origin-bottom bg-green-500 will-change-transform"
               style={{ 
-                left: `${(i / 60) * 100 + Math.random() * 4 - 2}%`,
-                width: `${Math.random() * 3 + 1}px`,
-                zIndex: Math.floor(Math.random() * 5),
+                left: blade.left,
+                width: blade.width,
+                zIndex: i % 3,
               }}
               initial={{ height: 0 }}
-              animate={{ height: `${Math.random() * 30 + 20}%` }}
+              animate={{ height: blade.height }}
               transition={{ 
-                duration: 1.5 + Math.random() * 1, 
-                delay: 0.2 + i * 0.02 + Math.random() * 0.1,
-                ease: [0.16, 1, 0.3, 1]
+                duration: 0.8, 
+                delay: blade.delay,
+                ease: [0.2, 0.8, 0.2, 1]
               }}
             />
           ))}

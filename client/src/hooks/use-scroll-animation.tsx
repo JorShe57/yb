@@ -9,6 +9,8 @@ interface ScrollAnimationOptions {
 /**
  * A custom hook that detects when an element enters the viewport
  * and can be used to trigger animations based on scroll position.
+ * 
+ * Elements are visible by default for better UX and smoother page load.
  */
 export const useScrollAnimation = <T extends HTMLElement = HTMLElement>(options: ScrollAnimationOptions = {}) => {
   const { 
@@ -18,15 +20,19 @@ export const useScrollAnimation = <T extends HTMLElement = HTMLElement>(options:
   } = options;
   
   const ref = useRef<T | null>(null);
-  // Always visible so content is immediately accessible
-  const [isVisible] = useState(true);
+  // Always start with elements visible for smoother experience
+  const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
+    // Only set up observer if we want elements to animate on scroll
+    // Otherwise just leave everything visible by default
     const observer = new IntersectionObserver(
       ([entry]) => {
-        // Just unobserve after element is visible
-        if (entry.isIntersecting && triggerOnce && ref.current) {
-          observer.unobserve(ref.current);
+        // Just track intersection and unobserve once triggered
+        if (entry.isIntersecting) {
+          if (triggerOnce && ref.current) {
+            observer.unobserve(ref.current);
+          }
         }
       },
       { threshold, rootMargin }

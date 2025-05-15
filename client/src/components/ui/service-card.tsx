@@ -38,24 +38,26 @@ export function ServiceCard({
       initial={{ opacity: 1, y: 0 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ 
-        duration: 0.3, 
-        delay: staggerDelay,
-        ease: "easeOut" 
+        duration: 0.5,
+        ease: [0.4, 0, 0.2, 1]  // Cubic bezier for smoother motion
       }}
       viewport={{ once: true }}
-      layout="position"
+      layoutRoot={true}
     >
       {/* Card Header with Image */}
       <div 
         className={cn(
-          "relative w-full transition-all duration-500 ease-in-out",
+          "relative w-full overflow-hidden bg-muted/50 rounded-t-xl",
           isExpanded ? "h-[120px]" : "h-[180px] md:h-[200px]"
         )}
       >
         <motion.div
           className="absolute inset-0 bg-black/40 z-10"
           animate={{ opacity: isExpanded ? 0.6 : 0.3 }}
-          transition={{ duration: 0.3 }}
+          transition={{ 
+            duration: 0.4,
+            ease: [0.4, 0, 0.2, 1]
+          }}
         />
         
         <img 
@@ -94,13 +96,17 @@ export function ServiceCard({
         className="flex-1 flex flex-col p-4"
         layout
       >
-        <AnimatePresence mode="wait">
+        <AnimatePresence initial={false} mode="wait">
           {isExpanded ? (
             <motion.div
-              initial={{ opacity: 1 }}
+              key="expanded"
+              initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              exit={{ opacity: 1 }}
-              transition={{ duration: 0.2 }}
+              exit={{ opacity: 0 }}
+              transition={{ 
+                duration: 0.3,
+                ease: [0.4, 0, 0.2, 1] 
+              }}
               className="flex-1 flex flex-col"
             >
               <p className="text-foreground/90 text-sm md:text-base mb-4">{description}</p>
@@ -121,10 +127,14 @@ export function ServiceCard({
             </motion.div>
           ) : (
             <motion.p
-              initial={{ opacity: 1 }}
+              key="collapsed"
+              initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              exit={{ opacity: 1 }}
-              transition={{ duration: 0.2 }}
+              exit={{ opacity: 0 }}
+              transition={{ 
+                duration: 0.3,
+                ease: [0.4, 0, 0.2, 1] 
+              }}
               className="text-foreground/70 text-sm line-clamp-2"
             >
               {description}
@@ -135,16 +145,24 @@ export function ServiceCard({
 
       {/* Toggle Button */}
       <motion.button
-        className="absolute bottom-3 right-3 w-8 h-8 rounded-full bg-primary text-white hover:bg-primary/80 flex items-center justify-center border border-white/10 shadow-md transition-colors"
+        className="absolute bottom-3 right-3 w-8 h-8 rounded-full bg-primary text-white hover:bg-primary/80 flex items-center justify-center border border-white/10 shadow-md transition-all"
         onClick={() => setIsExpanded(!isExpanded)}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
+        transition={{ 
+          type: "spring", 
+          stiffness: 500, 
+          damping: 30 
+        }}
         aria-label={isExpanded ? "Show less" : "Show more"}
         title={isExpanded ? "Show less" : "Show more"}
       >
         <motion.div
           animate={{ rotate: isExpanded ? 180 : 0 }}
-          transition={{ duration: 0.3 }}
+          transition={{ 
+            duration: 0.3, 
+            ease: [0.4, 0, 0.2, 1] 
+          }}
         >
           <ChevronDown className="w-5 h-5" />
         </motion.div>

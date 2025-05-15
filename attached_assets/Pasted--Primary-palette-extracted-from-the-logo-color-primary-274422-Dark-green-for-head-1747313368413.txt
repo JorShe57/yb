@@ -1,0 +1,169 @@
+/* Primary palette extracted from the logo */
+  --color-primary: #274422;     /* Dark green for headings & accents */
+  --color-secondary: #A5C65C;   /* Vibrant green for buttons & links */
+  --color-accent: #8B5A2B;      /* Earthy brown for highlights */
+  --color-background: #F5F1E0;  /* Warm beige for page background */
+  --color-text: #2D2D2D;        /* Dark charcoal for body text */
+
+  /* Typography */
+  --font-heading: 'Cinzel', serif;
+  --font-body: 'Open Sans', sans-serif;
+
+  /* Spacing */
+  --spacing-small: 0.5rem;
+  --spacing-medium: 1rem;
+  --spacing-large: 2rem;
+
+  /* Border Radius */
+  --radius: 0.5rem;
+
+  /* Transition */
+  --transition-fast: 0.2s ease-in-out;
+}
+
+/* Global Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  color: var(--color-primary);
+  text-transform: uppercase;
+  margin-bottom: var(--spacing-medium);
+}
+
+p {
+  margin-bottom: var(--spacing-medium);
+}
+
+a {
+  color: var(--color-secondary);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--color-accent);
+}
+
+button,
+.btn {
+  background-color: var(--color-secondary);
+  color: #fff;
+  font-family: var(--font-heading);
+  padding: var(--spacing-small) var(--spacing-medium);
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: background-color var(--transition-fast);
+}
+
+button:hover,
+.btn:hover {
+  background-color: var(--color-accent);
+}
+
+/* Utility Classes */
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--spacing-large) 0;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* Card Component */
+.card {
+  background-color: #fff;
+  border-radius: var(--radius);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform var(--transition-fast);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.card-body {
+  padding: var(--spacing-medium);
+}
+
+/* Form Elements */
+input[type="text"],
+input[type="email"],
+textarea {
+  width: 100%;
+  padding: var(--spacing-small);
+  border: 1px solid #ccc;
+  border-radius: var(--radius);
+  font-family: var(--font-body);
+  margin-bottom: var(--spacing-medium);
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+/* Navigation Bar */
+.navbar {
+  background-color: var(--color-primary);
+  padding: var(--spacing-small) var(--spacing-medium);
+}
+
+.navbar .logo {
+  font-family: var(--font-heading);
+  color: #fff;
+  font-size: 1.5rem;
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  gap: var(--spacing-medium);
+}
+
+.navbar a {
+  color: #fff;
+  font-family: var(--font-body);
+}
+
+/* Footer */
+footer {
+  background-color: var(--color-primary);
+  color: #fff;
+  padding: var(--spacing-medium) 0;
+  text-align: center;
+}
+
+/* Responsive Utilities */
+@media (max-width: 768px) {
+  .navbar ul {
+    flex-direction: column;
+    gap: var(--spacing-small);
+  }
+}

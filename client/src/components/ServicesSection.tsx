@@ -16,6 +16,8 @@ export default function ServicesSection() {
   const [isMobile, setIsMobile] = useState(false);
   // Track active slide for indicators
   const [activeSlide, setActiveSlide] = useState(0);
+  // Store carousel API reference
+  const [carouselApi, setCarouselApi] = useState<any>(null);
   
   useEffect(() => {
     // Check if we're on mobile
@@ -32,6 +34,13 @@ export default function ServicesSection() {
     // Cleanup
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
+  
+  // Handle manual active slide changes by syncing with carousel
+  useEffect(() => {
+    if (carouselApi) {
+      carouselApi.scrollTo(activeSlide);
+    }
+  }, [activeSlide, carouselApi]);
   const services = [
     {
       title: "Site Preparation & Grading",
@@ -127,6 +136,8 @@ export default function ServicesSection() {
                 api?.on("select", () => {
                   setActiveSlide(api.selectedScrollSnap());
                 });
+                // Store API reference for dot navigation
+                setCarouselApi(api);
               }}
             >
               <CarouselContent>
@@ -161,7 +172,7 @@ export default function ServicesSection() {
                         ? 'bg-primary' 
                         : 'bg-muted hover:bg-muted/80'
                     }`}
-                    onClick={() => setActiveSlide(index)}
+                    onClick={() => carouselApi?.scrollTo(index)}
                     aria-label={`Go to slide ${index + 1}`}
                   />
                 ))}

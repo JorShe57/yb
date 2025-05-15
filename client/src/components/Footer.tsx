@@ -14,11 +14,11 @@ export default function Footer() {
             <ul className="space-y-2">
               <li className="flex items-center">
                 <i className="fas fa-phone mr-2"></i>
-                <span>(555) 123-4567</span>
+                <span>440-396-7474</span>
               </li>
               <li className="flex items-center">
                 <i className="fas fa-envelope mr-2"></i>
-                <span>info@yardbroslandscaping.com</span>
+                <span>sales@yardbrother.com</span>
               </li>
               <li className="flex items-center">
                 <i className="fas fa-map-marker-alt mr-2"></i>

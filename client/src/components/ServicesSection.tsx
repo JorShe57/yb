@@ -9,11 +9,13 @@ import {
   CarouselNext,
   CarouselPrevious
 } from "@/components/ui/carousel";
-import { CarouselDots } from "@/components/ui/carousel-dots";
+
 
 export default function ServicesSection() {
   // Detect mobile viewport for conditional rendering
   const [isMobile, setIsMobile] = useState(false);
+  // Track active slide for indicators
+  const [activeSlide, setActiveSlide] = useState(0);
   
   useEffect(() => {
     // Check if we're on mobile
@@ -120,6 +122,12 @@ export default function ServicesSection() {
                 dragFree: true,
               }}
               className="w-full"
+              setApi={(api) => {
+                // Set up callback to update active slide index
+                api?.on("select", () => {
+                  setActiveSlide(api.selectedScrollSnap());
+                });
+              }}
             >
               <CarouselContent>
                 {services.map((service, index) => (
@@ -140,6 +148,23 @@ export default function ServicesSection() {
               <div className="flex justify-center mt-4 gap-2">
                 <CarouselPrevious className="relative static left-0 right-0 translate-x-0 bg-background border border-primary/20" />
                 <CarouselNext className="relative static left-0 right-0 translate-x-0 bg-background border border-primary/20" />
+              </div>
+              
+              {/* Custom indicator dots */}
+              <div className="flex justify-center gap-1.5 mt-4">
+                {services.map((_, index) => (
+                  <button
+                    key={index}
+                    type="button"
+                    className={`h-2 w-2 rounded-full transition-colors ${
+                      activeSlide === index 
+                        ? 'bg-primary' 
+                        : 'bg-muted hover:bg-muted/80'
+                    }`}
+                    onClick={() => setActiveSlide(index)}
+                    aria-label={`Go to slide ${index + 1}`}
+                  />
+                ))}
               </div>
             </Carousel>
           </div>

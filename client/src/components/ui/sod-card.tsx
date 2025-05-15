@@ -39,22 +39,22 @@ export function SodCard({
     >
       <div 
         className={`relative w-full transition-all duration-500 ${
-          isExpanded ? 'h-[200px]' : 'h-[400px]'
+          isExpanded ? 'h-[250px]' : 'h-[400px]'
         }`}
       >
         <motion.div 
-          className="absolute inset-0 z-10 bg-gradient-to-t from-black/30 via-black/5 to-transparent"
-          animate={{ opacity: isExpanded ? 0.3 : 0.2 }}
+          className="absolute inset-0 z-10 bg-gradient-to-t from-black/20 via-black/5 to-transparent"
+          animate={{ opacity: isExpanded ? 0.2 : 0.1 }}
           transition={{ duration: 0.3 }}
         />
         
         <motion.img 
           src={image} 
           alt={name} 
-          className="w-full h-full object-contain absolute inset-0"
+          className="w-full h-full object-cover absolute inset-0"
           animate={{ 
             scale: isExpanded ? 1.02 : 1,
-            filter: isExpanded ? 'brightness(0.98)' : 'brightness(1)'
+            filter: isExpanded ? 'brightness(1)' : 'brightness(1.05)'
           }}
           transition={{ duration: 0.5 }}
         />

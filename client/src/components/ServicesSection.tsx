@@ -1,9 +1,35 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { ServiceCard } from "@/components/ui/service-card";
 import { Button } from "@/components/ui/button";
+import { 
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious
+} from "@/components/ui/carousel";
+import { CarouselDots } from "@/components/ui/carousel-dots";
 
 export default function ServicesSection() {
+  // Detect mobile viewport for conditional rendering
+  const [isMobile, setIsMobile] = useState(false);
+  
+  useEffect(() => {
+    // Check if we're on mobile
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    // Initial check
+    checkMobile();
+    
+    // Add event listener for resize
+    window.addEventListener('resize', checkMobile);
+    
+    // Cleanup
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
   const services = [
     {
       title: "Site Preparation & Grading",
@@ -84,18 +110,53 @@ export default function ServicesSection() {
           care and attention to detail. Explore our offerings below.
         </motion.p>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-16">
-          {services.map((service, index) => (
-            <ServiceCard
-              key={index}
-              index={index}
-              title={service.title}
-              description={service.description}
-              image={service.image}
-              alt={service.alt}
-            />
-          ))}
-        </div>
+        {/* Show carousel on mobile, grid on desktop */}
+        {isMobile ? (
+          <div className="mb-16">
+            <Carousel
+              opts={{
+                align: "center",
+                loop: true,
+                dragFree: true,
+              }}
+              className="w-full"
+            >
+              <CarouselContent>
+                {services.map((service, index) => (
+                  <CarouselItem key={index} className="pl-4 pr-4 basis-full sm:basis-4/5">
+                    <div className="p-1 h-full flex flex-col">
+                      <ServiceCard
+                        key={index}
+                        index={index}
+                        title={service.title}
+                        description={service.description}
+                        image={service.image}
+                        alt={service.alt}
+                      />
+                    </div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <div className="flex justify-center mt-4 gap-2">
+                <CarouselPrevious className="relative static left-0 right-0 translate-x-0 bg-background border border-primary/20" />
+                <CarouselNext className="relative static left-0 right-0 translate-x-0 bg-background border border-primary/20" />
+              </div>
+            </Carousel>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-16">
+            {services.map((service, index) => (
+              <ServiceCard
+                key={index}
+                index={index}
+                title={service.title}
+                description={service.description}
+                image={service.image}
+                alt={service.alt}
+              />
+            ))}
+          </div>
+        )}
         
         <motion.div 
           className="text-center"

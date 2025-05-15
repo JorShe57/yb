@@ -25,6 +25,10 @@
     @apply w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary;
     @apply bg-white dark:bg-gray-800 dark:text-white dark:border-gray-600;
   }
+  
+  .calculator-label {
+    @apply block text-sm font-semibold mb-2 dark:text-gray-200;
+  }
 
   /* Navigation Bar */
   .navbar-custom {

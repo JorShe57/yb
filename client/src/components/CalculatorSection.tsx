@@ -133,7 +133,7 @@ export default function CalculatorSection() {
               <div className="space-y-4">
                 <div className="grid md:grid-cols-3 gap-4">
                   <div>
-                    <label htmlFor="length" className="block text-sm font-semibold mb-2">Length (feet)</label>
+                    <label htmlFor="length" className="calculator-label">Length (feet)</label>
                     <input 
                       type="number" 
                       id="length" 
@@ -141,11 +141,11 @@ export default function CalculatorSection() {
                       min="1" 
                       value={lwInputs.length}
                       onChange={handleLwInputChange}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                      className="calculator-input"
                     />
                   </div>
                   <div>
-                    <label htmlFor="width" className="block text-sm font-semibold mb-2">Width (feet)</label>
+                    <label htmlFor="width" className="calculator-label">Width (feet)</label>
                     <input 
                       type="number" 
                       id="width" 
@@ -153,11 +153,11 @@ export default function CalculatorSection() {
                       min="1" 
                       value={lwInputs.width}
                       onChange={handleLwInputChange}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                      className="calculator-input"
                     />
                   </div>
                   <div>
-                    <label htmlFor="depth" className="block text-sm font-semibold mb-2">Depth (inches)</label>
+                    <label htmlFor="depth" className="calculator-label">Depth (inches)</label>
                     <input 
                       type="number" 
                       id="depth" 
@@ -166,7 +166,7 @@ export default function CalculatorSection() {
                       max="12" 
                       value={lwInputs.depth}
                       onChange={handleLwInputChange}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                      className="calculator-input"
                     />
                   </div>
                 </div>
@@ -210,7 +210,7 @@ export default function CalculatorSection() {
                       min="1" 
                       value={areaInputs.area}
                       onChange={handleAreaInputChange}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                      className="calculator-input"
                     />
                   </div>
                   <div>
@@ -223,7 +223,7 @@ export default function CalculatorSection() {
                       max="12" 
                       value={areaInputs.depth}
                       onChange={handleAreaInputChange}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                      className="calculator-input"
                     />
                   </div>
                 </div>

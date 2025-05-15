@@ -92,10 +92,10 @@ export default function HomeSection() {
             className="mb-3"
           >
             <h1 className="text-5xl md:text-6xl font-heading font-bold text-white">
-              Bring Your <span className="text-accent relative">
-                Dream Yard
+              Custom <span className="text-accent relative">
+                Lawns
                 <span className="absolute bottom-1 left-0 w-full h-1 bg-accent/30 rounded-full"></span>
-              </span> to Life
+              </span> & Complete Landscapes
             </h1>
           </MotionDiv>
           
@@ -105,7 +105,7 @@ export default function HomeSection() {
             className="mb-6"
           >
             <h2 className="text-2xl md:text-3xl font-heading text-white/90">
-              Professional landscaping with guaranteed satisfaction
+              Expertly Crafted from the Ground Up
             </h2>
           </MotionDiv>
           
@@ -185,13 +185,20 @@ export default function HomeSection() {
             className="inline-block"
           >
             <div className="bg-white/10 backdrop-blur-sm p-4 rounded-lg inline-block border border-white/10 shadow-glow">
-              <div className="flex items-center">
-                <div className="flex text-yellow-400 mr-3">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="h-5 w-5 fill-current" />
-                  ))}
+              <div className="flex flex-col">
+                <div className="flex items-center mb-3">
+                  <div className="flex text-yellow-400 mr-3">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="h-5 w-5 fill-current" />
+                    ))}
+                  </div>
+                  <span className="text-sm">Trusted by over 500+ homeowners in your area</span>
                 </div>
-                <span className="text-sm">Trusted by over 500+ homeowners in your area</span>
+                
+                <div className="border-t border-white/10 pt-3 text-center italic text-sm font-light">
+                  "Whatever you do, work at it with all your heart, as working for the Lord, not for human masters."
+                  <div className="text-xs mt-1 text-accent font-medium">Colossians 3:23</div>
+                </div>
               </div>
             </div>
           </MotionDiv>

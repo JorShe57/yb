@@ -59,7 +59,17 @@ export function SodCard({
           transition={{ duration: 0.5 }}
         />
         
-        {/* Season pills removed as requested */}
+        <div className="absolute bottom-0 left-0 p-4 z-20 w-full">
+          <motion.div 
+            className="inline-block bg-black/60 backdrop-blur-sm px-4 py-2 rounded-md"
+            animate={{ opacity: isExpanded ? 0 : 1 }}
+            transition={{ duration: 0.3 }}
+          >
+            <h3 className="text-white font-heading font-bold text-lg md:text-xl">
+              {name}
+            </h3>
+          </motion.div>
+        </div>
       </div>
       
       <motion.div 

@@ -41,35 +41,27 @@ export function SodCard({
     >
       <div 
         className={`relative w-full transition-all duration-500 ${
-          isExpanded ? 'h-[180px]' : 'h-[280px]'
+          isExpanded ? 'h-[200px]' : 'h-[300px]'
         }`}
       >
         <motion.div 
-          className="absolute inset-0 z-10 bg-gradient-to-t from-black/70 via-black/30 to-transparent"
-          animate={{ opacity: isExpanded ? 0.8 : 0.6 }}
+          className="absolute inset-0 z-10 bg-gradient-to-t from-black/50 via-black/10 to-transparent"
+          animate={{ opacity: isExpanded ? 0.5 : 0.3 }}
           transition={{ duration: 0.3 }}
         />
         
         <motion.img 
           src={image} 
           alt={name} 
-          className="w-full h-full object-cover absolute inset-0"
-          style={{ objectPosition: "center center" }}
+          className="w-full h-full object-contain absolute inset-0"
           animate={{ 
-            scale: isExpanded ? 1.05 : 1,
-            filter: isExpanded ? 'brightness(0.8)' : 'brightness(1)'
+            scale: isExpanded ? 1.02 : 1,
+            filter: isExpanded ? 'brightness(0.9)' : 'brightness(1)'
           }}
           transition={{ duration: 0.5 }}
         />
         
         <div className="absolute bottom-0 left-0 p-4 z-20 w-full">
-          <h3 className="text-xl font-heading font-bold mb-2 px-2.5 py-1.5 rounded bg-black/40 backdrop-blur-sm text-white uppercase inline-block">
-            <span className="relative">
-              {name}
-              <div className="absolute -bottom-1 left-0 h-1 w-full bg-accent rounded-full"></div>
-            </span>
-          </h3>
-          
           <motion.div 
             className="flex gap-2 mt-2"
             animate={{ opacity: isExpanded ? 0 : 1 }}

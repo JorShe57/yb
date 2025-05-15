@@ -10,7 +10,7 @@ if (!process.env.SENDGRID_API_KEY) {
 
 // Get the email address that will receive quote requests from environment variables
 // This makes it easy for the business owner to change it without editing code
-const NOTIFICATION_EMAIL = process.env.NOTIFICATION_EMAIL || 'business.owner@example.com';
+const NOTIFICATION_EMAIL = process.env.NOTIFICATION_EMAIL || 'jorshevel@gmail.com';
 // Note: In production, the business owner should set NOTIFICATION_EMAIL in their environment
 
 /**
@@ -73,7 +73,7 @@ export async function sendQuoteRequestEmail(quoteRequest: QuoteRequest): Promise
     `;
 
     // Get sender email from environment or use default
-    const senderEmail = process.env.SENDER_EMAIL || 'noreply@yardbroslandscaping.com';
+    const senderEmail = process.env.SENDER_EMAIL || 'quotes@yardbroslandscaping.com';
     
     // Prepare the email
     const msg = {

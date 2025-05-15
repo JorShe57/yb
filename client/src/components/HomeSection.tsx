@@ -135,7 +135,6 @@ export default function HomeSection() {
                   className="bg-accent hover:bg-yellow-500 hover:text-white text-white font-semibold py-4 px-8 rounded-lg transition-colors shadow-lg text-center text-lg flex items-center justify-center w-full max-w-md"
                 >
                   Get a Free Quote
-                  <ChevronDown className="ml-2 h-5 w-5" />
                 </motion.a>
               </div>
               

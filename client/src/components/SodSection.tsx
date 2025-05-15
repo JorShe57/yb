@@ -68,9 +68,6 @@ export default function SodSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <a href="#home" className="text-primary hover:text-secondary mr-3 transition-colors" aria-label="Go back to home">
-            <ArrowLeft className="h-5 w-5" />
-          </a>
           <h2 className="text-3xl md:text-4xl font-heading font-bold relative inline-block">
             Our <span className="text-primary">Sod</span>
             <motion.div 

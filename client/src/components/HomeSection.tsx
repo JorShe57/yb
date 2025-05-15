@@ -79,8 +79,7 @@ export default function HomeSection() {
           className="mb-12 flex justify-center md:justify-start"
         >
           <div className="bg-white/10 backdrop-blur-sm py-3 px-6 rounded-full inline-flex items-center border border-white/10 shadow-glow">
-            <span className="text-3xl font-bold text-accent mr-2">YardBros</span>
-            <span className="text-xl">Landscaping</span>
+            <span className="text-3xl font-bold text-accent">YardBros</span>
           </div>
         </MotionDiv>
         

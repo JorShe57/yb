@@ -2,68 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom mobile optimization styles */
-:root {
-  /* Used for iOS viewport height fix */
-  --vh: 1vh;
-}
-
-/* Use to fix iOS 100vh issue */
-.min-h-screen-safe {
-  min-height: 100vh; /* Fallback */
-  min-height: calc(var(--vh, 1vh) * 100);
-}
-
-.h-screen-safe {
-  height: 100vh; /* Fallback */
-  height: calc(var(--vh, 1vh) * 100);
-}
-
-/* Add better tap target sizes for mobile */
-@media (max-width: 768px) {
-  button, 
-  a, 
-  [role="button"],
-  input[type="submit"],
-  input[type="button"] {
-    min-height: 44px;
-    min-width: 44px;
-  }
-  
-  /* Improve touch scrolling */
-  * {
-    -webkit-overflow-scrolling: touch;
-  }
-  
-  .mobile-touch-scroll {
-    overflow: auto;
-    -webkit-overflow-scrolling: touch;
-    overscroll-behavior: none;
-  }
-  
-  /* Remove hover effects on mobile */
-  .mobile-no-hover {
-    @apply hover:bg-transparent hover:shadow-none hover:scale-100;
-  }
-}
-
-/* Add smooth scrolling on desktop but not on mobile (can feel laggy) */
-@media (min-width: 769px) {
-  html {
-    scroll-behavior: smooth;
-  }
-}
-
-/* Active section indicator */
-.section-active-indicator {
-  @apply relative;
-}
-
-.section-active-indicator::after {
-  content: '';
-  @apply absolute bottom-0 left-1/2 w-1/3 h-0.5 bg-primary rounded-full transform -translate-x-1/2;
-}
-
 @layer components {
   /* Card Component */
   .card-custom {

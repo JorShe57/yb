@@ -32,7 +32,6 @@ export function ServiceCard({
         "service-card group relative overflow-hidden rounded-xl bg-background flex flex-col",
         "border border-border shadow-md hover:shadow-lg transition-all duration-300",
         "min-h-[240px] md:min-h-[320px] w-full max-w-[350px] mx-auto",
-        "active:scale-[0.98] touch-manipulation", // Better touch feedback
         isExpanded ? "z-10" : "z-0",
         className
       )}

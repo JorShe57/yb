@@ -64,23 +64,9 @@ export default function HomeSection() {
           loop 
           muted 
           playsInline
-          poster="/images/background-poster.jpg"
-          preload="auto"
-          onError={(e) => {
-            // If video fails, show the poster image instead
-            const video = e.target as HTMLVideoElement;
-            video.style.display = 'none';
-            const img = video.parentNode?.querySelector('img');
-            if (img) img.style.display = 'block';
-          }}
         >
-          <source src="/videos/background.mp4" type="video/mp4" />
-          <img 
-            src="/images/background-poster.jpg" 
-            alt="Lawn Background" 
-            className="absolute inset-0 w-full h-full object-cover" 
-            style={{display: 'none'}}
-          />
+          <source src="/videos/background-new.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
         </video>
       </motion.div>
       

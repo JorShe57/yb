@@ -41,7 +41,7 @@ export function SodCard({
     >
       <div 
         className={`relative w-full transition-all duration-500 ${
-          isExpanded ? 'h-[140px]' : 'h-[220px]'
+          isExpanded ? 'h-[180px]' : 'h-[280px]'
         }`}
       >
         <motion.div 
@@ -54,8 +54,9 @@ export function SodCard({
           src={image} 
           alt={name} 
           className="w-full h-full object-cover absolute inset-0"
+          style={{ objectPosition: "center center" }}
           animate={{ 
-            scale: isExpanded ? 1.1 : 1,
+            scale: isExpanded ? 1.05 : 1,
             filter: isExpanded ? 'brightness(0.8)' : 'brightness(1)'
           }}
           transition={{ duration: 0.5 }}

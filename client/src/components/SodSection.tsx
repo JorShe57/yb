@@ -1,8 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Shield } from 'lucide-react';
-import sodImage from '@assets/Sod.png';
-import turfImage from '@assets/Turf.png';
 import { SodCard } from '@/components/ui/sod-card';
 
 export default function SodSection() {
@@ -10,7 +8,7 @@ export default function SodSection() {
     {
       name: "YardBros SunGold Blend",
       description: "Perfect for high-visibility areas, full sun exposure, and requires minimal maintenance. Offers exceptional disease resistance and a soft, luxurious texture for comfortable barefoot enjoyment.",
-      image: sodImage,
+      image: "/images/sungold-blend.png",
       seasons: ['Spring', 'Summer', 'Fall'],
       features: [
         { label: "Sun Exposure", value: "Full Sun" },
@@ -24,7 +22,7 @@ export default function SodSection() {
     {
       name: "YardBros Cool Shade Blend",
       description: "Specially developed for shaded areas and cooler climates, thriving in various soil types. Features superior drought tolerance and provides excellent erosion control for sloped areas.",
-      image: turfImage,
+      image: "/images/cool-shade-blend.png",
       seasons: ['Spring', 'Summer', 'Fall'],
       features: [
         { label: "Sun Exposure", value: "Partial to Full Shade" },

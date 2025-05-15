@@ -1,9 +1,8 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { ArrowLeft, CheckCircle2 } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { ServiceCard } from "@/components/ui/service-card";
 import { Button } from "@/components/ui/button";
-import { LawnTransformAnimation } from "@/components/ui/grass-animation";
 
 export default function ServicesSection() {
   const services = [
@@ -78,7 +77,7 @@ export default function ServicesSection() {
         </motion.div>
         
         <motion.p
-          className="max-w-2xl mx-auto text-center mb-8 text-foreground/80"
+          className="max-w-2xl mx-auto text-center mb-12 text-foreground/80"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -87,55 +86,6 @@ export default function ServicesSection() {
           We provide comprehensive landscaping services that transform your outdoor spaces with professional 
           care and attention to detail. Explore our offerings below.
         </motion.p>
-        
-        {/* Lawn Transformation Animation */}
-        <div className="max-w-3xl mx-auto mb-12">
-          <motion.div
-            className="rounded-lg overflow-hidden shadow-lg border border-border"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3, duration: 0.5 }}
-          >
-            <div className="relative">
-              <LawnTransformAnimation 
-                className="h-40 md:h-52" 
-                delay={0.5}
-                duration={3}
-              />
-              
-              {/* Before/After Labels */}
-              <div className="absolute top-4 left-4 bg-black/50 text-white text-sm px-3 py-1 rounded-full">Before</div>
-              <div className="absolute top-4 right-4 bg-primary/90 text-white text-sm px-3 py-1 rounded-full">After</div>
-              
-              {/* "See the Transformation" overlay */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="bg-black/70 text-white py-2 px-4 rounded-lg text-sm md:text-base font-medium backdrop-blur-sm">
-                  Watch the Transformation
-                </div>
-              </div>
-            </div>
-            
-            <div className="bg-background p-4">
-              <h3 className="text-xl font-heading font-bold mb-3">YardBros Lawn Transformation</h3>
-              <p className="text-foreground/70 text-sm mb-3">Experience the dramatic difference our professional landscaping services can make to your property.</p>
-              <div className="flex flex-col gap-2">
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="text-primary h-4 w-4" />
-                  <span className="text-sm">From patchy, uneven grass to lush, vibrant lawn</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="text-primary h-4 w-4" />
-                  <span className="text-sm">Professional grading and soil preparation</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="text-primary h-4 w-4" />
-                  <span className="text-sm">Premium sod installation for immediate results</span>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-16">
           {services.map((service, index) => (

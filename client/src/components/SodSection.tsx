@@ -72,9 +72,9 @@ export default function SodSection() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             {/* Step 1: Site Preparation */}
             <div className="flex flex-col items-center text-center bg-white rounded-lg shadow-md overflow-hidden">
-              <div className="w-full aspect-video relative">
+              <div className="w-full aspect-video relative p-2">
                 <video 
-                  className="w-full h-full object-cover" 
+                  className="w-full h-full object-cover rounded-lg shadow-md" 
                   autoPlay 
                   loop 
                   muted 
@@ -93,9 +93,9 @@ export default function SodSection() {
             
             {/* Step 2: Sod Installation */}
             <div className="flex flex-col items-center text-center bg-white rounded-lg shadow-md overflow-hidden">
-              <div className="w-full aspect-video relative">
+              <div className="w-full aspect-video relative p-2">
                 <video 
-                  className="w-full h-full object-cover" 
+                  className="w-full h-full object-cover rounded-lg shadow-md" 
                   autoPlay 
                   loop 
                   muted 
@@ -114,9 +114,9 @@ export default function SodSection() {
             
             {/* Step 3: Rolling & Watering */}
             <div className="flex flex-col items-center text-center bg-white rounded-lg shadow-md overflow-hidden">
-              <div className="w-full aspect-video relative">
+              <div className="w-full aspect-video relative p-2">
                 <video 
-                  className="w-full h-full object-cover" 
+                  className="w-full h-full object-cover rounded-lg shadow-md" 
                   autoPlay 
                   loop 
                   muted 
@@ -135,9 +135,9 @@ export default function SodSection() {
             
             {/* Step 4: Final Inspection */}
             <div className="flex flex-col items-center text-center bg-white rounded-lg shadow-md overflow-hidden">
-              <div className="w-full aspect-video relative">
+              <div className="w-full aspect-video relative p-2">
                 <video 
-                  className="w-full h-full object-cover" 
+                  className="w-full h-full object-cover rounded-lg shadow-md" 
                   autoPlay 
                   loop 
                   muted 
@@ -231,7 +231,8 @@ export default function SodSection() {
         {/* Testimonials */}
         <div className="mb-12">
           <h3 className="text-xl font-heading font-bold text-primary mb-6">What Our Customers Say</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Testimonial 1 */}
             <div className="bg-white p-5 rounded-xl shadow-md">
               <div className="flex items-center text-yellow-400 mb-3">
                 {[...Array(5)].map((_, i) => (
@@ -255,6 +256,8 @@ export default function SodSection() {
                 </div>
               </div>
             </div>
+            
+            {/* Testimonial 2 */}
             <div className="bg-white p-5 rounded-xl shadow-md">
               <div className="flex items-center text-yellow-400 mb-3">
                 {[...Array(5)].map((_, i) => (
@@ -275,6 +278,109 @@ export default function SodSection() {
                 <div>
                   <p className="font-medium">Melissa T.</p>
                   <p className="text-xs text-gray-500">Seattle, WA</p>
+                </div>
+              </div>
+            </div>
+            
+            {/* Testimonial 3 */}
+            <div className="bg-white p-5 rounded-xl shadow-md">
+              <div className="flex items-center text-yellow-400 mb-3">
+                {[...Array(5)].map((_, i) => (
+                  <svg key={i} xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                ))}
+              </div>
+              <p className="text-gray-700 italic mb-4">"From dirt to gorgeous lawn in just one day! Their sod installation was flawless and transformed our backyard completely."</p>
+              <div className="flex items-center">
+                <div className="w-12 h-12 rounded-full mr-3 overflow-hidden">
+                  <img 
+                    src="/images/customers/customer3.png" 
+                    alt="Michael J." 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div>
+                  <p className="font-medium">Michael J.</p>
+                  <p className="text-xs text-gray-500">Vancouver, WA</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          {/* Second row of testimonials */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+            {/* Testimonial 4 */}
+            <div className="bg-white p-5 rounded-xl shadow-md">
+              <div className="flex items-center text-yellow-400 mb-3">
+                {[...Array(5)].map((_, i) => (
+                  <svg key={i} xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                ))}
+              </div>
+              <p className="text-gray-700 italic mb-4">"My soil was basically clay until YardBros transformed it. Now everything I plant thrives! Their soil amendment services are top-notch."</p>
+              <div className="flex items-center">
+                <div className="w-12 h-12 rounded-full mr-3 overflow-hidden">
+                  <img 
+                    src="/images/customers/customer4.png" 
+                    alt="Jennifer K." 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div>
+                  <p className="font-medium">Jennifer K.</p>
+                  <p className="text-xs text-gray-500">Beaverton, OR</p>
+                </div>
+              </div>
+            </div>
+            
+            {/* Testimonial 5 */}
+            <div className="bg-white p-5 rounded-xl shadow-md">
+              <div className="flex items-center text-yellow-400 mb-3">
+                {[...Array(5)].map((_, i) => (
+                  <svg key={i} xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                ))}
+              </div>
+              <p className="text-gray-700 italic mb-4">"They removed our patchy, weed-filled lawn quickly and thoroughly. Great preparation for our new landscaping. Would hire again!"</p>
+              <div className="flex items-center">
+                <div className="w-12 h-12 rounded-full mr-3 overflow-hidden">
+                  <img 
+                    src="/images/customers/customer5.png" 
+                    alt="David L." 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div>
+                  <p className="font-medium">David L.</p>
+                  <p className="text-xs text-gray-500">Tigard, OR</p>
+                </div>
+              </div>
+            </div>
+            
+            {/* Testimonial 6 */}
+            <div className="bg-white p-5 rounded-xl shadow-md">
+              <div className="flex items-center text-yellow-400 mb-3">
+                {[...Array(5)].map((_, i) => (
+                  <svg key={i} xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                ))}
+              </div>
+              <p className="text-gray-700 italic mb-4">"YardBros' irrigation recommendations saved us money on water bills while keeping our lawn perfectly watered. Professional service!"</p>
+              <div className="flex items-center">
+                <div className="w-12 h-12 rounded-full mr-3 overflow-hidden">
+                  <img 
+                    src="/images/customers/customer6.png" 
+                    alt="Amanda R." 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div>
+                  <p className="font-medium">Amanda R.</p>
+                  <p className="text-xs text-gray-500">Lake Oswego, OR</p>
                 </div>
               </div>
             </div>

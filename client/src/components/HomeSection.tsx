@@ -80,7 +80,7 @@ export default function HomeSection() {
             className="mb-6"
           >
             <h1 className="text-6xl md:text-7xl font-heading font-bold text-white leading-tight">
-              Custom <span className="text-primary relative">
+              Custom <span className="text-[#4CAF50] relative">
                 Lawns
                 <span className="absolute bottom-1 left-0 w-full h-1 bg-accent/30 rounded-full"></span>
               </span> & Complete Landscapes

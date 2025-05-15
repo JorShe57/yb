@@ -1,6 +1,5 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { ArrowLeft } from "lucide-react";
 import { ServiceCard } from "@/components/ui/service-card";
 import { Button } from "@/components/ui/button";
 
@@ -61,9 +60,7 @@ export default function ServicesSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <a href="#home" className="text-primary hover:text-secondary mr-3 transition-colors" aria-label="Go back to home">
-            <ArrowLeft className="h-5 w-5" />
-          </a>
+          
           <h2 className="text-3xl md:text-4xl font-heading font-bold relative inline-block">
             Our <span className="text-primary">Services</span>
             <motion.div 

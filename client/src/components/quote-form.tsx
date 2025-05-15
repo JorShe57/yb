@@ -160,8 +160,8 @@ export function QuoteForm() {
                 <FormLabel>Service Interest</FormLabel>
                 <Select onValueChange={field.onChange} defaultValue={field.value}>
                   <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select a service" />
+                    <SelectTrigger className="bg-background text-foreground/90 data-[state=open]:bg-background">
+                      <SelectValue placeholder="Choose a service type" />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>

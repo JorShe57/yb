@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowLeft, Shield } from 'lucide-react';
+import { ArrowLeft, Shield, ChevronLeft, ChevronRight } from 'lucide-react';
 import { SodCard } from '@/components/ui/sod-card';
+import { SwipeDetector } from '@/components/ui/swipe-detector';
+import { useIsMobile } from '@/hooks/use-mobile';
+import { Button } from '@/components/ui/button';
 
 export default function SodSection() {
+  const isMobile = useIsMobile();
+  const [currentSodIndex, setCurrentSodIndex] = useState(0);
   const sodTypes = [
     {
       name: "YardBros SunGold Blend",
@@ -50,6 +55,19 @@ export default function SodSection() {
       ]
     }
   ];
+
+  // Functions to navigate between sod types on mobile
+  const nextSod = () => {
+    setCurrentSodIndex((prev) => 
+      prev < sodTypes.length - 1 ? prev + 1 : prev
+    );
+  };
+
+  const prevSod = () => {
+    setCurrentSodIndex((prev) => 
+      prev > 0 ? prev - 1 : prev
+    );
+  };
 
   return (
     <section 
@@ -116,20 +134,100 @@ export default function SodSection() {
             Choose The Perfect Blend For Your Yard
           </motion.h3>
 
-          <div className="grid md:grid-cols-2 gap-8">
-            {sodTypes.map((sod, index) => (
-              <SodCard 
-                key={index}
-                index={index}
-                name={sod.name}
-                description={sod.description}
-                image={sod.image}
-                features={sod.features}
-                whenToUse={sod.whenToUse}
-                benefits={sod.benefits}
-              />
-            ))}
-          </div>
+          {isMobile ? (
+            <SwipeDetector
+              onSwipeLeft={nextSod}
+              onSwipeRight={prevSod}
+              className="relative"
+            >
+              <div className="relative px-2 py-4">
+                {/* Current sod type with animation */}
+                <motion.div
+                  key={sodTypes[currentSodIndex].name}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.3 }}
+                  className="flex justify-center"
+                >
+                  <SodCard
+                    name={sodTypes[currentSodIndex].name}
+                    description={sodTypes[currentSodIndex].description}
+                    image={sodTypes[currentSodIndex].image}
+                    features={sodTypes[currentSodIndex].features}
+                    whenToUse={sodTypes[currentSodIndex].whenToUse}
+                    benefits={sodTypes[currentSodIndex].benefits}
+                    index={currentSodIndex}
+                  />
+                </motion.div>
+                
+                {/* Mobile navigation controls */}
+                <div className="flex justify-between w-full absolute top-1/2 transform -translate-y-1/2 px-3 z-20 pointer-events-none">
+                  <Button 
+                    size="icon" 
+                    variant="outline" 
+                    onClick={prevSod} 
+                    disabled={currentSodIndex === 0}
+                    className={`rounded-full bg-background/70 backdrop-blur-sm shadow-md pointer-events-auto ${
+                      currentSodIndex === 0 ? 'opacity-0' : 'opacity-100'
+                    }`}
+                    aria-label="Previous sod type"
+                  >
+                    <ChevronLeft />
+                  </Button>
+                  <Button 
+                    size="icon" 
+                    variant="outline" 
+                    onClick={nextSod} 
+                    disabled={currentSodIndex === sodTypes.length - 1}
+                    className={`rounded-full bg-background/70 backdrop-blur-sm shadow-md pointer-events-auto ${
+                      currentSodIndex === sodTypes.length - 1 ? 'opacity-0' : 'opacity-100'
+                    }`}
+                    aria-label="Next sod type"
+                  >
+                    <ChevronRight />
+                  </Button>
+                </div>
+                
+                {/* Dots for navigation */}
+                <div className="flex justify-center mt-6 gap-2">
+                  {sodTypes.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setCurrentSodIndex(index)}
+                      className={`w-3 h-3 rounded-full transition-colors ${
+                        index === currentSodIndex 
+                          ? (sodTypes[currentSodIndex].name.toLowerCase().includes('sungold') 
+                              ? 'bg-yellow-500' 
+                              : 'bg-blue-500')
+                          : 'bg-gray-300 dark:bg-gray-600'
+                      }`}
+                      aria-label={`Go to sod type ${index + 1}`}
+                    />
+                  ))}
+                </div>
+                
+                {/* Swipe instruction */}
+                <div className="text-center mt-2 text-sm text-foreground/70">
+                  Swipe to compare sod types ({currentSodIndex + 1}/{sodTypes.length})
+                </div>
+              </div>
+            </SwipeDetector>
+          ) : (
+            <div className="grid md:grid-cols-2 gap-8">
+              {sodTypes.map((sod, index) => (
+                <SodCard 
+                  key={index}
+                  index={index}
+                  name={sod.name}
+                  description={sod.description}
+                  image={sod.image}
+                  features={sod.features}
+                  whenToUse={sod.whenToUse}
+                  benefits={sod.benefits}
+                />
+              ))}
+            </div>
+          )}
         </div>
 
         {/* Installation Process with Video */}

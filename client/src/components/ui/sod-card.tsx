@@ -40,7 +40,7 @@ export function SodCard({
 
   return (
     <motion.div
-      className="group bg-background rounded-xl overflow-hidden shadow-lg border border-border relative"
+      className="group bg-background rounded-xl overflow-hidden shadow-lg border border-border relative active:scale-[0.99] touch-manipulation"
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ 
         opacity: 1, 
@@ -208,14 +208,14 @@ export function SodCard({
               >
                 <a 
                   href="#quotes" 
-                  className={`block w-auto mx-auto font-medium py-1.5 px-5 rounded-md text-center transition-colors flex items-center justify-center gap-2 shadow-md ${
+                  className={`block w-auto mx-auto font-medium py-1.5 md:py-2 px-4 md:px-5 rounded-md text-center transition-colors flex items-center justify-center gap-1.5 md:gap-2 shadow-md text-xs md:text-sm ${
                     isSunGold
                       ? "bg-gradient-to-r from-yellow-500 to-green-600 text-white hover:from-yellow-500 hover:to-yellow-500 hover:text-primary"
                       : "bg-gradient-to-r from-blue-600 to-teal-600 text-white hover:from-blue-400 hover:to-blue-400 hover:text-blue-700"
                   }`}
                 >
-                  <Zap size={14} />
-                  <span className="text-sm">Get a Quote</span>
+                  <Zap size={12} className="md:w-4 md:h-4" />
+                  <span>Get a Quote</span>
                 </a>
               </motion.div>
             </motion.div>

@@ -7,7 +7,7 @@ export default function CalculatorSection() {
   const { ref: calculatorRef } = useScrollAnimation({ threshold: 0.1 });
   const { ref: helpSectionRef } = useScrollAnimation({ threshold: 0.1 });
   const [activeCalculator, setActiveCalculator] = useState<'lengthWidth' | 'area'>('lengthWidth');
-  
+
   // Length & Width Calculator
   const [lwInputs, setLwInputs] = useState({
     length: '',
@@ -19,7 +19,7 @@ export default function CalculatorSection() {
     cubicYards: '0',
     cubicFeet: '0'
   });
-  
+
   // Area Calculator
   const [areaInputs, setAreaInputs] = useState({
     area: '',
@@ -30,7 +30,7 @@ export default function CalculatorSection() {
     cubicYards: '0',
     cubicFeet: '0'
   });
-  
+
   const handleLwInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setLwInputs(prev => ({
@@ -38,7 +38,7 @@ export default function CalculatorSection() {
       [name]: value
     }));
   };
-  
+
   const handleAreaInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setAreaInputs(prev => ({
@@ -46,18 +46,18 @@ export default function CalculatorSection() {
       [name]: value
     }));
   };
-  
+
   const calculateLw = () => {
     const length = parseFloat(lwInputs.length);
     const width = parseFloat(lwInputs.width);
     const depth = parseFloat(lwInputs.depth);
-    
+
     if (length > 0 && width > 0 && depth > 0) {
       // Convert dimensions to cubic feet
       const cubicFeet = (length * width * (depth / 12));
       // Convert cubic feet to cubic yards (27 cubic feet = 1 cubic yard)
       const cubicYards = cubicFeet / 27;
-      
+
       setLwResults({
         visible: true,
         cubicYards: cubicYards.toFixed(2),
@@ -67,17 +67,17 @@ export default function CalculatorSection() {
       alert('Please enter valid dimensions greater than zero.');
     }
   };
-  
+
   const calculateArea = () => {
     const area = parseFloat(areaInputs.area);
     const depth = parseFloat(areaInputs.depth);
-    
+
     if (area > 0 && depth > 0) {
       // Convert dimensions to cubic feet
       const cubicFeet = area * (depth / 12);
       // Convert cubic feet to cubic yards
       const cubicYards = cubicFeet / 27;
-      
+
       setAreaResults({
         visible: true,
         cubicYards: cubicYards.toFixed(2),
@@ -87,7 +87,7 @@ export default function CalculatorSection() {
       alert('Please enter valid dimensions greater than zero.');
     }
   };
-  
+
   return (
     <AnimatedSection 
       id="calculator" 
@@ -96,16 +96,13 @@ export default function CalculatorSection() {
     >
       <div className="container mx-auto px-4 bg-white/80 backdrop-blur-sm p-6 rounded-lg shadow-lg">
         <div className="flex items-center mb-8">
-          <a href="#home" className="text-primary hover:text-secondary mr-3" aria-label="Go back to home">
-            <i className="fas fa-chevron-left text-xl"></i>
-          </a>
           <h2 className="text-3xl font-heading font-bold">Topsoil Calculator</h2>
         </div>
-        
+
         <div className="mb-8">
           <p className="text-lg max-w-4xl">Use our calculator to determine how much topsoil you'll need for your landscaping project. Choose the calculation method that works best for you.</p>
         </div>
-        
+
         <div className="flex flex-wrap gap-4 mb-8">
           <button 
             className={`${activeCalculator === 'lengthWidth' ? 'bg-primary' : 'bg-gray-400'} hover:bg-primary/80 text-white font-semibold py-3 px-6 rounded-lg transition-colors shadow-md`}
@@ -120,7 +117,7 @@ export default function CalculatorSection() {
             Area
           </button>
         </div>
-        
+
         <div 
           className="calculator-containers animate-from-bottom"
           style={{ transitionDelay: '0.3s' }}
@@ -129,10 +126,10 @@ export default function CalculatorSection() {
           {/* Length & Width Calculator */}
           <div className={`calculator-container bg-white p-6 rounded-lg shadow-md ${activeCalculator === 'lengthWidth' ? '' : 'hidden'}`}>
             <h3 className="text-xl font-heading font-semibold mb-4">Calculate by Length & Width</h3>
-            
+
             <div className="mb-6">
               <p className="mb-4">Please enter the dimensions of your area and the desired depth of topsoil:</p>
-              
+
               <div className="space-y-4">
                 <div className="grid md:grid-cols-3 gap-4">
                   <div>
@@ -173,7 +170,7 @@ export default function CalculatorSection() {
                     />
                   </div>
                 </div>
-                
+
                 <div className="text-right">
                   <button 
                     type="button" 
@@ -185,7 +182,7 @@ export default function CalculatorSection() {
                 </div>
               </div>
             </div>
-            
+
             {lwResults.visible && (
               <div className="bg-neutral p-4 rounded-lg border border-gray-300">
                 <h4 className="font-heading font-semibold mb-2">Results:</h4>
@@ -194,14 +191,14 @@ export default function CalculatorSection() {
               </div>
             )}
           </div>
-          
+
           {/* Area Calculator */}
           <div className={`calculator-container bg-white p-6 rounded-lg shadow-md ${activeCalculator === 'area' ? '' : 'hidden'}`}>
             <h3 className="text-xl font-heading font-semibold mb-4">Calculate by Area</h3>
-            
+
             <div className="mb-6">
               <p className="mb-4">Please enter the area and the desired depth of topsoil:</p>
-              
+
               <div className="space-y-4">
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
@@ -230,7 +227,7 @@ export default function CalculatorSection() {
                     />
                   </div>
                 </div>
-                
+
                 <div className="text-right">
                   <button 
                     type="button" 
@@ -242,7 +239,7 @@ export default function CalculatorSection() {
                 </div>
               </div>
             </div>
-            
+
             {areaResults.visible && (
               <div className="bg-neutral p-4 rounded-lg border border-gray-300">
                 <h4 className="font-heading font-semibold mb-2">Results:</h4>
@@ -252,7 +249,7 @@ export default function CalculatorSection() {
             )}
           </div>
         </div>
-        
+
         <div 
           className="mt-8 bg-white p-6 rounded-lg shadow-md animate-from-right"
           style={{ transitionDelay: '0.5s' }}

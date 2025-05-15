@@ -1,10 +1,10 @@
-// ServicesSection.tsx
 import React from "react";
-import AnimatedSection from "./AnimatedSection";
-import { useScrollAnimation } from "@/hooks/use-scroll-animation";
+import { motion } from "framer-motion";
+import { ArrowLeft } from "lucide-react";
+import { ServiceCard } from "@/components/ui/service-card";
+import { Button } from "@/components/ui/button";
 
 export default function ServicesSection() {
-  const { ref: cardsRef, isVisible: cardsVisible } = useScrollAnimation({ threshold: 0.1 });
   const services = [
     {
       title: "Site Preparation & Grading",
@@ -45,56 +45,77 @@ export default function ServicesSection() {
   ];
   
   return (
-    <AnimatedSection 
+    <section 
       id="services" 
-      className="py-16 bg-gradient-to-br from-gray-50 to-neutral"
-      animation="from-left"
-      showTransitionToNext={true}
+      className="py-20 bg-gradient-to-br from-background/80 to-background relative overflow-hidden"
     >
-      <div className="container mx-auto px-4">
-        <div className="flex items-center mb-8 animate-from-top" style={{ transitionDelay: '0.2s' }}>
-          <a href="#home" className="text-primary hover:text-secondary mr-3" aria-label="Go back to home">
-            <i className="fas fa-chevron-left text-xl"></i>
-          </a>
-          <h2 className="text-3xl font-heading font-bold">Our Services</h2>
-        </div>
-        
-        <div 
-          className="flex flex-wrap justify-center stagger-children animate-show"
-          ref={cardsRef as React.RefObject<HTMLDivElement>}
+      {/* Background circles decoration */}
+      <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full -translate-y-1/2 translate-x-1/2" />
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent/5 rounded-full translate-y-1/2 -translate-x-1/2" />
+      
+      <div className="container mx-auto px-4 relative z-10">
+        <motion.div 
+          className="flex items-center mb-10 md:mb-16"
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
         >
+          <a href="#home" className="text-primary hover:text-secondary mr-3 transition-colors" aria-label="Go back to home">
+            <ArrowLeft className="h-5 w-5" />
+          </a>
+          <h2 className="text-3xl md:text-4xl font-heading font-bold relative inline-block">
+            Our <span className="text-primary">Services</span>
+            <motion.div 
+              className="absolute -bottom-2 left-0 h-1 bg-accent/50 rounded-full"
+              initial={{ width: 0 }}
+              whileInView={{ width: "100%" }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3, duration: 0.8 }}
+            />
+          </h2>
+        </motion.div>
+        
+        <motion.p
+          className="max-w-2xl mx-auto text-center mb-12 text-foreground/80"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.2, duration: 0.5 }}
+        >
+          We provide comprehensive landscaping services that transform your outdoor spaces with professional 
+          care and attention to detail. Explore our offerings below.
+        </motion.p>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-16">
           {services.map((service, index) => (
-            <div key={index} className="flip-card" tabIndex={0}>
-              <div className="flip-card-inner">
-                <div className="flip-card-front">
-                  <img src={service.image} alt={service.alt} />
-                </div>
-                <div className="flip-card-back">
-                  <h3 className="text-lg font-medium text-primary mb-3">{service.title}</h3>
-                  <p className="text-sm mb-4">{service.description}</p>
-                  
-                  <div className="flex items-center justify-center mt-4 mb-2">
-                    <div className="h-8 w-8 text-primary">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-                    </div>
-                  </div>
-                  <p className="text-sm text-center text-primary font-medium mb-4">100% Satisfaction Guarantee</p>
-                  
-                  <a href="#quotes" className="mt-auto inline-block bg-accent hover:bg-yellow-500 text-dark font-medium py-2 px-4 rounded text-sm transition-colors">
-                    Get a Quote
-                  </a>
-                </div>
-              </div>
-            </div>
+            <ServiceCard
+              key={index}
+              index={index}
+              title={service.title}
+              description={service.description}
+              image={service.image}
+              alt={service.alt}
+            />
           ))}
         </div>
         
-        <div className="mt-12 text-center animate-from-bottom" style={{ transitionDelay: '0.6s' }}>
-          <a href="#quotes" className="bg-accent hover:bg-yellow-500 text-white font-semibold py-3 px-8 rounded-lg transition-colors inline-block shadow-lg">
-            Book a Consultation
-          </a>
-        </div>
+        <motion.div 
+          className="text-center"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.5, duration: 0.5 }}
+        >
+          <Button 
+            asChild
+            variant="default" 
+            className="bg-accent hover:bg-yellow-500 text-white px-8 py-6 text-lg shadow-lg"
+          >
+            <a href="#quotes">Book a Consultation</a>
+          </Button>
+        </motion.div>
       </div>
-    </AnimatedSection>
+    </section>
   );
 }

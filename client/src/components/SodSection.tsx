@@ -152,9 +152,23 @@ export default function SodSection() {
               loop 
               muted 
               playsInline
+              poster="/images/sodding-process-poster.jpg"
+              preload="auto"
+              onError={(e) => {
+                // If video fails, show the poster image instead
+                const video = e.target as HTMLVideoElement;
+                video.style.display = 'none';
+                const img = video.parentNode?.querySelector('img');
+                if (img) img.style.display = 'block';
+              }}
             >
-              <source src="/videos/sodding-process-new2.mp4" type="video/mp4" />
-              Your browser does not support the video tag.
+              <source src="/videos/sodding-process.mp4" type="video/mp4" />
+              <img 
+                src="/images/sodding-process-poster.jpg" 
+                alt="Sodding Process" 
+                className="w-full h-full object-cover" 
+                style={{display: 'none'}}
+              />
             </video>
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent flex flex-col items-center justify-end p-4 sm:p-6 md:p-8">
               <h2 className="text-white text-center font-heading font-bold text-2xl sm:text-3xl md:text-4xl mb-2 sm:mb-3 px-2 sm:px-4 drop-shadow-md max-w-[90%] md:max-w-3xl">
@@ -204,10 +218,22 @@ export default function SodSection() {
                     muted 
                     playsInline
                     poster="/images/sod-installation-poster.jpg"
+                    preload="auto"
+                    onError={(e) => {
+                      // If video fails, show the poster image instead
+                      const video = e.target as HTMLVideoElement;
+                      video.style.display = 'none';
+                      const img = video.parentNode?.querySelector('img');
+                      if (img) img.style.display = 'block';
+                    }}
                   >
-                    <source src="/videos/sod-installation-new.mp4" type="video/mp4" />
                     <source src="/videos/sod-installation.mp4" type="video/mp4" />
-                    <img src="/images/sod-installation-poster.jpg" alt="Sod Installation" className="w-full h-full object-cover" />
+                    <img 
+                      src="/images/sod-installation-poster.jpg" 
+                      alt="Sod Installation" 
+                      className="w-full h-full object-cover" 
+                      style={{display: 'none'}}
+                    />
                   </video>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
                 </div>
@@ -232,10 +258,22 @@ export default function SodSection() {
                     muted 
                     playsInline
                     poster="/images/rolling-watering-poster.jpg"
+                    preload="auto"
+                    onError={(e) => {
+                      // If video fails, show the poster image instead
+                      const video = e.target as HTMLVideoElement;
+                      video.style.display = 'none';
+                      const img = video.parentNode?.querySelector('img');
+                      if (img) img.style.display = 'block';
+                    }}
                   >
                     <source src="/videos/rolling-watering.mp4" type="video/mp4" />
-                    <source src="/videos/rolling-watering-new.mp4" type="video/mp4" />
-                    <img src="/images/rolling-watering-poster.jpg" alt="Rolling and Watering" className="w-full h-full object-cover" />
+                    <img 
+                      src="/images/rolling-watering-poster.jpg" 
+                      alt="Rolling and Watering" 
+                      className="w-full h-full object-cover" 
+                      style={{display: 'none'}}
+                    />
                   </video>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
                 </div>

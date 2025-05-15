@@ -124,11 +124,11 @@ export default function CalculatorSection() {
           ref={calculatorRef as React.RefObject<HTMLDivElement>}
         >
           {/* Length & Width Calculator */}
-          <div className={`calculator-container bg-white p-6 rounded-lg shadow-md ${activeCalculator === 'lengthWidth' ? '' : 'hidden'}`}>
-            <h3 className="text-xl font-heading font-semibold mb-4">Calculate by Length & Width</h3>
+          <div className={`calculator-container bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md dark:shadow-gray-900 ${activeCalculator === 'lengthWidth' ? '' : 'hidden'}`}>
+            <h3 className="text-xl font-heading font-semibold mb-4 dark:text-white">Calculate by Length & Width</h3>
 
             <div className="mb-6">
-              <p className="mb-4">Please enter the dimensions of your area and the desired depth of topsoil:</p>
+              <p className="mb-4 dark:text-gray-200">Please enter the dimensions of your area and the desired depth of topsoil:</p>
 
               <div className="space-y-4">
                 <div className="grid md:grid-cols-3 gap-4">
@@ -193,11 +193,11 @@ export default function CalculatorSection() {
           </div>
 
           {/* Area Calculator */}
-          <div className={`calculator-container bg-white p-6 rounded-lg shadow-md ${activeCalculator === 'area' ? '' : 'hidden'}`}>
-            <h3 className="text-xl font-heading font-semibold mb-4">Calculate by Area</h3>
+          <div className={`calculator-container bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md dark:shadow-gray-900 ${activeCalculator === 'area' ? '' : 'hidden'}`}>
+            <h3 className="text-xl font-heading font-semibold mb-4 dark:text-white">Calculate by Area</h3>
 
             <div className="mb-6">
-              <p className="mb-4">Please enter the area and the desired depth of topsoil:</p>
+              <p className="mb-4 dark:text-gray-200">Please enter the area and the desired depth of topsoil:</p>
 
               <div className="space-y-4">
                 <div className="grid md:grid-cols-2 gap-4">
@@ -251,11 +251,11 @@ export default function CalculatorSection() {
         </div>
 
         <div 
-          className="mt-8 bg-white p-6 rounded-lg shadow-md animate-from-right"
+          className="mt-8 bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md dark:shadow-gray-900 animate-from-right"
           style={{ transitionDelay: '0.5s' }}
           ref={helpSectionRef as React.RefObject<HTMLDivElement>}>
-          <h3 className="text-xl font-heading font-semibold mb-4">Need Help with Your Topsoil?</h3>
-          <p className="mb-4">Once you've calculated your topsoil needs, let us handle the delivery and spreading. We provide premium topsoil that's perfect for establishing new lawns and gardens.</p>
+          <h3 className="text-xl font-heading font-semibold mb-4 dark:text-white">Need Help with Your Topsoil?</h3>
+          <p className="mb-4 dark:text-gray-200">Once you've calculated your topsoil needs, let us handle the delivery and spreading. We provide premium topsoil that's perfect for establishing new lawns and gardens.</p>
           <a href="#quotes" className="bg-primary hover:bg-primary/80 hover:text-white text-white font-semibold py-2 px-6 rounded-lg transition-colors inline-block shadow-md">
             Request Topsoil Delivery Quote
           </a>

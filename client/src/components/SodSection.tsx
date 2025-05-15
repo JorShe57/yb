@@ -160,7 +160,7 @@ export default function SodSection() {
               Your browser does not support the video tag.
             </video>
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end justify-center">
-              <p className="text-white text-center p-4 font-medium text-lg">
+              <p className="text-white text-center p-4 font-heading font-bold text-2xl">
                 How We Do It
               </p>
             </div>

@@ -26,7 +26,7 @@ const quoteFormSchema = z.object({
   city: z.string().min(2, { message: "City is required" }),
   address: z.string().min(5, { message: "Please enter a valid service address" }),
   phone: z.string().min(7, { message: "Please enter a valid phone number" }),
-  service: z.string().optional(),
+  service: z.string().min(1, { message: "Please select a service type" }),
   comments: z.string().optional(),
 });
 
@@ -157,7 +157,7 @@ export function QuoteForm() {
             name="service"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Service Interest</FormLabel>
+                <FormLabel>Service Interest *</FormLabel>
                 <Select onValueChange={field.onChange} defaultValue={field.value}>
                   <FormControl>
                     <SelectTrigger className="bg-background text-foreground/90 hover:bg-background data-[state=open]:bg-background focus:bg-background">

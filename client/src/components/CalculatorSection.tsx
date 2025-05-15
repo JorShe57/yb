@@ -259,7 +259,7 @@ export default function CalculatorSection() {
           ref={helpSectionRef as React.RefObject<HTMLDivElement>}>
           <h3 className="text-xl font-heading font-semibold mb-4">Need Help with Your Topsoil?</h3>
           <p className="mb-4">Once you've calculated your topsoil needs, let us handle the delivery and spreading. We provide premium topsoil that's perfect for establishing new lawns and gardens.</p>
-          <a href="#quotes" className="bg-primary hover:bg-green-700 text-white font-semibold py-2 px-6 rounded-lg transition-colors inline-block">
+          <a href="#quotes" className="bg-primary hover:bg-primary/80 text-white font-semibold py-2 px-6 rounded-lg transition-colors inline-block shadow-md">
             Request Topsoil Delivery Quote
           </a>
         </div>

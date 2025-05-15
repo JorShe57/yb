@@ -143,7 +143,7 @@ export default function HomeSection() {
                 }}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-accent hover:bg-yellow-500 text-white font-semibold py-4 px-8 rounded-lg transition-colors shadow-lg text-center text-lg flex-grow sm:flex-grow-0 flex items-center justify-center"
+                className="bg-accent hover:bg-yellow-500 hover:text-primary text-white font-semibold py-4 px-8 rounded-lg transition-colors shadow-lg text-center text-lg flex-grow sm:flex-grow-0 flex items-center justify-center"
               >
                 Get a Free Quote
                 <ChevronDown className="ml-2 h-5 w-5" />

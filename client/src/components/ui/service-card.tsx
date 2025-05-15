@@ -138,10 +138,10 @@ export function ServiceCard({
 
       {/* Toggle Button */}
       <motion.button
-        className="absolute bottom-3 right-3 w-8 h-8 rounded-full bg-primary/90 backdrop-blur-sm text-white flex items-center justify-center border border-white/10 shadow-md"
+        className="absolute bottom-3 right-3 w-8 h-8 rounded-full bg-primary text-white hover:bg-primary/80 flex items-center justify-center border border-white/10 shadow-md transition-colors"
         onClick={() => setIsExpanded(!isExpanded)}
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
         aria-label={isExpanded ? "Show less" : "Show more"}
         title={isExpanded ? "Show less" : "Show more"}
       >

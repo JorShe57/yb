@@ -208,10 +208,10 @@ export function SodCard({
               >
                 <a 
                   href="#quotes" 
-                  className={`block w-auto mx-auto text-white font-medium py-1.5 px-5 rounded-md text-center transition-colors flex items-center justify-center gap-2 shadow-md ${
+                  className={`block w-auto mx-auto font-medium py-1.5 px-5 rounded-md text-center transition-colors flex items-center justify-center gap-2 shadow-md ${
                     isSunGold
-                      ? "bg-gradient-to-r from-yellow-500 to-green-600 hover:from-yellow-500/90 hover:to-green-600/90"
-                      : "bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-600/90 hover:to-teal-600/90"
+                      ? "bg-gradient-to-r from-yellow-500 to-green-600 text-white hover:from-yellow-500 hover:to-yellow-500 hover:text-primary"
+                      : "bg-gradient-to-r from-blue-600 to-teal-600 text-white hover:from-blue-400 hover:to-blue-400 hover:text-blue-700"
                   }`}
                 >
                   <Zap size={14} />
@@ -246,18 +246,14 @@ export function SodCard({
         
         {/* Toggle expand button */}
         <motion.button
-          className={`absolute bottom-5 right-4 w-8 h-8 rounded-full flex items-center justify-center shadow-md border border-white/20 ${
+          className={`absolute bottom-5 right-4 w-8 h-8 rounded-full flex items-center justify-center shadow-md border border-white/20 transition-colors ${
             isSunGold 
-              ? isExpanded 
-                ? 'bg-gradient-to-br from-yellow-500 to-green-600 text-white' 
-                : 'bg-gradient-to-br from-yellow-500/90 to-green-500/90 text-white'
-              : isExpanded 
-                ? 'bg-gradient-to-br from-blue-600 to-teal-600 text-white' 
-                : 'bg-gradient-to-br from-blue-600/90 to-teal-500/90 text-white'
+              ? 'bg-gradient-to-br from-yellow-500 to-green-600 text-white hover:from-yellow-500 hover:to-yellow-500 hover:text-primary'
+              : 'bg-gradient-to-br from-blue-600 to-teal-600 text-white hover:from-blue-400 hover:to-blue-400 hover:text-blue-700'
           }`}
           onClick={() => setIsExpanded(!isExpanded)}
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
           aria-label={isExpanded ? "Show less" : "Show more"}
         >
           <motion.div

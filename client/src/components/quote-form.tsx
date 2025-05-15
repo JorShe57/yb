@@ -195,6 +195,7 @@ export function QuoteForm() {
         <div className="text-right">
           <Button 
             type="submit" 
+            variant="accent"
             disabled={quoteRequestMutation.isPending}
             className="min-w-[180px]"
           >

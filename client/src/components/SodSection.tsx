@@ -69,26 +69,89 @@ export default function SodSection() {
             </div>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            <div className="flex flex-col items-center text-center p-3 hover:bg-green-50 rounded-lg transition-colors">
-              <div className="w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center mb-3">1</div>
-              <h4 className="font-medium mb-1">Site Preparation</h4>
-              <p className="text-sm text-gray-600">Removal of old turf and debris, soil grading and amendment</p>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+            {/* Step 1: Site Preparation */}
+            <div className="flex flex-col items-center text-center bg-white rounded-lg shadow-md overflow-hidden">
+              <div className="w-full aspect-video relative">
+                <video 
+                  className="w-full h-full object-cover" 
+                  autoPlay 
+                  loop 
+                  muted 
+                  playsInline
+                >
+                  <source src="/videos/site-preparation.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+              <div className="p-3">
+                <div className="w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center mx-auto -mt-8 mb-2 border-4 border-white shadow-sm">1</div>
+                <h4 className="font-medium mb-1">Site Preparation</h4>
+                <p className="text-sm text-gray-600">Removal of old turf and debris, soil grading and amendment</p>
+              </div>
             </div>
-            <div className="flex flex-col items-center text-center p-3 hover:bg-green-50 rounded-lg transition-colors">
-              <div className="w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center mb-3">2</div>
-              <h4 className="font-medium mb-1">Sod Installation</h4>
-              <p className="text-sm text-gray-600">Precision cutting and seam-free placement of fresh sod</p>
+            
+            {/* Step 2: Sod Installation */}
+            <div className="flex flex-col items-center text-center bg-white rounded-lg shadow-md overflow-hidden">
+              <div className="w-full aspect-video relative">
+                <video 
+                  className="w-full h-full object-cover" 
+                  autoPlay 
+                  loop 
+                  muted 
+                  playsInline
+                >
+                  <source src="/videos/sod-installation.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+              <div className="p-3">
+                <div className="w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center mx-auto -mt-8 mb-2 border-4 border-white shadow-sm">2</div>
+                <h4 className="font-medium mb-1">Sod Installation</h4>
+                <p className="text-sm text-gray-600">Precision cutting and seam-free placement of fresh sod</p>
+              </div>
             </div>
-            <div className="flex flex-col items-center text-center p-3 hover:bg-green-50 rounded-lg transition-colors">
-              <div className="w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center mb-3">3</div>
-              <h4 className="font-medium mb-1">Rolling & Watering</h4>
-              <p className="text-sm text-gray-600">Ensuring proper soil contact and initial moisture for establishment</p>
+            
+            {/* Step 3: Rolling & Watering */}
+            <div className="flex flex-col items-center text-center bg-white rounded-lg shadow-md overflow-hidden">
+              <div className="w-full aspect-video relative">
+                <video 
+                  className="w-full h-full object-cover" 
+                  autoPlay 
+                  loop 
+                  muted 
+                  playsInline
+                >
+                  <source src="/videos/rolling-watering.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+              <div className="p-3">
+                <div className="w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center mx-auto -mt-8 mb-2 border-4 border-white shadow-sm">3</div>
+                <h4 className="font-medium mb-1">Rolling & Watering</h4>
+                <p className="text-sm text-gray-600">Ensuring proper soil contact and initial moisture for establishment</p>
+              </div>
             </div>
-            <div className="flex flex-col items-center text-center p-3 hover:bg-green-50 rounded-lg transition-colors">
-              <div className="w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center mb-3">4</div>
-              <h4 className="font-medium mb-1">Final Inspection</h4>
-              <p className="text-sm text-gray-600">Quality check and care instructions for proper establishment</p>
+            
+            {/* Step 4: Final Inspection */}
+            <div className="flex flex-col items-center text-center bg-white rounded-lg shadow-md overflow-hidden">
+              <div className="w-full aspect-video relative">
+                <video 
+                  className="w-full h-full object-cover" 
+                  autoPlay 
+                  loop 
+                  muted 
+                  playsInline
+                >
+                  <source src="/videos/final-inspection.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+              <div className="p-3">
+                <div className="w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center mx-auto -mt-8 mb-2 border-4 border-white shadow-sm">4</div>
+                <h4 className="font-medium mb-1">Final Inspection</h4>
+                <p className="text-sm text-gray-600">Quality check and care instructions for proper establishment</p>
+              </div>
             </div>
           </div>
         </div>

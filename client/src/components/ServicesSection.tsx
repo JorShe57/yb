@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { ServiceCard } from "@/components/ui/service-card";
 import { Button } from "@/components/ui/button";
+import { SwipeDetector } from "@/components/ui/swipe-detector"; 
+import { useIsMobile } from "@/hooks/use-mobile";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 export default function ServicesSection() {
+  const isMobile = useIsMobile();
+  const [currentServiceIndex, setCurrentServiceIndex] = useState(0);
   const services = [
     {
       title: "Site Preparation & Grading",
@@ -43,6 +48,19 @@ export default function ServicesSection() {
     }
   ];
   
+  // Functions to navigate between services on mobile
+  const nextService = () => {
+    setCurrentServiceIndex((prev) => 
+      prev < services.length - 1 ? prev + 1 : prev
+    );
+  };
+
+  const prevService = () => {
+    setCurrentServiceIndex((prev) => 
+      prev > 0 ? prev - 1 : prev
+    );
+  };
+
   return (
     <section 
       id="services" 
@@ -84,18 +102,94 @@ export default function ServicesSection() {
           care and attention to detail. Explore our offerings below.
         </motion.p>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-16">
-          {services.map((service, index) => (
-            <ServiceCard
-              key={index}
-              index={index}
-              title={service.title}
-              description={service.description}
-              image={service.image}
-              alt={service.alt}
-            />
-          ))}
-        </div>
+        {isMobile ? (
+          <SwipeDetector 
+            onSwipeLeft={nextService} 
+            onSwipeRight={prevService}
+            className="mb-16"
+          >
+            <div className="relative px-2 py-4">
+              {/* Current service card with animation */}
+              <motion.div
+                key={services[currentServiceIndex].title}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.3 }}
+                className="flex justify-center"
+              >
+                <ServiceCard
+                  title={services[currentServiceIndex].title}
+                  description={services[currentServiceIndex].description}
+                  image={services[currentServiceIndex].image}
+                  alt={services[currentServiceIndex].alt}
+                  index={currentServiceIndex}
+                />
+              </motion.div>
+              
+              {/* Mobile navigation controls */}
+              <div className="flex justify-between w-full absolute top-1/2 transform -translate-y-1/2 px-3 z-10 pointer-events-none">
+                <Button 
+                  size="icon" 
+                  variant="outline" 
+                  onClick={prevService} 
+                  disabled={currentServiceIndex === 0}
+                  className={`rounded-full bg-background/70 backdrop-blur-sm shadow-md pointer-events-auto ${
+                    currentServiceIndex === 0 ? 'opacity-0' : 'opacity-100'
+                  }`}
+                  aria-label="Previous service"
+                >
+                  <ChevronLeft />
+                </Button>
+                <Button 
+                  size="icon" 
+                  variant="outline" 
+                  onClick={nextService} 
+                  disabled={currentServiceIndex === services.length - 1}
+                  className={`rounded-full bg-background/70 backdrop-blur-sm shadow-md pointer-events-auto ${
+                    currentServiceIndex === services.length - 1 ? 'opacity-0' : 'opacity-100'
+                  }`}
+                  aria-label="Next service"
+                >
+                  <ChevronRight />
+                </Button>
+              </div>
+              
+              {/* Indicator text */}
+              <div className="text-center mt-4 text-sm text-foreground/70">
+                Swipe to see more services ({currentServiceIndex + 1}/{services.length})
+              </div>
+              
+              {/* Dots for navigation */}
+              <div className="flex justify-center mt-2 gap-1.5">
+                {services.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentServiceIndex(index)}
+                    className={`w-2.5 h-2.5 rounded-full transition-colors ${
+                      index === currentServiceIndex 
+                      ? 'bg-primary' 
+                      : 'bg-primary/30'
+                    }`}
+                    aria-label={`Go to service ${index + 1}`}
+                  />
+                ))}
+              </div>
+            </div>
+          </SwipeDetector>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-16">
+            {services.map((service, index) => (
+              <ServiceCard
+                key={index}
+                index={index}
+                title={service.title}
+                description={service.description}
+                image={service.image}
+                alt={service.alt}
+              />
+            ))}
+          </div>
+        )}
         
         <motion.div 
           className="text-center"

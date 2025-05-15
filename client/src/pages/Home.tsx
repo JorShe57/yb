@@ -47,7 +47,8 @@ export default function Home() {
       <Footer />
       <ChatLauncher />
       <SectionIndicator sections={sections} />
-      <PullToRefresh />
+      {/* Temporarily disabled until we fix the hook issue */}
+      {/* <PullToRefresh /> */}
     </div>
   );
 }

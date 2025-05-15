@@ -19,13 +19,7 @@ export default function QuotesSection() {
     >
       <div className="container mx-auto px-4">
         <div className="flex items-center mb-8">
-          <a 
-            href="#home" 
-            className="text-primary hover:text-secondary mr-3 transition-colors" 
-            aria-label="Go back to home"
-          >
-            <ArrowLeft className="h-5 w-5" />
-          </a>
+          
           <h2 className="text-3xl md:text-4xl font-heading font-bold">
             Request a <span className="text-primary">Free Quote</span>
           </h2>

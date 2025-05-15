@@ -159,9 +159,12 @@ export default function SodSection() {
               <source src="/videos/sodding-process-new2.mp4" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end justify-center">
-              <p className="text-white text-center p-4 font-heading font-bold text-2xl">
-                How We Do It
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent flex flex-col items-center justify-end pb-8">
+              <h2 className="text-white text-center font-heading font-bold text-4xl mb-3 px-4 drop-shadow-md">
+                How We <span className="text-accent">Transform</span> Your Lawn
+              </h2>
+              <p className="text-white/90 text-center max-w-2xl px-6 text-lg md:text-xl drop-shadow-sm">
+                Our expert technicians follow a meticulous process to ensure your lawn looks perfect from day one
               </p>
             </div>
           </div>

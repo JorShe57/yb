@@ -72,17 +72,6 @@ export default function HomeSection() {
       
       {/* Content */}
       <div className="container mx-auto px-4 py-16 text-white relative z-20">
-        {/* Logo/Brand Element */}
-        <MotionDiv 
-          variant="fadeInDown" 
-          duration={0.7}
-          className="mb-12 flex justify-center md:justify-start"
-        >
-          <div className="bg-white/10 backdrop-blur-sm py-3 px-6 rounded-full inline-flex items-center border border-white/10 shadow-glow">
-            <span className="text-3xl font-bold text-accent">YardBros</span>
-          </div>
-        </MotionDiv>
-        
         <div className="max-w-4xl">
           {/* Enhanced Headline */}
           <MotionDiv 

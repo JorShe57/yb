@@ -50,7 +50,7 @@ export default function SodSection() {
       ]
     }
   ];
-  
+
   return (
     <section 
       id="sod" 
@@ -59,7 +59,7 @@ export default function SodSection() {
       {/* Decorative elements */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full -translate-y-1/2 translate-x-1/2" />
       <div className="absolute bottom-0 left-0 w-64 h-64 bg-accent/5 rounded-full translate-y-1/2 -translate-x-1/2" />
-      
+
       <div className="container mx-auto px-4 relative z-10">
         <motion.div 
           className="flex items-center mb-8"
@@ -82,7 +82,7 @@ export default function SodSection() {
             />
           </h2>
         </motion.div>
-        
+
         <motion.div
           className="mb-10"
           initial={{ opacity: 0, y: 20 }}
@@ -95,7 +95,7 @@ export default function SodSection() {
             conditions. Our sod is freshly harvested, delivered directly to your location, and professionally 
             installed for immediate curb appeal.
           </p>
-          
+
           <div className="flex items-center mt-4 bg-primary/5 p-4 rounded-lg border border-primary/10">
             <div className="text-primary mr-3">
               <Shield className="h-6 w-6" />
@@ -106,7 +106,7 @@ export default function SodSection() {
             </p>
           </div>
         </motion.div>
-        
+
         {/* Sod Cards */}
         <div className="mb-16">
           <motion.h3 
@@ -118,7 +118,7 @@ export default function SodSection() {
           >
             Choose The Perfect Blend For Your Yard
           </motion.h3>
-          
+
           <div className="grid md:grid-cols-2 gap-8">
             {sodTypes.map((sod, index) => (
               <SodCard 
@@ -134,7 +134,7 @@ export default function SodSection() {
             ))}
           </div>
         </div>
-        
+
         {/* Installation Process with Video */}
         <motion.div 
           className="mb-16 bg-card rounded-xl shadow-md overflow-hidden border border-border"
@@ -146,7 +146,7 @@ export default function SodSection() {
           <h3 className="text-xl font-heading font-bold text-primary p-6 border-b border-border bg-muted/30">
             Our Installation Process
           </h3>
-          
+
           {/* Process Video */}
           <div className="relative overflow-hidden aspect-video">
             <video 
@@ -165,7 +165,7 @@ export default function SodSection() {
               </p>
             </div>
           </div>
-          
+
           <div className="p-6">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {/* Step 1: Site Preparation */}
@@ -193,7 +193,7 @@ export default function SodSection() {
                   </p>
                 </div>
               </div>
-              
+
               {/* Step 2: Sod Installation */}
               <div className="flex flex-col bg-card rounded-lg shadow-sm overflow-hidden border border-border">
                 <div className="relative h-36 overflow-hidden">
@@ -204,7 +204,7 @@ export default function SodSection() {
                     muted 
                     playsInline
                   >
-                    <source src="/videos/sod-installation.mp4" type="video/mp4" />
+                    <source src="/videos/sod-installation-new.mp4" type="video/mp4" />
                     Your browser does not support the video tag.
                   </video>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
@@ -219,7 +219,7 @@ export default function SodSection() {
                   </p>
                 </div>
               </div>
-              
+
               {/* Step 3: Rolling & Watering */}
               <div className="flex flex-col bg-card rounded-lg shadow-sm overflow-hidden border border-border">
                 <div className="relative h-36 overflow-hidden">
@@ -245,7 +245,7 @@ export default function SodSection() {
                   </p>
                 </div>
               </div>
-              
+
               {/* Step 4: Final Inspection */}
               <div className="flex flex-col bg-card rounded-lg shadow-sm overflow-hidden border border-border">
                 <div className="relative h-36 overflow-hidden">
@@ -274,7 +274,7 @@ export default function SodSection() {
             </div>
           </div>
         </motion.div>
-        
+
         {/* FAQ Section - Optimized for Mobile */}
         <motion.div 
           className="mb-16"
@@ -286,7 +286,7 @@ export default function SodSection() {
           <h3 className="text-2xl font-heading font-semibold mb-6 text-center md:text-left">
             Frequently Asked Questions
           </h3>
-          
+
           <div className="space-y-4">
             {/* FAQ Item 1 */}
             <motion.div 
@@ -303,7 +303,7 @@ export default function SodSection() {
                 your sod should be firmly rooted.
               </p>
             </motion.div>
-            
+
             {/* FAQ Item 2 */}
             <motion.div 
               className="bg-card p-5 rounded-xl shadow-sm border border-border"
@@ -319,7 +319,7 @@ export default function SodSection() {
                 another week, then transition to your normal watering schedule.
               </p>
             </motion.div>
-            
+
             {/* FAQ Item 3 */}
             <motion.div 
               className="bg-card p-5 rounded-xl shadow-sm border border-border"
@@ -337,7 +337,7 @@ export default function SodSection() {
             </motion.div>
           </div>
         </motion.div>
-        
+
         {/* CTA */}
         <motion.div 
           className="text-center"

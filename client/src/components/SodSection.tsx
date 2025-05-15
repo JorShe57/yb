@@ -201,7 +201,7 @@ export default function SodSection() {
                       if (img) img.style.display = 'block';
                     }}
                   >
-                    <source src="/videos/site-preparation.mp4" type="video/mp4" />
+                    <source src="/videos/site-preparation-new.mp4" type="video/mp4" />
                     <img 
                       src="/images/site-preparation-poster.jpg" 
                       alt="Site Preparation" 

@@ -72,14 +72,14 @@ export default function HomeSection() {
       
       {/* Content */}
       <div className="container mx-auto px-4 py-16 text-white relative z-20">
-        <div className="max-w-4xl">
+        <div className="max-w-5xl mx-auto text-center">
           {/* Enhanced Headline */}
           <MotionDiv 
             variant="fadeInUp" 
             delay={0.3}
-            className="mb-3"
+            className="mb-6"
           >
-            <h1 className="text-5xl md:text-6xl font-heading font-bold text-white">
+            <h1 className="text-6xl md:text-7xl font-heading font-bold text-white leading-tight">
               Custom <span className="text-accent relative">
                 Lawns
                 <span className="absolute bottom-1 left-0 w-full h-1 bg-accent/30 rounded-full"></span>
@@ -90,22 +90,22 @@ export default function HomeSection() {
           <MotionDiv 
             variant="fadeInUp" 
             delay={0.5}
-            className="mb-6"
+            className="mb-12"
           >
-            <h2 className="text-2xl md:text-3xl font-heading text-white/90">
+            <h2 className="text-3xl md:text-4xl font-heading text-white/90 tracking-wide">
               Expertly Crafted from the Ground Up
             </h2>
           </MotionDiv>
           
           {/* Benefits List with Staggered Animation */}
-          <MotionList className="mb-8 grid grid-cols-1 md:grid-cols-3 gap-4" delay={0.7}>
+          <MotionList className="mb-12 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto" delay={0.7}>
             {benefitsList.map((benefit, index) => (
               <MotionListItem key={index} delay={index * 0.1}>
-                <div className="flex items-center p-2 rounded-lg bg-white/5 backdrop-blur-sm border border-white/5 hover:bg-white/10 transition-colors duration-300">
+                <div className="flex items-center justify-center p-4 rounded-lg bg-white/5 backdrop-blur-sm border border-white/5 hover:bg-white/10 transition-colors duration-300">
                   <div className="mr-3 bg-accent/20 p-2 rounded-full">
-                    <CheckCircle className="h-5 w-5 text-accent" />
+                    <CheckCircle className="h-6 w-6 text-accent" />
                   </div>
-                  <span>{benefit.text}</span>
+                  <span className="text-lg">{benefit.text}</span>
                 </div>
               </MotionListItem>
             ))}

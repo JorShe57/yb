@@ -201,21 +201,21 @@ export function SodCard({
               </motion.div>
               
               <motion.div 
-                className="pt-4 flex justify-center"
+                className="pt-4 pb-6 flex justify-center"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
               >
                 <a 
                   href="#quotes" 
-                  className={`block w-full text-white font-medium py-2 px-4 rounded-md text-center transition-colors flex items-center justify-center gap-2 shadow-md ${
+                  className={`block w-auto mx-auto text-white font-medium py-1.5 px-5 rounded-md text-center transition-colors flex items-center justify-center gap-2 shadow-md ${
                     isSunGold
                       ? "bg-gradient-to-r from-yellow-500 to-green-600 hover:from-yellow-500/90 hover:to-green-600/90"
                       : "bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-600/90 hover:to-teal-600/90"
                   }`}
                 >
-                  <Zap size={16} />
-                  Get a Quote
+                  <Zap size={14} />
+                  <span className="text-sm">Get a Quote</span>
                 </a>
               </motion.div>
             </motion.div>
@@ -246,7 +246,7 @@ export function SodCard({
         
         {/* Toggle expand button */}
         <motion.button
-          className={`absolute bottom-4 right-4 w-9 h-9 rounded-full flex items-center justify-center shadow-md border border-white/20 ${
+          className={`absolute bottom-5 right-4 w-8 h-8 rounded-full flex items-center justify-center shadow-md border border-white/20 ${
             isSunGold 
               ? isExpanded 
                 ? 'bg-gradient-to-br from-yellow-500 to-green-600 text-white' 

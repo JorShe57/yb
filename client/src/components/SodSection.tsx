@@ -8,7 +8,7 @@ export default function SodSection() {
     {
       name: "YardBros SunGold Blend",
       description: "Perfect for high-visibility areas, full sun exposure, and requires minimal maintenance. Offers exceptional disease resistance and a soft, luxurious texture for comfortable barefoot enjoyment.",
-      image: "/images/sungold-blend.png",
+      image: "/images/Screenshot 2025-05-15 at 11.06.48 AM.png",
       features: [
         { label: "Sun Exposure", value: "Full Sun" },
         { label: "Water Requirements", value: "Moderate" },
@@ -21,7 +21,7 @@ export default function SodSection() {
     {
       name: "YardBros Cool Shade Blend",
       description: "Specially developed for shaded areas and cooler climates, thriving in various soil types. Features superior drought tolerance and provides excellent erosion control for sloped areas.",
-      image: "/images/cool-shade-blend.png",
+      image: "/images/Screenshot 2025-05-15 at 11.07.30 AM.png",
       features: [
         { label: "Sun Exposure", value: "Partial to Full Shade" },
         { label: "Water Requirements", value: "Low to Moderate" },

@@ -39,7 +39,7 @@ export function SodCard({
     >
       <div 
         className={`relative w-full transition-all duration-500 ${
-          isExpanded ? 'h-[200px]' : 'h-[350px]'
+          isExpanded ? 'h-[200px]' : 'h-[400px]'
         }`}
       >
         <motion.div 

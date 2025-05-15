@@ -96,9 +96,7 @@ export default function ChatLauncher() {
       
       {/* Chat Toggle Button */}
       <SidebarToggle 
-        icon={<MessageCircle size={20} />} 
         label="Chat with us"
-        showLabel={true}
         side="right"
       />
     </SidebarProvider>

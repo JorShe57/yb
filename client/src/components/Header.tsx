@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
-import { Menu, X, Anchor } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { motion } from "framer-motion";
+import yardBrosLogo from "@/assets/yardbros-logo.jpg";
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -46,9 +47,9 @@ export default function Header() {
         >
           <a href="#home" className="flex items-center">
             <img 
-              src="/images/yardbros-logo.png" 
+              src={yardBrosLogo} 
               alt="Yard Bros Landscaping Logo" 
-              className="h-12 md:h-14"
+              className="h-16 md:h-20 rounded-full"
             />
           </a>
         </motion.div>
@@ -63,7 +64,6 @@ export default function Header() {
               href="#quotes"
               className="hidden md:inline-flex mr-4 bg-accent hover:bg-accent/90 text-white font-medium py-2 px-4 rounded text-sm transition-colors"
             >
-              <Anchor className="w-4 h-4 mr-2" />
               Get a Free Quote
             </a>
           </motion.div>
@@ -99,10 +99,9 @@ export default function Header() {
           <div className="flex flex-col space-y-3">
             <a 
               href="#quotes" 
-              className="flex items-center justify-center gap-2 py-3 px-4 bg-accent text-white rounded-md shadow-sm"
+              className="flex items-center justify-center py-3 px-4 bg-accent text-white rounded-md shadow-sm"
               onClick={closeMobileMenu}
             >
-              <Anchor className="w-4 h-4" />
               Get a Free Quote
             </a>
             

@@ -145,29 +145,17 @@ export function SidebarToggle({
 
   return (
     <div className={cn(
-      "fixed bottom-6 z-40 flex items-center gap-2",
+      "fixed bottom-6 z-40 flex items-center",
       side === 'right' ? 'right-6' : 'left-6',
       className
     )}>
-      {showLabel && side === 'left' && (
-        <div className="bg-primary/80 text-white px-3 py-1.5 rounded-lg text-sm font-medium shadow-lg">
-          {label}
-        </div>
-      )}
-      
       <button
         onClick={toggleSidebar}
-        className="w-12 h-12 flex items-center justify-center bg-primary text-white rounded-full shadow-lg hover:scale-105 transition-transform"
+        className="bg-primary/90 hover:bg-primary text-white px-4 py-2 rounded-lg text-sm font-medium shadow-lg hover:shadow-xl transition-all duration-200 flex items-center gap-2"
         aria-label={label}
       >
-        {icon}
+        {label}
       </button>
-      
-      {showLabel && side === 'right' && (
-        <div className="bg-primary/80 text-white px-3 py-1.5 rounded-lg text-sm font-medium shadow-lg">
-          {label}
-        </div>
-      )}
     </div>
   );
 }

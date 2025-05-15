@@ -191,9 +191,23 @@ export default function SodSection() {
                     loop 
                     muted 
                     playsInline
+                    poster="/images/site-preparation-poster.jpg"
+                    preload="auto"
+                    onError={(e) => {
+                      // If video fails, show the poster image instead
+                      const video = e.target as HTMLVideoElement;
+                      video.style.display = 'none';
+                      const img = video.parentNode?.querySelector('img');
+                      if (img) img.style.display = 'block';
+                    }}
                   >
-                    <source src="/videos/site-preparation-new.mp4" type="video/mp4" />
-                    Your browser does not support the video tag.
+                    <source src="/videos/site-preparation.mp4" type="video/mp4" />
+                    <img 
+                      src="/images/site-preparation-poster.jpg" 
+                      alt="Site Preparation" 
+                      className="w-full h-full object-cover" 
+                      style={{display: 'none'}}
+                    />
                   </video>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
                 </div>
@@ -297,9 +311,23 @@ export default function SodSection() {
                     loop 
                     muted 
                     playsInline
+                    poster="/images/final-inspection-poster.jpg"
+                    preload="auto"
+                    onError={(e) => {
+                      // If video fails, show the poster image instead
+                      const video = e.target as HTMLVideoElement;
+                      video.style.display = 'none';
+                      const img = video.parentNode?.querySelector('img');
+                      if (img) img.style.display = 'block';
+                    }}
                   >
-                    <source src="/videos/final-inspection-new.mp4" type="video/mp4" />
-                    Your browser does not support the video tag.
+                    <source src="/videos/final-inspection.mp4" type="video/mp4" />
+                    <img 
+                      src="/images/final-inspection-poster.jpg" 
+                      alt="Final Inspection" 
+                      className="w-full h-full object-cover" 
+                      style={{display: 'none'}}
+                    />
                   </video>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
                 </div>

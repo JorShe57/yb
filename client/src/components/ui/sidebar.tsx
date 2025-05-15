@@ -151,7 +151,7 @@ export function SidebarToggle({
     )}>
       <button
         onClick={toggleSidebar}
-        className="bg-primary/90 hover:bg-primary text-white px-4 py-2 rounded-lg text-sm font-medium shadow-lg hover:shadow-xl transition-all duration-200 flex items-center gap-2"
+        className="bg-primary text-white hover:bg-primary/80 hover:text-white px-4 py-2 rounded-lg text-sm font-medium shadow-lg hover:shadow-xl transition-all duration-200 flex items-center gap-2"
         aria-label={label}
       >
         {label}

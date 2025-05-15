@@ -62,7 +62,7 @@ export default function Header() {
           >
             <a 
               href="#quotes"
-              className="hidden md:inline-flex mr-4 bg-accent hover:bg-accent/90 text-white font-medium py-2 px-4 rounded text-sm transition-colors"
+              className="hidden md:inline-flex mr-4 bg-accent hover:bg-yellow-500 hover:text-primary text-white font-medium py-2 px-4 rounded text-sm transition-colors"
             >
               Get a Free Quote
             </a>
@@ -99,7 +99,7 @@ export default function Header() {
           <div className="flex flex-col space-y-3">
             <a 
               href="#quotes" 
-              className="flex items-center justify-center py-3 px-4 bg-accent text-white rounded-md shadow-sm"
+              className="flex items-center justify-center py-3 px-4 bg-accent text-white hover:bg-yellow-500 hover:text-primary rounded-md shadow-sm transition-colors"
               onClick={closeMobileMenu}
             >
               Get a Free Quote

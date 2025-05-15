@@ -108,13 +108,13 @@ export default function CalculatorSection() {
         
         <div className="flex flex-wrap gap-4 mb-8">
           <button 
-            className={`${activeCalculator === 'lengthWidth' ? 'bg-primary' : 'bg-gray-400'} hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors shadow-md`}
+            className={`${activeCalculator === 'lengthWidth' ? 'bg-primary' : 'bg-gray-400'} hover:bg-primary/80 text-white font-semibold py-3 px-6 rounded-lg transition-colors shadow-md`}
             onClick={() => setActiveCalculator('lengthWidth')}
           >
             Length & Width
           </button>
           <button 
-            className={`${activeCalculator === 'area' ? 'bg-primary' : 'bg-gray-400'} hover:bg-gray-500 text-white font-semibold py-3 px-6 rounded-lg transition-colors shadow-md`}
+            className={`${activeCalculator === 'area' ? 'bg-primary' : 'bg-gray-400'} ${activeCalculator === 'area' ? 'hover:bg-primary/80' : 'hover:bg-gray-500'} text-white font-semibold py-3 px-6 rounded-lg transition-colors shadow-md`}
             onClick={() => setActiveCalculator('area')}
           >
             Area
@@ -178,7 +178,7 @@ export default function CalculatorSection() {
                   <button 
                     type="button" 
                     onClick={calculateLw}
-                    className="bg-accent hover:bg-yellow-500 text-white font-semibold py-2 px-6 rounded-lg transition-colors"
+                    className="bg-accent hover:bg-yellow-500 hover:text-primary text-white font-semibold py-2 px-6 rounded-lg transition-colors"
                   >
                     Calculate
                   </button>
@@ -235,7 +235,7 @@ export default function CalculatorSection() {
                   <button 
                     type="button" 
                     onClick={calculateArea}
-                    className="bg-accent hover:bg-yellow-500 text-white font-semibold py-2 px-6 rounded-lg transition-colors"
+                    className="bg-accent hover:bg-yellow-500 hover:text-primary text-white font-semibold py-2 px-6 rounded-lg transition-colors"
                   >
                     Calculate
                   </button>

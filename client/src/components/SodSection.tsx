@@ -251,10 +251,7 @@ export default function SodSection() {
                       if (img) img.style.display = "block";
                     }}
                   >
-                    <source
-                      src="public/videos/sod-installation-new2.mp4"
-                      type="video/mp4"
-                    />
+                    <source src="/videos/sod-installation-new2.mp4" type="video/mp4" />
                     <img
                       src="/images/sod-installation-poster.jpg"
                       alt="Sod Installation"

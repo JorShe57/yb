@@ -35,18 +35,15 @@ export function ServiceCard({
         isExpanded ? "z-10" : "z-0",
         className
       )}
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ 
-        opacity: 1, 
-        y: 0,
-        transition: { 
-          duration: 0.5, 
-          delay: staggerDelay,
-          ease: "easeOut" 
-        }
+      initial={{ opacity: 1, y: 0 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ 
+        duration: 0.3, 
+        delay: staggerDelay,
+        ease: "easeOut" 
       }}
-      viewport={{ once: true, margin: "-100px" }}
-      layout
+      viewport={{ once: true }}
+      layout="position"
     >
       {/* Card Header with Image */}
       <div 
@@ -97,13 +94,13 @@ export function ServiceCard({
         className="flex-1 flex flex-col p-4"
         layout
       >
-        <AnimatePresence>
+        <AnimatePresence mode="wait">
           {isExpanded ? (
             <motion.div
-              initial={{ opacity: 0 }}
+              initial={{ opacity: 1 }}
               animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
+              exit={{ opacity: 1 }}
+              transition={{ duration: 0.2 }}
               className="flex-1 flex flex-col"
             >
               <p className="text-foreground/90 text-sm md:text-base mb-4">{description}</p>
@@ -124,10 +121,10 @@ export function ServiceCard({
             </motion.div>
           ) : (
             <motion.p
-              initial={{ opacity: 0 }}
+              initial={{ opacity: 1 }}
               animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
+              exit={{ opacity: 1 }}
+              transition={{ duration: 0.2 }}
               className="text-foreground/70 text-sm line-clamp-2"
             >
               {description}

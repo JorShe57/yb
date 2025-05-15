@@ -35,6 +35,12 @@
     -webkit-overflow-scrolling: touch;
   }
   
+  .mobile-touch-scroll {
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: none;
+  }
+  
   /* Remove hover effects on mobile */
   .mobile-no-hover {
     @apply hover:bg-transparent hover:shadow-none hover:scale-100;

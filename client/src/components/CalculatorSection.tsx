@@ -94,7 +94,7 @@ export default function CalculatorSection() {
       className="py-16 bg-gradient-to-tr from-gray-100 to-neutral"
       animation="fade"
     >
-      <div className="container mx-auto px-4 bg-white/80 backdrop-blur-sm p-6 rounded-lg shadow-lg">
+      <div className="container mx-auto px-4 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-6 rounded-lg shadow-lg">
         <div className="flex items-center mb-8">
           <h2 className="text-3xl font-heading font-bold">Topsoil Calculator</h2>
         </div>
@@ -184,10 +184,10 @@ export default function CalculatorSection() {
             </div>
 
             {lwResults.visible && (
-              <div className="bg-neutral p-4 rounded-lg border border-gray-300">
-                <h4 className="font-heading font-semibold mb-2">Results:</h4>
-                <p>You will need approximately <span className="font-bold text-primary">{lwResults.cubicYards}</span> cubic yards of topsoil.</p>
-                <p className="mt-2 text-sm">This is equivalent to approximately <span className="font-semibold">{lwResults.cubicFeet}</span> cubic feet.</p>
+              <div className="bg-neutral dark:bg-gray-700 p-4 rounded-lg border border-gray-300 dark:border-gray-600">
+                <h4 className="font-heading font-semibold mb-2 dark:text-white">Results:</h4>
+                <p className="dark:text-gray-200">You will need approximately <span className="font-bold text-primary dark:text-accent">{lwResults.cubicYards}</span> cubic yards of topsoil.</p>
+                <p className="mt-2 text-sm dark:text-gray-300">This is equivalent to approximately <span className="font-semibold dark:text-white">{lwResults.cubicFeet}</span> cubic feet.</p>
               </div>
             )}
           </div>
@@ -202,7 +202,7 @@ export default function CalculatorSection() {
               <div className="space-y-4">
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
-                    <label htmlFor="area" className="block text-sm font-semibold mb-2">Area (square feet)</label>
+                    <label htmlFor="area" className="calculator-label">Area (square feet)</label>
                     <input 
                       type="number" 
                       id="area" 
@@ -214,7 +214,7 @@ export default function CalculatorSection() {
                     />
                   </div>
                   <div>
-                    <label htmlFor="areaDepth" className="block text-sm font-semibold mb-2">Depth (inches)</label>
+                    <label htmlFor="areaDepth" className="calculator-label">Depth (inches)</label>
                     <input 
                       type="number" 
                       id="areaDepth" 
@@ -241,10 +241,10 @@ export default function CalculatorSection() {
             </div>
 
             {areaResults.visible && (
-              <div className="bg-neutral p-4 rounded-lg border border-gray-300">
-                <h4 className="font-heading font-semibold mb-2">Results:</h4>
-                <p>You will need approximately <span className="font-bold text-primary">{areaResults.cubicYards}</span> cubic yards of topsoil.</p>
-                <p className="mt-2 text-sm">This is equivalent to approximately <span className="font-semibold">{areaResults.cubicFeet}</span> cubic feet.</p>
+              <div className="bg-neutral dark:bg-gray-700 p-4 rounded-lg border border-gray-300 dark:border-gray-600">
+                <h4 className="font-heading font-semibold mb-2 dark:text-white">Results:</h4>
+                <p className="dark:text-gray-200">You will need approximately <span className="font-bold text-primary dark:text-accent">{areaResults.cubicYards}</span> cubic yards of topsoil.</p>
+                <p className="mt-2 text-sm dark:text-gray-300">This is equivalent to approximately <span className="font-semibold dark:text-white">{areaResults.cubicFeet}</span> cubic feet.</p>
               </div>
             )}
           </div>

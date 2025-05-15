@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Shield } from 'lucide-react';
 import { SodCard } from '@/components/ui/sod-card';
+import { GrassAnimation } from '@/components/ui/grass-animation';
 
 export default function SodSection() {
   const sodTypes = [
@@ -263,9 +264,20 @@ export default function SodSection() {
           viewport={{ once: true }}
           transition={{ delay: 0.4, duration: 0.6 }}
         >
-          <h3 className="text-2xl font-heading font-semibold mb-6 text-center md:text-left">
-            Frequently Asked Questions
-          </h3>
+          <div className="flex items-center justify-between mb-6">
+            <h3 className="text-2xl font-heading font-semibold text-center md:text-left">
+              Frequently Asked Questions
+            </h3>
+            <div className="hidden md:block w-1/3 relative h-16 overflow-hidden">
+              <GrassAnimation 
+                height="tall" 
+                density="medium" 
+                color="light" 
+                delay={0.2}
+                className="transform scale-x-[-1]"
+              />
+            </div>
+          </div>
           
           <div className="space-y-4">
             {/* FAQ Item 1 */}
@@ -320,18 +332,31 @@ export default function SodSection() {
         
         {/* CTA */}
         <motion.div 
-          className="text-center"
+          className="text-center relative"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.8, duration: 0.5 }}
         >
-          <a 
-            href="#quotes" 
-            className="bg-accent hover:bg-yellow-500 text-white font-semibold py-4 px-8 rounded-lg transition-colors inline-block shadow-lg text-lg"
-          >
-            Request Sod Installation
-          </a>
+          <div className="mb-8">
+            <a 
+              href="#quotes" 
+              className="bg-accent hover:bg-yellow-500 text-white font-semibold py-4 px-8 rounded-lg transition-colors inline-block shadow-lg text-lg"
+            >
+              Request Sod Installation
+            </a>
+          </div>
+          
+          {/* Bottom grass animation */}
+          <div className="w-full h-20 overflow-hidden mt-12">
+            <GrassAnimation 
+              height="tall" 
+              density="dense" 
+              color="medium" 
+              delay={0.3}
+              className="h-20"
+            />
+          </div>
         </motion.div>
       </div>
     </section>

@@ -336,10 +336,7 @@ export default function SodSection() {
                       if (img) img.style.display = "block";
                     }}
                   >
-                    <source
-                      src="public/videos/final-inspection-new.mp4"
-                      type="video/mp4"
-                    />
+                    <source src="/videos/final-inspection-new.mp4" type="video/mp4" />
                     <img
                       src="/images/final-inspection-poster.jpg"
                       alt="Final Inspection"

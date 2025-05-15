@@ -8,9 +8,10 @@ if (!process.env.SENDGRID_API_KEY) {
   sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 }
 
-// The email address that will receive quote requests
-// In a production app, this should be configurable or stored in environment variables
-const NOTIFICATION_EMAIL = 'business.owner@example.com'; // Replace with the actual business email
+// Get the email address that will receive quote requests from environment variables
+// This makes it easy for the business owner to change it without editing code
+const NOTIFICATION_EMAIL = process.env.NOTIFICATION_EMAIL || 'business.owner@example.com';
+// Note: In production, the business owner should set NOTIFICATION_EMAIL in their environment
 
 /**
  * Sends an email notification about a new quote request
@@ -71,10 +72,13 @@ export async function sendQuoteRequestEmail(quoteRequest: QuoteRequest): Promise
       This is an automated email from your Yard Bros website.
     `;
 
+    // Get sender email from environment or use default
+    const senderEmail = process.env.SENDER_EMAIL || 'noreply@yardbroslandscaping.com';
+    
     // Prepare the email
     const msg = {
       to: NOTIFICATION_EMAIL,
-      from: 'noreply@yardbroslandscaping.com', // Change to your verified sender in SendGrid
+      from: senderEmail, // Must be a verified sender in SendGrid
       subject: `New Quote Request from ${quoteRequest.name}`,
       text: textContent,
       html: htmlContent,

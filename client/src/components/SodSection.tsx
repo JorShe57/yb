@@ -7,7 +7,7 @@ export default function SodSection() {
   const sodTypes = [
     {
       name: "YardBros SunGold Blend",
-      description: "Perfect for high-visibility areas, full sun exposure, and requires minimal maintenance. Offers exceptional disease resistance and a soft, luxurious texture for comfortable barefoot enjoyment.",
+      description: "Our Kentucky Bluegrass and Ryegrass blend creates the perfect turf for high-visibility areas with full sun exposure. This low-maintenance premium blend delivers a vibrant, lush appearance.",
       image: "/images/sungold-lawn.png",
       features: [
         { label: "Sun Exposure", value: "Full Sun" },
@@ -16,11 +16,20 @@ export default function SodSection() {
         { label: "Drought Resistance", value: "Moderate" },
         { label: "Traffic Tolerance", value: "High" },
         { label: "Texture", value: "Soft, Luxurious" }
+      ],
+      whenToUse: [
+        "High-Visibility Areas: Use SunGold sod in front yards or areas visible to visitors for its lush and vibrant appearance.",
+        "Full Sun: It thrives in full sunlight conditions, making it perfect for sunny spots in your landscape.",
+        "Minimal Maintenance: Requires less watering and maintenance compared to other sod types."
+      ],
+      benefits: [
+        "Disease Resistance: Known for its resilience against common lawn diseases.",
+        "Soft Texture: Provides a soft, comfortable feel underfoot."
       ]
     },
     {
       name: "YardBros Cool Shade Blend",
-      description: "Specially developed for shaded areas and cooler climates, thriving in various soil types. Features superior drought tolerance and provides excellent erosion control for sloped areas.",
+      description: "Our Fescue and Bluegrass blend is specially developed for shaded areas and cooler climates. This versatile sod thrives in partial shade and performs exceptionally well in various soil conditions.",
       image: "/images/coolshade-lawn.png",
       features: [
         { label: "Sun Exposure", value: "Partial to Full Shade" },
@@ -29,6 +38,15 @@ export default function SodSection() {
         { label: "Drought Resistance", value: "High" },
         { label: "Traffic Tolerance", value: "Medium" },
         { label: "Texture", value: "Medium-Fine" }
+      ],
+      whenToUse: [
+        "Shaded Areas: Thrives in areas with partial shade or dappled sunlight, making it ideal for backyards under trees or shaded corners.",
+        "Cooler Climates: Performs well in cooler temperatures and retains its green color throughout the year.",
+        "Versatility: Suitable for a wide range of soil types and requires minimal watering once established."
+      ],
+      benefits: [
+        "Drought Tolerance: Maintains its color and vigor during dry spells.",
+        "Erosion Control: Helps prevent soil erosion due to its deep-rooted nature."
       ]
     }
   ];
@@ -110,6 +128,8 @@ export default function SodSection() {
                 description={sod.description}
                 image={sod.image}
                 features={sod.features}
+                whenToUse={sod.whenToUse}
+                benefits={sod.benefits}
               />
             ))}
           </div>

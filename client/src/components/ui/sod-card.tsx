@@ -11,6 +11,8 @@ interface SodCardProps {
     value: string;
   }[];
   index?: number;
+  whenToUse?: string[];
+  benefits?: string[];
 }
 
 export function SodCard({ 
@@ -18,7 +20,9 @@ export function SodCard({
   description, 
   image, 
   features,
-  index = 0 
+  index = 0,
+  whenToUse = [],
+  benefits = []
 }: SodCardProps) {
   const [isExpanded, setIsExpanded] = useState(false);
   
@@ -94,11 +98,51 @@ export function SodCard({
                 {description}
               </motion.p>
               
+              {/* When to Use Section */}
+              {whenToUse.length > 0 && (
+                <motion.div
+                  className="mt-4 bg-primary/5 p-3 rounded-lg border border-primary/10"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.15 }}
+                >
+                  <h4 className="text-sm font-semibold text-primary mb-2">When to Use:</h4>
+                  <ul className="space-y-2">
+                    {whenToUse.map((item, idx) => (
+                      <li key={idx} className="flex items-start text-sm">
+                        <Check size={16} className="text-primary mt-0.5 mr-2 flex-shrink-0" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </motion.div>
+              )}
+              
+              {/* Additional Benefits Section */}
+              {benefits.length > 0 && (
+                <motion.div
+                  className="mt-4 bg-accent/5 p-3 rounded-lg border border-accent/10"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2 }}
+                >
+                  <h4 className="text-sm font-semibold text-accent mb-2">Additional Benefits:</h4>
+                  <ul className="space-y-2">
+                    {benefits.map((item, idx) => (
+                      <li key={idx} className="flex items-start text-sm">
+                        <Check size={16} className="text-accent mt-0.5 mr-2 flex-shrink-0" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </motion.div>
+              )}
+              
               <motion.div 
                 className="grid grid-cols-2 gap-2 mt-4"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
+                transition={{ delay: 0.25 }}
               >
                 {features.map((feature, idx) => (
                   <div key={idx} className="flex flex-col p-2 bg-muted/50 rounded-lg">

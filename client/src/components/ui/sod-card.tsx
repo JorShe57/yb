@@ -74,7 +74,7 @@ export function SodCard({
             {seasons.map(season => (
               <span 
                 key={season} 
-                className="px-2 py-1 bg-accent/80 backdrop-blur-sm text-dark text-xs rounded-full"
+                className="px-2 py-1 bg-accent/80 backdrop-blur-sm text-white text-xs rounded-full"
               >
                 {season}
               </span>
@@ -156,7 +156,7 @@ export function SodCard({
         {/* Toggle expand button */}
         <motion.button
           className={`absolute bottom-4 right-4 w-8 h-8 rounded-full flex items-center justify-center shadow-md ${
-            isExpanded ? 'bg-primary text-white' : 'bg-accent text-dark'
+            isExpanded ? 'bg-primary text-white' : 'bg-accent text-white'
           }`}
           onClick={() => setIsExpanded(!isExpanded)}
           whileHover={{ scale: 1.1 }}

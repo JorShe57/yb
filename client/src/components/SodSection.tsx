@@ -333,7 +333,7 @@ export default function SodSection() {
         >
           <a 
             href="#quotes" 
-            className="bg-accent hover:bg-yellow-500 text-dark font-semibold py-4 px-8 rounded-lg transition-colors inline-block shadow-lg text-lg"
+            className="bg-accent hover:bg-yellow-500 text-white font-semibold py-4 px-8 rounded-lg transition-colors inline-block shadow-lg text-lg"
           >
             Request Sod Installation
           </a>

@@ -113,7 +113,7 @@ export function ServiceCard({
                 
                 <a 
                   href="#quotes" 
-                  className="mt-2 bg-accent hover:bg-accent/90 text-dark font-medium py-2 px-4 rounded text-sm transition-colors w-full text-center"
+                  className="mt-2 bg-accent hover:bg-accent/90 text-white font-medium py-2 px-4 rounded text-sm transition-colors w-full text-center"
                 >
                   Get a Quote
                 </a>

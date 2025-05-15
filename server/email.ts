@@ -73,7 +73,10 @@ export async function sendQuoteRequestEmail(quoteRequest: QuoteRequest): Promise
     `;
 
     // Get sender email from environment or use default
-    const senderEmail = process.env.SENDER_EMAIL || 'quotes@yardbroslandscaping.com';
+    // Note: This MUST be a verified sender in SendGrid, which usually means
+    // either a domain you've verified or your own email address
+    // Using the same email as the notification email since it's likely to be a verified sender
+    const senderEmail = process.env.SENDER_EMAIL || NOTIFICATION_EMAIL;
     
     // Prepare the email
     const msg = {
@@ -86,11 +89,27 @@ export async function sendQuoteRequestEmail(quoteRequest: QuoteRequest): Promise
     };
 
     // Send the email
-    await sgMail.send(msg);
-    console.log(`Email notification sent for quote request #${quoteRequest.id}`);
-    return true;
+    try {
+      await sgMail.send(msg);
+      console.log(`Email notification sent for quote request #${quoteRequest.id}`);
+      return true;
+    } catch (emailError: any) {
+      // Provide more detailed error information
+      if (emailError.code === 403) {
+        console.error('SendGrid Authorization Error: Your sender email may not be verified or API key has insufficient permissions');
+        console.error('Attempted to send from:', senderEmail);
+        console.error('To:', NOTIFICATION_EMAIL);
+        
+        if (emailError.response && emailError.response.body && emailError.response.body.errors) {
+          console.error('SendGrid error details:', JSON.stringify(emailError.response.body.errors, null, 2));
+        }
+      } else {
+        console.error('Failed to send email notification:', emailError);
+      }
+      return false;
+    }
   } catch (error) {
-    console.error('Failed to send email notification:', error);
+    console.error('Error preparing email notification:', error);
     return false;
   }
 }

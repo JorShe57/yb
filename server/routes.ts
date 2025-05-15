@@ -3,6 +3,7 @@ import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertQuoteRequestSchema } from "@shared/schema";
 import { ZodError } from "zod";
+import { sendQuoteRequestEmail } from "./email";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Quote requests API endpoints
@@ -15,6 +16,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       // Save quote request to database
       const savedQuote = await storage.createQuoteRequest(quoteData);
+      
+      // Send email notification to the business owner
+      try {
+        await sendQuoteRequestEmail(savedQuote);
+      } catch (emailError) {
+        // Log the error but don't fail the request
+        console.error("Failed to send email notification:", emailError);
+      }
       
       // Return success response
       return res.status(201).json({

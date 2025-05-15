@@ -65,7 +65,7 @@ export default function HomeSection() {
           muted 
           playsInline
         >
-          <source src="/videos/background-new.mp4" type="video/mp4" />
+          <source src="/videos/background.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
       </motion.div>

@@ -60,31 +60,47 @@ export function ServiceCard({
           }}
         />
         
-        <img 
+        <motion.img 
           src={image} 
           alt={alt} 
-          className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out"
+          className="absolute inset-0 w-full h-full object-cover"
+          initial={false}
+          animate={{ 
+            scale: isExpanded ? 1.08 : 1
+          }}
+          transition={{
+            duration: 0.5,
+            ease: [0.4, 0, 0.2, 1]
+          }}
           style={{
-            transform: isExpanded ? 'scale(1.15)' : 'scale(1)'
+            willChange: 'transform'
           }}
         />
 
         {/* Title always visible */}
         <motion.div 
           className="absolute inset-x-0 z-30 p-4 flex flex-col items-start justify-end h-full" 
+          initial={false}
           animate={{ 
-            bottom: isExpanded ? "auto" : 0
+            y: isExpanded ? -8 : 0,
+            opacity: isExpanded ? 0.9 : 1
+          }}
+          transition={{
+            duration: 0.4,
+            ease: [0.4, 0, 0.2, 1]
           }}
         >
           <h3 className="text-lg md:text-xl font-bold relative mb-1 px-2.5 py-1.5 rounded bg-black/40 backdrop-blur-sm text-white font-heading uppercase">
             <span className="relative z-10">
               {title}
               <motion.div 
-                className="absolute -bottom-1 left-0 h-1 bg-accent rounded-full" 
-                initial={{ width: 0 }}
-                whileInView={{ width: "100%" }}
-                transition={{ delay: staggerDelay + 0.3, duration: 0.4 }}
-                viewport={{ once: true }}
+                className="absolute -bottom-1 left-0 h-1 bg-accent rounded-full"
+                initial={{ width: "40%" }}
+                animate={{ width: "100%" }}
+                transition={{ 
+                  duration: 0.4,
+                  ease: [0.4, 0, 0.2, 1] 
+                }}
               />
             </span>
           </h3>

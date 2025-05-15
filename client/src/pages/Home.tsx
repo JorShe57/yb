@@ -10,14 +10,16 @@ import { ScrollToTop } from "@/components/ui/scroll-to-top";
 
 export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col font-body bg-background text-foreground">
+    <div className="min-h-screen flex flex-col font-body bg-background text-foreground will-change-transform">
       <Header />
-      <main className="flex-grow pt-16">
-        <HomeSection />
-        <QuotesSection />
-        <ServicesSection />
-        <SodSection />
-        <CalculatorSection />
+      <main className="flex-grow pt-16 overflow-hidden">
+        <div className="content-wrapper relative">
+          <HomeSection />
+          <QuotesSection />
+          <ServicesSection />
+          <SodSection />
+          <CalculatorSection />
+        </div>
       </main>
       <Footer />
       <ChatLauncher />

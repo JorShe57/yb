@@ -6,10 +6,11 @@ import SodSection from "@/components/SodSection";
 import CalculatorSection from "@/components/CalculatorSection";
 import Footer from "@/components/Footer";
 import ChatLauncher from "@/components/ChatLauncher";
+import { ScrollToTop } from "@/components/ui/scroll-to-top";
 
 export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col font-body bg-neutral text-darkText">
+    <div className="min-h-screen flex flex-col font-body bg-background text-foreground">
       <Header />
       <main className="flex-grow pt-16">
         <HomeSection />
@@ -20,6 +21,7 @@ export default function Home() {
       </main>
       <Footer />
       <ChatLauncher />
+      <ScrollToTop />
     </div>
   );
 }

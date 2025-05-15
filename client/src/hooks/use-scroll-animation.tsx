@@ -18,20 +18,15 @@ export const useScrollAnimation = <T extends HTMLElement = HTMLElement>(options:
   } = options;
   
   const ref = useRef<T | null>(null);
-  // Default to true to ensure content is visible by default
-  const [isVisible, setIsVisible] = useState(true);
+  // Always visible so content is immediately accessible
+  const [isVisible] = useState(true);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          // If we only want to trigger the animation once
-          if (triggerOnce && ref.current) {
-            observer.unobserve(ref.current);
-          }
-        } else if (!triggerOnce) {
-          setIsVisible(false);
+        // Just unobserve after element is visible
+        if (entry.isIntersecting && triggerOnce && ref.current) {
+          observer.unobserve(ref.current);
         }
       },
       { threshold, rootMargin }

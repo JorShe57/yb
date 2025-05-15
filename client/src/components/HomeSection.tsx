@@ -46,7 +46,7 @@ export default function HomeSection() {
 
   const benefitsList = [
     { text: "Licensed & Insured Pros" },
-    { text: "Free On-Site Estimates" },
+    { text: "Free Professional Estimates" },
     { text: "Satisfaction Guaranteed" },
   ];
 

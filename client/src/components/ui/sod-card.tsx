@@ -6,7 +6,6 @@ interface SodCardProps {
   name: string;
   description: string;
   image: string;
-  seasons: string[];
   features: {
     label: string;
     value: string;
@@ -18,7 +17,6 @@ export function SodCard({
   name, 
   description, 
   image, 
-  seasons, 
   features,
   index = 0 
 }: SodCardProps) {
@@ -53,30 +51,15 @@ export function SodCard({
         <motion.img 
           src={image} 
           alt={name} 
-          className="w-full h-full object-contain absolute inset-0"
+          className="w-full h-full object-cover absolute inset-0"
           animate={{ 
             scale: isExpanded ? 1.02 : 1,
-            filter: isExpanded ? 'brightness(0.9)' : 'brightness(1)'
+            filter: isExpanded ? 'brightness(0.98)' : 'brightness(1)'
           }}
           transition={{ duration: 0.5 }}
         />
         
-        <div className="absolute bottom-0 left-0 p-4 z-20 w-full">
-          <motion.div 
-            className="flex gap-2 mt-2"
-            animate={{ opacity: isExpanded ? 0 : 1 }}
-            transition={{ duration: 0.3 }}
-          >
-            {seasons.map(season => (
-              <span 
-                key={season} 
-                className="px-2 py-1 bg-accent/80 backdrop-blur-sm text-white text-xs rounded-full"
-              >
-                {season}
-              </span>
-            ))}
-          </motion.div>
-        </div>
+        {/* Season pills removed as requested */}
       </div>
       
       <motion.div 

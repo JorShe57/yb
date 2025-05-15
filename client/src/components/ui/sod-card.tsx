@@ -62,8 +62,11 @@ export function SodCard({
         />
         
         <div className="absolute bottom-0 left-0 p-4 z-20 w-full">
-          <h3 className="text-xl font-heading font-bold text-white mb-2 text-shadow-lg">
-            {name}
+          <h3 className="text-xl font-heading font-bold mb-2 px-2.5 py-1.5 rounded bg-black/40 backdrop-blur-sm text-white uppercase inline-block">
+            <span className="relative">
+              {name}
+              <div className="absolute -bottom-1 left-0 h-1 w-full bg-accent rounded-full"></div>
+            </span>
           </h3>
           
           <motion.div 

@@ -76,15 +76,17 @@ export function ServiceCard({
             bottom: isExpanded ? "auto" : 0
           }}
         >
-          <h3 className="text-lg md:text-xl font-bold text-white relative mb-1 text-shadow-lg">
-            {title}
-            <motion.div 
-              className="absolute bottom-0 left-0 h-0.5 bg-accent" 
-              initial={{ width: 0 }}
-              whileInView={{ width: "100%" }}
-              transition={{ delay: staggerDelay + 0.3, duration: 0.4 }}
-              viewport={{ once: true }}
-            />
+          <h3 className="text-lg md:text-xl font-bold relative mb-1 px-2.5 py-1.5 rounded bg-black/40 backdrop-blur-sm text-white font-heading uppercase">
+            <span className="relative z-10">
+              {title}
+              <motion.div 
+                className="absolute -bottom-1 left-0 h-1 bg-accent rounded-full" 
+                initial={{ width: 0 }}
+                whileInView={{ width: "100%" }}
+                transition={{ delay: staggerDelay + 0.3, duration: 0.4 }}
+                viewport={{ once: true }}
+              />
+            </span>
           </h3>
         </motion.div>
       </div>

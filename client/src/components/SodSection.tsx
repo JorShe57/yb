@@ -256,7 +256,7 @@ export default function SodSection() {
                     muted 
                     playsInline
                   >
-                    <source src="/videos/final-inspection.mp4" type="video/mp4" />
+                    <source src="/videos/final-inspection-new.mp4" type="video/mp4" />
                     Your browser does not support the video tag.
                   </video>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>

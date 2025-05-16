@@ -1,37 +1,38 @@
 
-import { useState } from "react";
-import { Minus, Plus } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { MessageCircle } from "lucide-react";
 
-export default function ChatLauncher() {
-  const [isMinimized, setIsMinimized] = useState(false);
-
+export default function ChatSection() {
   return (
-    <div
-      className={cn(
-        "fixed bottom-20 right-6 z-[999] w-full max-w-[400px] overflow-hidden rounded-lg border border-border bg-white shadow-lg transition-all duration-300",
-        isMinimized ? "h-[42px]" : "h-[600px]"
-      )}
-    >
-      <div className="flex items-center justify-between bg-primary px-4 py-2">
-        <span className="font-medium text-primary-foreground">Ask The Bros</span>
-        <button
-          onClick={() => setIsMinimized(!isMinimized)}
-          className="text-primary-foreground hover:opacity-80"
-          aria-label={isMinimized ? "Expand chat" : "Minimize chat"}
-        >
-          {isMinimized ? (
-            <Plus className="h-5 w-5" />
-          ) : (
-            <Minus className="h-5 w-5" />
-          )}
-        </button>
+    <section id="chat" className="py-16 bg-muted/30">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">
+            Ask The <span className="text-accent">Yard Bros</span>
+          </h2>
+          <p className="text-muted-foreground max-w-2xl mx-auto">
+            Have questions about your lawn care needs? Our virtual assistant is here to help! 
+            Chat with us about lawn maintenance, sodding, or any landscaping concerns.
+          </p>
+        </div>
+        
+        <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden border border-border">
+          <div className="flex items-center justify-between bg-primary p-4">
+            <div className="flex items-center gap-2">
+              <MessageCircle className="h-5 w-5 text-white" />
+              <h3 className="font-heading font-semibold text-lg text-white">Chat with Yard Bros</h3>
+            </div>
+          </div>
+          
+          <div className="aspect-video md:aspect-[16/9] w-full">
+            <iframe
+              src="https://ask-the-bros-jorshevel.replit.app/"
+              className="w-full h-[600px] border-none bg-white"
+              title="Ask The Bros Chat"
+              loading="lazy"
+            />
+          </div>
+        </div>
       </div>
-      <iframe
-        src="https://ask-the-bros-jorshevel.replit.app/"
-        className="h-[calc(100%-42px)] w-full border-none bg-white"
-        title="Ask The Bros Chat"
-      />
-    </div>
+    </section>
   );
 }

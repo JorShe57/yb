@@ -5,7 +5,7 @@ import ServicesSection from "@/components/ServicesSection";
 import SodSection from "@/components/SodSection";
 import CalculatorSection from "@/components/CalculatorSection";
 import Footer from "@/components/Footer";
-import ChatLauncher from "@/components/ChatLauncher";
+import ChatSection from "@/components/ChatLauncher"; // Still using the same file but different component name
 import { ScrollToTop } from "@/components/ui/scroll-to-top";
 import { ScrollIndicator } from "@/components/ui/scroll-indicator";
 
@@ -21,10 +21,10 @@ export default function Home() {
           <ServicesSection />
           <SodSection />
           <CalculatorSection />
+          <ChatSection />
         </div>
       </main>
       <Footer />
-      <ChatLauncher />
       <ScrollToTop />
     </div>
   );

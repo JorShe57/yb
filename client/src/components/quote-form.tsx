@@ -1,8 +1,7 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation } from "@tanstack/react-query";
+import { useState } from "react";
 import { z } from "zod";
-import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 
 import {
@@ -35,6 +34,7 @@ type QuoteFormValues = z.infer<typeof quoteFormSchema>;
 
 export function QuoteForm() {
   const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   
   // Initialize the form
   const form = useForm<QuoteFormValues>({
@@ -50,32 +50,39 @@ export function QuoteForm() {
     },
   });
 
-  // Handle form submission with React Query
-  const quoteRequestMutation = useMutation({
-    mutationFn: async (data: QuoteFormValues) => {
-      return apiRequest("POST", "/api/quotes", data);
-    },
-    onSuccess: () => {
-      toast({
-        title: "Quote Request Received",
-        description: "Thank you for your request. We'll contact you shortly!",
-        variant: "default",
+  // Submit handler for Formspree
+  async function onSubmit(data: QuoteFormValues) {
+    setIsSubmitting(true);
+    
+    try {
+      const response = await fetch("https://formspree.io/f/xldbzbyd", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
       });
-      form.reset();
-    },
-    onError: (error) => {
+      
+      if (response.ok) {
+        toast({
+          title: "Quote Request Received",
+          description: "Thank you for your request. We'll contact you shortly!",
+          variant: "default",
+        });
+        form.reset();
+      } else {
+        throw new Error("Form submission failed");
+      }
+    } catch (error) {
       console.error("Error submitting quote request:", error);
       toast({
         title: "Submission Failed",
         description: "There was a problem submitting your request. Please try again.",
         variant: "destructive",
       });
-    },
-  });
-
-  // Submit handler
-  function onSubmit(data: QuoteFormValues) {
-    quoteRequestMutation.mutate(data);
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
@@ -196,10 +203,10 @@ export function QuoteForm() {
           <Button 
             type="submit" 
             variant="accent"
-            disabled={quoteRequestMutation.isPending}
+            disabled={isSubmitting}
             className="min-w-[180px]"
           >
-            {quoteRequestMutation.isPending ? (
+            {isSubmitting ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                 Processing...

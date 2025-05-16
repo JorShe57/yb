@@ -20,8 +20,8 @@ export default function Home() {
           <QuotesSection />
           <ServicesSection />
           <SodSection />
-          <CalculatorSection />
           <ChatSection />
+          <CalculatorSection />
         </div>
       </main>
       <Footer />

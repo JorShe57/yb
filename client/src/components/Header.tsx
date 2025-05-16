@@ -109,6 +109,7 @@ export default function Header() {
             
             <a href="#services" className="flex items-center py-2 px-3 hover:bg-primary/10 rounded-md transition-colors" onClick={closeMobileMenu}>Our Services</a>
             <a href="#sod" className="flex items-center py-2 px-3 hover:bg-primary/10 rounded-md transition-colors" onClick={closeMobileMenu}>Our Sod</a>
+            <a href="#chat" className="flex items-center py-2 px-3 hover:bg-primary/10 rounded-md transition-colors" onClick={closeMobileMenu}>Ask The Bros</a>
             <a href="#calculator" className="flex items-center py-2 px-3 hover:bg-primary/10 rounded-md transition-colors" onClick={closeMobileMenu}>Topsoil Calculator</a>
           </div>
         </div>

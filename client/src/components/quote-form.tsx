@@ -199,7 +199,7 @@ export function QuoteForm() {
               )}
             />
             {/* Hidden field for FormSubmit */}
-            <input type="hidden" name="service" value={form.watch("service")} />
+            <input type="hidden" id="service_submit" name="service" value={form.watch("service")} />
           </div>
         </div>
 
@@ -219,7 +219,7 @@ export function QuoteForm() {
             )}
           />
           {/* Hidden field for FormSubmit */}
-          <input type="hidden" name="comments" value={form.watch("comments") || ""} />
+          <input type="hidden" id="comments_submit" name="comments" value={form.watch("comments") || ""} />
         </div>
 
         <div className="text-right">

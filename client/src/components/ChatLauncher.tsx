@@ -1,64 +1,98 @@
-import { useEffect, useRef } from "react";
-import { Send } from "lucide-react";
-import { 
-  SidebarProvider, 
-  Sidebar, 
-  SidebarToggle 
-} from "@/components/ui/sidebar";
+import { useState, useEffect, useRef } from "react";
+import { X, MessageCircle } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
 
 export default function ChatLauncher() {
+  const [isOpen, setIsOpen] = useState(false);
+  const chatContainerRef = useRef<HTMLDivElement>(null);
   const iframeRef = useRef<HTMLIFrameElement>(null);
   
-  // Set up a resize observer to adjust the iframe height based on content
+  const toggleChat = () => {
+    setIsOpen(!isOpen);
+  };
+
+  // Handle clicking outside to close (only on mobile)
   useEffect(() => {
-    const handleIframeLoad = () => {
-      if (iframeRef.current) {
-        // Make sure the iframe takes the full height
-        iframeRef.current.style.height = '100%';
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        isOpen && 
+        chatContainerRef.current && 
+        !chatContainerRef.current.contains(event.target as Node) &&
+        window.innerWidth < 768
+      ) {
+        setIsOpen(false);
       }
     };
 
-    const iframe = iframeRef.current;
-    if (iframe) {
-      iframe.addEventListener('load', handleIframeLoad);
-      return () => {
-        iframe.removeEventListener('load', handleIframeLoad);
-      };
-    }
-  }, []);
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isOpen]);
+
+  // Handle escape key to close
+  useEffect(() => {
+    const handleEscKey = (event: KeyboardEvent) => {
+      if (isOpen && event.key === 'Escape') {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener('keydown', handleEscKey);
+    return () => {
+      document.removeEventListener('keydown', handleEscKey);
+    };
+  }, [isOpen]);
 
   return (
-    <SidebarProvider>
-      {/* Chat Sidebar */}
-      <Sidebar 
-        side="right" 
-        width="380px" 
-        className="border-l border-primary/10 overflow-hidden"
+    <>
+      {/* Chat Button - Fixed at bottom right, stays during scroll */}
+      <button
+        onClick={toggleChat}
+        className="fixed bottom-6 right-6 z-50 bg-accent hover:bg-accent/90 text-white px-4 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2 font-medium"
+        aria-label="Ask the Yard Bros"
       >
-        <div className="flex flex-col h-full">
-          <h3 className="font-heading font-semibold text-lg py-4 text-center bg-primary text-white">
-            Chat with Yard Bros
-          </h3>
-          
-          <div className="flex-grow relative w-full h-full">
-            <iframe
-              ref={iframeRef}
-              src="https://ask-the-bros-jorshevel.replit.app"
-              className="w-full h-full border-0"
-              title="Yard Bros Chat"
-              sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-              loading="lazy"
-            />
-          </div>
-        </div>
-      </Sidebar>
+        <MessageCircle className="w-5 h-5" />
+        <span className="hidden sm:inline">Ask the Yard Bros</span>
+      </button>
       
-      {/* Chat Toggle Button */}
-      <SidebarToggle 
-        label="Ask the Yard Bros"
-        side="right"
-        className="bg-accent hover:bg-accent/90 text-white shadow-md transition-all duration-300 hover:shadow-lg"
-      />
-    </SidebarProvider>
+      {/* Chat Container */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            ref={chatContainerRef}
+            className="fixed bottom-[5.5rem] right-6 z-40 w-[90vw] sm:w-[400px] h-[80vh] max-h-[600px] rounded-xl overflow-hidden shadow-2xl border border-border bg-white"
+            initial={{ opacity: 0, y: 50, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 20, scale: 0.95 }}
+            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+          >
+            {/* Chat Header */}
+            <div className="flex items-center justify-between bg-primary text-white px-4 py-3">
+              <h3 className="font-heading font-semibold text-lg">Chat with Yard Bros</h3>
+              <button
+                onClick={toggleChat}
+                className="p-1 rounded-full hover:bg-primary-dark transition-colors"
+                aria-label="Close chat"
+              >
+                <X size={20} />
+              </button>
+            </div>
+            
+            {/* Chat Content - Iframe */}
+            <div className="relative w-full h-[calc(100%-56px)]">
+              <iframe
+                ref={iframeRef}
+                src="https://ask-the-bros-jorshevel.replit.app"
+                className="w-full h-full border-0"
+                title="Yard Bros Chat"
+                sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+                loading="lazy"
+              />
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 }

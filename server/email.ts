@@ -77,7 +77,7 @@ export async function sendQuoteRequestEmail(quoteRequest: QuoteRequest): Promise
     // Note: This MUST be a verified sender in SendGrid, which usually means
     // either a domain you've verified or your own email address
     // Using the same email as the notification email since it's likely to be a verified sender
-    const senderEmail = process.env.SENDER_EMAIL || NOTIFICATION_EMAIL;
+    const senderEmail = process.env.SENDER_EMAIL || NOTIFICATION_EMAILS[0];
     
     // Prepare the email
     const msg = {
@@ -99,7 +99,7 @@ export async function sendQuoteRequestEmail(quoteRequest: QuoteRequest): Promise
       if (emailError.code === 403) {
         console.error('SendGrid Authorization Error: Your sender email may not be verified or API key has insufficient permissions');
         console.error('Attempted to send from:', senderEmail);
-        console.error('To:', NOTIFICATION_EMAIL);
+        console.error('To:', NOTIFICATION_EMAILS);
         
         if (emailError.response && emailError.response.body && emailError.response.body.errors) {
           console.error('SendGrid error details:', JSON.stringify(emailError.response.body.errors, null, 2));

@@ -82,7 +82,7 @@ export default function ServicesSection() {
     {
       title: "Bed Creation and Mulching",
       description: "Define your landscape with professionally designed garden beds, complete with premium mulch installation that suppresses weeds, retains moisture, and gives your property a polished, finished look.",
-      image: "/images/irrigation.png",
+      image: "/images/mulching-service.jpg",
       alt: "Bed Creation and Mulching"
     }
   ];

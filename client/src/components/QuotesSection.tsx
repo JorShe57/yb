@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { ArrowLeft } from "lucide-react";
 import { useInView } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
-import { QuoteForm } from "./quote-form-new";
+import { QuoteForm } from "./quote-form";
 import { SkeletonForm } from "@/components/ui/skeleton-loader";
 import AnimatedSection from "./AnimatedSection";
 

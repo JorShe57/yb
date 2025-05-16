@@ -50,154 +50,177 @@ export function QuoteForm() {
     },
   });
 
-  // Submit handler for Formspree
-  async function onSubmit(data: QuoteFormValues) {
+  // Submit handler for FormSubmit
+  function onSubmit(data: QuoteFormValues) {
     setIsSubmitting(true);
-    
-    try {
-      const response = await fetch("https://formspree.io/f/xldbzbyd", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-      
-      if (response.ok) {
-        toast({
-          title: "Quote Request Received",
-          description: "Thank you for your request. We'll contact you shortly!",
-          variant: "default",
-        });
-        form.reset();
-      } else {
-        throw new Error("Form submission failed");
-      }
-    } catch (error) {
-      console.error("Error submitting quote request:", error);
-      toast({
-        title: "Submission Failed",
-        description: "There was a problem submitting your request. Please try again.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
+    // Form submission will actually be handled by the FormSubmit action
+    // Just showing a toast for better UX
+    toast({
+      title: "Validating your information",
+      description: "Your form is being submitted...",
+      variant: "default",
+    });
   }
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+      <form 
+        action="https://formsubmit.co/jorshevel@gmail.com" 
+        method="POST" 
+        onSubmit={form.handleSubmit(onSubmit)} 
+        className="space-y-6"
+      >
+        {/* Hidden fields for FormSubmit configuration */}
+        <input type="hidden" name="_subject" value="New Quote Request from YardBros Website" />
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="hidden" name="_template" value="table" />
+        <input type="hidden" name="_next" value={window.location.origin + window.location.pathname} />
+        
         <div className="grid md:grid-cols-2 gap-6">
-          <FormField
-            control={form.control}
-            name="name"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Name *</FormLabel>
-                <FormControl>
-                  <Input placeholder="Your full name" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Email *</FormLabel>
-                <FormControl>
-                  <Input placeholder="your.email@example.com" type="email" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="city"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>City *</FormLabel>
-                <FormControl>
-                  <Input placeholder="Your city" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="address"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Service Address *</FormLabel>
-                <FormControl>
-                  <Input placeholder="Where service is needed" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="phone"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Phone Number *</FormLabel>
-                <FormControl>
-                  <Input placeholder="Your phone number" type="tel" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="service"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Service Interest *</FormLabel>
-                <Select onValueChange={field.onChange} defaultValue={field.value}>
+          {/* Name field */}
+          <div>
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Name *</FormLabel>
                   <FormControl>
-                    <SelectTrigger className="bg-background text-foreground/90 hover:bg-background data-[state=open]:bg-background focus:bg-background">
-                      <SelectValue placeholder="Choose a service type" />
-                    </SelectTrigger>
+                    <Input {...field} />
                   </FormControl>
-                  <SelectContent>
-                    <SelectItem value="sod">Sod Installation</SelectItem>
-                    <SelectItem value="landscaping">Landscaping</SelectItem>
-                    <SelectItem value="maintenance">Yard Maintenance</SelectItem>
-                    <SelectItem value="topsoil">Topsoil Delivery</SelectItem>
-                    <SelectItem value="other">Other</SelectItem>
-                  </SelectContent>
-                </Select>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            {/* Hidden field for FormSubmit - using id instead of name to avoid conflicts */}
+            <input type="hidden" id="name_submit" name="name" value={form.watch("name")} />
+          </div>
+
+          {/* Email field */}
+          <div>
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Email *</FormLabel>
+                  <FormControl>
+                    <Input type="email" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            {/* Hidden field for FormSubmit */}
+            <input type="hidden" id="email_submit" name="email" value={form.watch("email")} />
+          </div>
+
+          {/* City field */}
+          <div>
+            <FormField
+              control={form.control}
+              name="city"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>City *</FormLabel>
+                  <FormControl>
+                    <Input {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            {/* Hidden field for FormSubmit */}
+            <input type="hidden" id="city_submit" name="city" value={form.watch("city")} />
+          </div>
+
+          {/* Address field */}
+          <div>
+            <FormField
+              control={form.control}
+              name="address"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Service Address *</FormLabel>
+                  <FormControl>
+                    <Input {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            {/* Hidden field for FormSubmit */}
+            <input type="hidden" id="address_submit" name="address" value={form.watch("address")} />
+          </div>
+
+          {/* Phone field */}
+          <div>
+            <FormField
+              control={form.control}
+              name="phone"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Phone Number *</FormLabel>
+                  <FormControl>
+                    <Input type="tel" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            {/* Hidden field for FormSubmit */}
+            <input type="hidden" id="phone_submit" name="phone" value={form.watch("phone")} />
+          </div>
+
+          {/* Service field */}
+          <div>
+            <FormField
+              control={form.control}
+              name="service"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Service Interest *</FormLabel>
+                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                    <FormControl>
+                      <SelectTrigger className="bg-background text-foreground/90 hover:bg-background data-[state=open]:bg-background focus:bg-background">
+                        <SelectValue placeholder="Choose a service type" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value="sod">Sod Installation</SelectItem>
+                      <SelectItem value="landscaping">Landscaping</SelectItem>
+                      <SelectItem value="maintenance">Yard Maintenance</SelectItem>
+                      <SelectItem value="topsoil">Topsoil Delivery</SelectItem>
+                      <SelectItem value="other">Other</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            {/* Hidden field for FormSubmit */}
+            <input type="hidden" name="service" value={form.watch("service")} />
+          </div>
         </div>
 
-        <FormField
-          control={form.control}
-          name="comments"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Additional Comments</FormLabel>
-              <FormControl>
-                <Textarea placeholder="Tell us more about your project" rows={4} {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        {/* Comments field */}
+        <div>
+          <FormField
+            control={form.control}
+            name="comments"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Additional Comments</FormLabel>
+                <FormControl>
+                  <Textarea placeholder="Tell us more about your project" rows={4} {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          {/* Hidden field for FormSubmit */}
+          <input type="hidden" name="comments" value={form.watch("comments") || ""} />
+        </div>
 
         <div className="text-right">
           <Button 

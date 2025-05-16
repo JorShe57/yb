@@ -22,7 +22,7 @@ export default function Footer() {
               </li>
               <li className="flex items-center">
                 <i className="fas fa-map-marker-alt mr-2"></i>
-                <span>123 Green Street, Anytown, USA</span>
+                <span>201 E. Bridge Street, Elyria, OH 44035</span>
               </li>
             </ul>
           </div>

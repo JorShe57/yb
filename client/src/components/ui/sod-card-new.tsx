@@ -38,13 +38,6 @@ export function SodCard({
     ? "bg-gradient-to-r from-yellow-500/80 to-green-600/80 backdrop-blur-sm"
     : "bg-gradient-to-r from-blue-600/80 to-green-700/80 backdrop-blur-sm";
 
-  // Use more mobile-friendly animation settings
-  const transitionProps = {
-    type: "spring",
-    bounce: 0.25,
-    duration: 0.4
-  };
-
   return (
     <motion.div
       className="group bg-background rounded-xl overflow-hidden shadow-lg border border-border relative"
@@ -52,33 +45,47 @@ export function SodCard({
       whileInView={{ 
         opacity: 1, 
         y: 0, 
+        transition: { duration: 0.5, delay: animationDelay } 
       }}
       viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.5, delay: animationDelay }}
+      layout="position"
+      transition={{ 
+        layout: { duration: 0.4, ease: [0.4, 0, 0.2, 1] } 
+      }}
     >
       <motion.div 
         className="relative w-full"
         animate={{ 
           height: isExpanded ? '250px' : '400px'
         }}
-        transition={transitionProps}
+        transition={{ 
+          duration: 0.4,
+          ease: [0.4, 0, 0.2, 1]
+        }}
       >
-        <div 
+        <motion.div 
           className="absolute inset-0 z-10 bg-gradient-to-t from-black/20 via-black/5 to-transparent"
+          animate={{ opacity: isExpanded ? 0.2 : 0.1 }}
+          transition={{ duration: 0.3 }}
         />
         
-        <img 
+        <motion.img 
           src={image} 
           alt={name} 
           className="w-full h-full object-cover absolute inset-0"
+          animate={{ 
+            scale: isExpanded ? 1.02 : 1,
+            filter: isExpanded ? 'brightness(1)' : 'brightness(1.05)'
+          }}
+          transition={{ duration: 0.5 }}
         />
         
-        <motion.div 
-          className="absolute bottom-0 left-0 p-4 z-20 w-full"
-          animate={{ opacity: isExpanded ? 0 : 1 }}
-          transition={{ duration: 0.3 }}
-        >
-          <div className={`inline-block ${titleStyle} px-4 py-2 rounded-md border border-white/20 shadow-lg`}>
+        <div className="absolute bottom-0 left-0 p-4 z-20 w-full">
+          <motion.div 
+            className={`inline-block ${titleStyle} px-4 py-2 rounded-md border border-white/20 shadow-lg`}
+            animate={{ opacity: isExpanded ? 0 : 1 }}
+            transition={{ duration: 0.3 }}
+          >
             <h3 className="text-white font-heading font-bold text-lg md:text-xl">
               {name}
               {isSunGold && (
@@ -94,11 +101,17 @@ export function SodCard({
                 </span>
               )}
             </h3>
-          </div>
-        </motion.div>
+          </motion.div>
+        </div>
       </motion.div>
       
-      <div className="p-5 relative z-10 bg-background">
+      <motion.div 
+        className="p-5 relative z-10 bg-background"
+        layout="position"
+        transition={{ 
+          layout: { duration: 0.4, ease: [0.4, 0, 0.2, 1] }
+        }}
+      >
         <AnimatePresence mode="wait" initial={false}>
           {isExpanded ? (
             <motion.div
@@ -109,18 +122,26 @@ export function SodCard({
               transition={{ duration: 0.3 }}
               className="space-y-4"
             >
-              <p className="text-foreground/90 text-sm md:text-base">
+              <motion.p 
+                className="text-foreground/90 text-sm md:text-base"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 }}
+              >
                 {description}
-              </p>
+              </motion.p>
               
               {/* When to Use Section */}
               {whenToUse.length > 0 && (
-                <div
+                <motion.div
                   className={`mt-4 p-3 rounded-lg border ${
                     isSunGold 
                       ? "bg-yellow-500/5 border-yellow-500/20" 
                       : "bg-blue-500/5 border-blue-500/20"
                   }`}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.15 }}
                 >
                   <h4 className={`text-sm font-semibold mb-2 ${
                     isSunGold ? "text-yellow-600 dark:text-yellow-500" : "text-blue-600 dark:text-blue-500"
@@ -135,17 +156,20 @@ export function SodCard({
                       </li>
                     ))}
                   </ul>
-                </div>
+                </motion.div>
               )}
               
               {/* Additional Benefits Section */}
               {benefits.length > 0 && (
-                <div
+                <motion.div
                   className={`mt-4 p-3 rounded-lg border ${
                     isSunGold 
                       ? "bg-green-500/5 border-green-500/20" 
                       : "bg-teal-500/5 border-teal-500/20"
                   }`}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2 }}
                 >
                   <h4 className={`text-sm font-semibold mb-2 ${
                     isSunGold ? "text-green-600 dark:text-green-500" : "text-teal-600 dark:text-teal-500"
@@ -160,10 +184,15 @@ export function SodCard({
                       </li>
                     ))}
                   </ul>
-                </div>
+                </motion.div>
               )}
               
-              <div className="grid grid-cols-2 gap-2 mt-4">
+              <motion.div 
+                className="grid grid-cols-2 gap-2 mt-4"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.25 }}
+              >
                 {features.map((feature, idx) => (
                   <div 
                     key={idx} 
@@ -181,9 +210,14 @@ export function SodCard({
                     <span className="text-sm font-medium">{feature.value}</span>
                   </div>
                 ))}
-              </div>
+              </motion.div>
               
-              <div className="pt-4 pb-6 flex justify-center">
+              <motion.div 
+                className="pt-4 pb-6 flex justify-center"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+              >
                 <a 
                   href="#quotes" 
                   className={`block w-auto mx-auto font-medium py-1.5 px-5 rounded-md text-center transition-colors flex items-center justify-center gap-2 shadow-md ${
@@ -195,7 +229,7 @@ export function SodCard({
                   <Zap size={14} />
                   <span className="text-sm">Get a Quote</span>
                 </a>
-              </div>
+              </motion.div>
             </motion.div>
           ) : (
             <motion.div
@@ -243,7 +277,7 @@ export function SodCard({
             <ChevronDown size={18} />
           </motion.div>
         </motion.button>
-      </div>
+      </motion.div>
     </motion.div>
   );
 }

@@ -293,7 +293,7 @@ export default function SodSection() {
                       if (img) img.style.display = "block";
                     }}
                   >
-                    <source src="/videos/rolling-watering-new.mp4" type="video/mp4" />
+                    <source src="/videos/rolling-watering-optimized.mp4" type="video/mp4" />
                     <img
                       src="/images/rolling-watering-poster.jpg"
                       alt="Rolling and Watering"

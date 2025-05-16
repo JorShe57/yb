@@ -10,7 +10,8 @@ if (!process.env.SENDGRID_API_KEY) {
 
 // Get the email address that will receive quote requests from environment variables
 // This makes it easy for the business owner to change it without editing code
-const NOTIFICATION_EMAIL = process.env.NOTIFICATION_EMAIL || 'jorshevel@gmail.com';
+// Support comma-separated email addresses
+const NOTIFICATION_EMAILS = (process.env.NOTIFICATION_EMAIL || 'jorshevel@gmail.com').split(',').map(email => email.trim());
 // Note: In production, the business owner should set NOTIFICATION_EMAIL in their environment
 
 /**
@@ -80,7 +81,7 @@ export async function sendQuoteRequestEmail(quoteRequest: QuoteRequest): Promise
     
     // Prepare the email
     const msg = {
-      to: NOTIFICATION_EMAIL,
+      to: NOTIFICATION_EMAILS,
       from: senderEmail, // Must be a verified sender in SendGrid
       subject: `New Quote Request from ${quoteRequest.name}`,
       text: textContent,

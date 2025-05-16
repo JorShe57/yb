@@ -9,7 +9,7 @@ export default function ChatLauncher() {
   return (
     <div
       className={cn(
-        "fixed bottom-6 right-6 z-50 w-full max-w-[400px] overflow-hidden rounded-lg border border-border bg-white shadow-lg transition-all duration-300",
+        "fixed bottom-20 right-6 z-[999] w-full max-w-[400px] overflow-hidden rounded-lg border border-border bg-white shadow-lg transition-all duration-300",
         isMinimized ? "h-[42px]" : "h-[600px]"
       )}
     >

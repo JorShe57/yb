@@ -23,10 +23,10 @@ export default function ChatSection() {
             </div>
           </div>
           
-          <div className="aspect-video md:aspect-[16/9] w-full">
+          <div className="w-full">
             <iframe
               src="https://ask-the-bros-jorshevel.replit.app/"
-              className="w-full h-[600px] border-none bg-white"
+              className="w-full h-[700px] border-none bg-white"
               title="Ask The Bros Chat"
               loading="lazy"
             />

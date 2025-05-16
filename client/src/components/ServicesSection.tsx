@@ -45,39 +45,45 @@ export default function ServicesSection() {
   const services = [
     {
       title: "Site Preparation & Grading",
-      description: "We level and grade your yard for perfect drainage and a smooth, even surface—getting the base just right before any new grass goes down.",
+      description: "We expertly level and grade your yard to ensure perfect water drainage and create a smooth, even surface—the essential foundation before installing any new lawn.",
       image: "/images/site-preparation.png",
       alt: "Site Preparation & Grading"
     },
     {
-      title: "Edging & Trimming",
-      description: "Clean, crisp edges around sidewalks, driveways, and garden beds that enhance the overall appearance of your landscape.",
-      image: "/images/edging.png",
-      alt: "Edging & Trimming"
-    },
-    {
-      title: "Premium Sod Installation",
-      description: "Transform your yard with our high-quality sod varieties, professionally installed for immediate and lasting results.",
+      title: "New Lawn Install: Sod or Seed",
+      description: "Transform your yard with premium sod installation for instant results or professional seeding for a more economical option. We select the perfect grass varieties for your specific soil and sun conditions.",
       image: "/images/premium-sod.png",
-      alt: "Premium Sod Installation"
+      alt: "New Lawn Installation"
     },
     {
-      title: "Fertilization & Soil Amendment",
-      description: "We enhance your soil with custom fertilization programs and amendments to create the perfect growing environment for your landscape.",
+      title: "Aerating and Overseeding",
+      description: "Rejuvenate your existing lawn with our core aeration service that allows air, water and nutrients to penetrate the soil, followed by overseeding to fill in thin areas and enhance thickness.",
       image: "/images/fertilization.png",
-      alt: "Fertilization & Soil Amendment"
+      alt: "Aerating and Overseeding"
+    },
+    {
+      title: "Dethatching",
+      description: "Remove the layer of dead grass and debris that builds up between the soil and the green vegetation of your lawn. Our dethatching service improves lawn health by increasing air flow and nutrient absorption.",
+      image: "/images/edging.png",
+      alt: "Dethatching Services"
     },
     {
       title: "Old Turf Removal",
-      description: "Our efficient turf removal services prepare your yard for a fresh start, eliminating old grass and weeds completely.",
+      description: "Starting fresh? We'll efficiently remove your old, damaged lawn to prepare for new installation. Our specialized equipment ensures complete removal of old grass and roots for a clean slate.",
       image: "/images/old-turf.png",
       alt: "Old Turf Removal"
     },
     {
-      title: "Irrigation Consultation",
-      description: "Get expert advice on water-efficient irrigation systems tailored to your landscape's specific needs.",
+      title: "Patios and Concrete",
+      description: "Enhance your outdoor living space with custom patios, walkways, and concrete work. Our skilled team creates beautiful, durable hardscaping elements that complement your landscape.",
+      image: "/images/site-preparation-poster.jpg",
+      alt: "Patios and Concrete"
+    },
+    {
+      title: "Bed Creation and Mulching",
+      description: "Define your landscape with professionally designed garden beds, complete with premium mulch installation that suppresses weeds, retains moisture, and gives your property a polished, finished look.",
       image: "/images/irrigation.png",
-      alt: "Irrigation Consultation"
+      alt: "Bed Creation and Mulching"
     }
   ];
   

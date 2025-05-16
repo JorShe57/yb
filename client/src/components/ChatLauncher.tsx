@@ -101,7 +101,7 @@ export default function ChatLauncher() {
   }, [isOpen]);
 
   return (
-    <>
+    <div className="chat-launcher-container">
       {/* Chat Button - Fixed at bottom right, stays during scroll */}
       <button
         onClick={openChat}
@@ -112,19 +112,19 @@ export default function ChatLauncher() {
         <span className="hidden sm:inline">Ask the Yard Bros</span>
       </button>
       
-      {/* Chat Container - Positioned from top instead of bottom for better visibility */}
+      {/* Chat Container - Fixed position to follow scroll */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
             ref={chatContainerRef}
-            className="fixed top-[10%] right-6 z-40 w-[90vw] sm:w-[400px] h-[80vh] max-h-[600px] rounded-xl overflow-hidden shadow-2xl border border-border bg-white"
+            className="fixed bottom-24 right-6 z-40 w-[90vw] sm:w-[400px] h-[500px] max-h-[calc(80vh-100px)] rounded-xl overflow-hidden shadow-2xl border border-border bg-white"
             initial={{ opacity: 0, y: 50, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
           >
             {/* Chat Header */}
-            <div className="flex items-center justify-between bg-primary text-white px-4 py-3">
+            <div className="flex items-center justify-between bg-primary text-white px-4 py-3 sticky top-0 z-10">
               <h3 className="font-heading font-semibold text-lg">Chat with Yard Bros</h3>
               <button
                 onClick={closeChat}
@@ -149,6 +149,6 @@ export default function ChatLauncher() {
           </motion.div>
         )}
       </AnimatePresence>
-    </>
+    </div>
   );
 }

@@ -52,7 +52,7 @@ export default function ServicesSection() {
     {
       title: "New Lawn Install: Sod or Seed",
       description: "Transform your yard with premium sod installation for instant results or professional seeding for a more economical option. We select the perfect grass varieties for your specific soil and sun conditions.",
-      image: "/images/sod-installation-poster.jpg",
+      image: "/images/premium-sod.png",
       alt: "New Lawn Installation"
     },
     {

@@ -90,7 +90,7 @@ export function ServiceCard({
             ease: [0.4, 0, 0.2, 1]
           }}
         >
-          <h3 className="text-lg md:text-xl font-bold relative mb-1 px-2.5 py-1.5 rounded bg-black/40 backdrop-blur-sm text-white font-heading uppercase">
+          <h3 className="text-lg md:text-xl font-bold relative mb-1 px-3 py-2 rounded-md bg-gradient-to-r from-primary/80 to-primary/90 backdrop-blur-md text-white font-heading uppercase shadow-md">
             <span className="relative z-10">
               {title}
               <motion.div 

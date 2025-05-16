@@ -7,19 +7,34 @@ export default function ChatLauncher() {
   const chatContainerRef = useRef<HTMLDivElement>(null);
   const iframeRef = useRef<HTMLIFrameElement>(null);
   
-  const toggleChat = () => {
-    setIsOpen(!isOpen);
+  // Simple function to open chat
+  const openChat = () => {
+    console.log("Opening chat");
+    setIsOpen(true);
   };
+  
+  // Simple function to close chat
+  const closeChat = () => {
+    console.log("Closing chat");
+    setIsOpen(false);
+  };
+  
+  // Add some debugging
+  useEffect(() => {
+    console.log("Chat state changed:", isOpen);
+  }, [isOpen]);
 
   // Ensure the chat UI is always visible in the viewport
   useEffect(() => {
     if (isOpen && iframeRef.current) {
+      console.log("Adjusting iframe view for chat");
       // Adjust iframe styling to ensure the input is visible
       const updateIframeView = () => {
         if (iframeRef.current) {
           try {
             // Apply styles that will help show the input field
             iframeRef.current.style.height = '100%';
+            iframeRef.current.style.width = '100%';
             
             // Wait for iframe to load and try to adjust its scroll position
             const adjustIframeContent = () => {
@@ -32,6 +47,7 @@ export default function ChatLauncher() {
                 }
               } catch (e) {
                 // Ignore cross-origin errors silently
+                console.log("Could not access iframe content (expected for cross-origin)");
               }
             };
             
@@ -40,7 +56,7 @@ export default function ChatLauncher() {
             setTimeout(adjustIframeContent, 1000);
             setTimeout(adjustIframeContent, 2000);
           } catch (e) {
-            // Ignore cross-origin errors silently
+            console.error("Error adjusting iframe:", e);
           }
         }
       };
@@ -60,7 +76,7 @@ export default function ChatLauncher() {
         !chatContainerRef.current.contains(event.target as Node) &&
         window.innerWidth < 768
       ) {
-        setIsOpen(false);
+        closeChat();
       }
     };
 
@@ -74,7 +90,7 @@ export default function ChatLauncher() {
   useEffect(() => {
     const handleEscKey = (event: KeyboardEvent) => {
       if (isOpen && event.key === 'Escape') {
-        setIsOpen(false);
+        closeChat();
       }
     };
 
@@ -88,7 +104,7 @@ export default function ChatLauncher() {
     <>
       {/* Chat Button - Fixed at bottom right, stays during scroll */}
       <button
-        onClick={toggleChat}
+        onClick={openChat}
         className="fixed bottom-6 right-6 z-50 bg-accent hover:bg-accent/90 text-white px-4 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2 font-medium"
         aria-label="Ask the Yard Bros"
       >
@@ -111,7 +127,7 @@ export default function ChatLauncher() {
             <div className="flex items-center justify-between bg-primary text-white px-4 py-3">
               <h3 className="font-heading font-semibold text-lg">Chat with Yard Bros</h3>
               <button
-                onClick={toggleChat}
+                onClick={closeChat}
                 className="p-1 rounded-full hover:bg-primary-dark transition-colors"
                 aria-label="Close chat"
               >

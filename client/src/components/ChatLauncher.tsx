@@ -11,6 +11,46 @@ export default function ChatLauncher() {
     setIsOpen(!isOpen);
   };
 
+  // Ensure the chat UI is always visible in the viewport
+  useEffect(() => {
+    if (isOpen && iframeRef.current) {
+      // Adjust iframe styling to ensure the input is visible
+      const updateIframeView = () => {
+        if (iframeRef.current) {
+          try {
+            // Apply styles that will help show the input field
+            iframeRef.current.style.height = '100%';
+            
+            // Wait for iframe to load and try to adjust its scroll position
+            const adjustIframeContent = () => {
+              try {
+                const iframeDoc = iframeRef.current?.contentDocument || 
+                                 (iframeRef.current?.contentWindow?.document);
+                if (iframeDoc) {
+                  // Force scroll to appropriate position where input is visible
+                  iframeDoc.body.scrollTop = iframeDoc.body.scrollHeight;
+                }
+              } catch (e) {
+                // Ignore cross-origin errors silently
+              }
+            };
+            
+            // Try multiple times as iframe might take time to load
+            setTimeout(adjustIframeContent, 500);
+            setTimeout(adjustIframeContent, 1000);
+            setTimeout(adjustIframeContent, 2000);
+          } catch (e) {
+            // Ignore cross-origin errors silently
+          }
+        }
+      };
+      
+      updateIframeView();
+      window.addEventListener('resize', updateIframeView);
+      return () => window.removeEventListener('resize', updateIframeView);
+    }
+  }, [isOpen]);
+
   // Handle clicking outside to close (only on mobile)
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -56,12 +96,12 @@ export default function ChatLauncher() {
         <span className="hidden sm:inline">Ask the Yard Bros</span>
       </button>
       
-      {/* Chat Container */}
+      {/* Chat Container - Positioned from top instead of bottom for better visibility */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
             ref={chatContainerRef}
-            className="fixed bottom-[5.5rem] right-6 z-40 w-[90vw] sm:w-[400px] h-[80vh] max-h-[600px] rounded-xl overflow-hidden shadow-2xl border border-border bg-white"
+            className="fixed top-[10%] right-6 z-40 w-[90vw] sm:w-[400px] h-[80vh] max-h-[600px] rounded-xl overflow-hidden shadow-2xl border border-border bg-white"
             initial={{ opacity: 0, y: 50, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
@@ -79,7 +119,7 @@ export default function ChatLauncher() {
               </button>
             </div>
             
-            {/* Chat Content - Iframe */}
+            {/* Chat Content - Iframe - Added scroll container */}
             <div className="relative w-full h-[calc(100%-56px)]">
               <iframe
                 ref={iframeRef}

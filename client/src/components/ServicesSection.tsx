@@ -9,6 +9,7 @@ import {
   CarouselNext,
   CarouselPrevious
 } from "@/components/ui/carousel";
+import { CarouselDots } from "@/components/ui/carousel-dots";
 
 
 export default function ServicesSection() {
@@ -121,78 +122,68 @@ export default function ServicesSection() {
           care and attention to detail. Explore our offerings below.
         </motion.p>
         
-        {/* Show carousel on mobile, grid on desktop */}
-        {isMobile ? (
-          <div className="mb-16">
-            <Carousel
-              opts={{
-                align: "center",
-                loop: true,
-                dragFree: true,
-              }}
-              className="w-full"
-              setApi={(api) => {
-                // Set up callback to update active slide index
-                api?.on("select", () => {
-                  setActiveSlide(api.selectedScrollSnap());
-                });
-                // Store API reference for dot navigation
-                setCarouselApi(api);
-              }}
-            >
-              <CarouselContent>
-                {services.map((service, index) => (
-                  <CarouselItem key={index} className="pl-4 pr-4 basis-full sm:basis-4/5">
-                    <div className="p-1 h-full flex flex-col">
-                      <ServiceCard
-                        key={index}
-                        index={index}
-                        title={service.title}
-                        description={service.description}
-                        image={service.image}
-                        alt={service.alt}
-                      />
-                    </div>
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-              <div className="flex justify-center mt-4 gap-2">
-                <CarouselPrevious className="relative static left-0 right-0 translate-x-0 bg-background border border-primary/20" />
-                <CarouselNext className="relative static left-0 right-0 translate-x-0 bg-background border border-primary/20" />
-              </div>
-              
-              {/* Custom indicator dots */}
-              <div className="flex justify-center gap-1.5 mt-4">
-                {services.map((_, index) => (
-                  <button
-                    key={index}
-                    type="button"
-                    className={`h-2 w-2 rounded-full transition-colors ${
-                      activeSlide === index 
-                        ? 'bg-primary' 
-                        : 'bg-muted hover:bg-muted/80'
-                    }`}
-                    onClick={() => carouselApi?.scrollTo(index)}
-                    aria-label={`Go to slide ${index + 1}`}
-                  />
-                ))}
-              </div>
-            </Carousel>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-16">
-            {services.map((service, index) => (
-              <ServiceCard
-                key={index}
-                index={index}
-                title={service.title}
-                description={service.description}
-                image={service.image}
-                alt={service.alt}
-              />
-            ))}
-          </div>
-        )}
+        {/* Services Carousel for all screen sizes */}
+        <div className="mb-16">
+          <Carousel
+            opts={{
+              align: "center",
+              loop: true,
+              dragFree: true,
+            }}
+            className="w-full"
+            setApi={(api) => {
+              // Set up callback to update active slide index
+              api?.on("select", () => {
+                setActiveSlide(api.selectedScrollSnap());
+              });
+              // Store API reference for dot navigation
+              setCarouselApi(api);
+            }}
+          >
+            <CarouselContent>
+              {services.map((service, index) => (
+                <CarouselItem 
+                  key={index} 
+                  className="pl-4 pr-4 basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/3"
+                >
+                  <motion.div 
+                    className="p-1 h-full flex flex-col"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ 
+                      duration: 0.5, 
+                      delay: index * 0.1,
+                      ease: [0.2, 0.65, 0.3, 0.9] 
+                    }}
+                  >
+                    <ServiceCard
+                      key={index}
+                      index={index}
+                      title={service.title}
+                      description={service.description}
+                      image={service.image}
+                      alt={service.alt}
+                    />
+                  </motion.div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            
+            {/* Navigation Controls */}
+            <div className="flex justify-center mt-6 gap-4">
+              <CarouselPrevious className="relative static left-0 right-0 translate-x-0 bg-background border border-primary/20 hover:bg-primary hover:text-white transition-colors" />
+              <CarouselNext className="relative static left-0 right-0 translate-x-0 bg-background border border-primary/20 hover:bg-primary hover:text-white transition-colors" />
+            </div>
+            
+            {/* Indicator dots using the CarouselDots component */}
+            <CarouselDots 
+              count={services.length} 
+              activeIndex={activeSlide} 
+              onDotClick={(index) => carouselApi?.scrollTo(index)}
+              className="mt-4"
+            />
+          </Carousel>
+        </div>
         
         <motion.div 
           className="text-center"

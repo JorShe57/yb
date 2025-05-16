@@ -52,19 +52,19 @@ export default function ServicesSection() {
     {
       title: "New Lawn Install: Sod or Seed",
       description: "Transform your yard with premium sod installation for instant results or professional seeding for a more economical option. We select the perfect grass varieties for your specific soil and sun conditions.",
-      image: "/images/premium-sod.png",
+      image: "/images/sod-installation-poster.jpg",
       alt: "New Lawn Installation"
     },
     {
       title: "Aerating and Overseeding",
       description: "Rejuvenate your existing lawn with our core aeration service that allows air, water and nutrients to penetrate the soil, followed by overseeding to fill in thin areas and enhance thickness.",
-      image: "/images/fertilization.png",
+      image: "/images/services/aeration.png",
       alt: "Aerating and Overseeding"
     },
     {
       title: "Dethatching",
       description: "Remove the layer of dead grass and debris that builds up between the soil and the green vegetation of your lawn. Our dethatching service improves lawn health by increasing air flow and nutrient absorption.",
-      image: "/images/edging.png",
+      image: "/images/services/detach.png",
       alt: "Dethatching Services"
     },
     {
@@ -76,7 +76,7 @@ export default function ServicesSection() {
     {
       title: "Patios and Concrete",
       description: "Enhance your outdoor living space with custom patios, walkways, and concrete work. Our skilled team creates beautiful, durable hardscaping elements that complement your landscape.",
-      image: "/images/site-preparation-poster.jpg",
+      image: "/images/services/patio.png",
       alt: "Patios and Concrete"
     },
     {

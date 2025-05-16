@@ -1,70 +1,99 @@
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
-import { z } from "zod";
 import { useToast } from "@/hooks/use-toast";
-
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
+import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
-
-// Define the form schema with validation
-const quoteFormSchema = z.object({
-  name: z.string().min(2, { message: "Name must be at least 2 characters" }),
-  email: z.string().email({ message: "Please enter a valid email address" }),
-  city: z.string().min(2, { message: "City is required" }),
-  address: z.string().min(5, { message: "Please enter a valid service address" }),
-  phone: z.string().min(7, { message: "Please enter a valid phone number" }),
-  service: z.string().min(1, { message: "Please select a service type" }),
-  comments: z.string().optional(),
-});
-
-// Type definition for our form values
-type QuoteFormValues = z.infer<typeof quoteFormSchema>;
 
 export function QuoteForm() {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   
-  // Initialize the form
-  const form = useForm<QuoteFormValues>({
-    resolver: zodResolver(quoteFormSchema),
-    defaultValues: {
-      name: "",
-      email: "",
-      city: "",
-      address: "",
-      phone: "",
-      service: "",
-      comments: "",
-    },
-  });
-
   // Submit handler for FormSubmit
-  function onSubmit(data: QuoteFormValues) {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    // We're using basic validation
+    e.preventDefault();
+    
+    const form = e.currentTarget;
+    const nameInput = form.elements.namedItem('name') as HTMLInputElement;
+    const emailInput = form.elements.namedItem('email') as HTMLInputElement;
+    const cityInput = form.elements.namedItem('city') as HTMLInputElement;
+    const addressInput = form.elements.namedItem('address') as HTMLInputElement;
+    const phoneInput = form.elements.namedItem('phone') as HTMLInputElement;
+    const serviceInput = form.elements.namedItem('service') as HTMLSelectElement;
+    
+    // Basic validation before submission
+    if (!nameInput.value) {
+      toast({
+        title: "Name Required",
+        description: "Please enter your name",
+        variant: "destructive",
+      });
+      return;
+    }
+    
+    if (!emailInput.value || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value)) {
+      toast({
+        title: "Valid Email Required",
+        description: "Please enter a valid email address",
+        variant: "destructive",
+      });
+      return;
+    }
+    
+    if (!cityInput.value) {
+      toast({
+        title: "City Required",
+        description: "Please enter your city",
+        variant: "destructive",
+      });
+      return;
+    }
+    
+    if (!addressInput.value) {
+      toast({
+        title: "Address Required",
+        description: "Please enter your service address",
+        variant: "destructive",
+      });
+      return;
+    }
+    
+    if (!phoneInput.value) {
+      toast({
+        title: "Phone Required",
+        description: "Please enter your phone number",
+        variant: "destructive",
+      });
+      return;
+    }
+    
+    if (!serviceInput.value) {
+      toast({
+        title: "Service Selection Required",
+        description: "Please select a service type",
+        variant: "destructive",
+      });
+      return;
+    }
+    
+    // Form is valid, show submitting state
     setIsSubmitting(true);
-    // Form submission will actually be handled by the FormSubmit action
-    // Just showing a toast for better UX
     toast({
-      title: "Validating your information",
-      description: "Your form is being submitted...",
+      title: "Submitting Your Request",
+      description: "Please wait while we process your information...",
       variant: "default",
     });
-  }
+    
+    // Submit the form manually
+    form.submit();
+  };
 
   return (
     <Form {...form}>
       <form 
+        ref={formRef}
         action="https://formsubmit.co/jorshevel@gmail.com" 
         method="POST" 
         onSubmit={form.handleSubmit(onSubmit)} 

@@ -7,9 +7,13 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// Add health check endpoint
+// Serve React app in production, health check in development
 app.get('/', (_req, res) => {
-  res.status(200).send('OK');
+  if (app.get("env") === "development") {
+    res.status(200).send('OK');
+  } else {
+    res.sendFile(path.join(process.cwd(), 'dist', 'public', 'index.html'));
+  }
 });
 
 // Serve static files from the public directory with increased limits for large files

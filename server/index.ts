@@ -7,11 +7,6 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// Add health check endpoint
-app.get('/', (_req, res) => {
-  res.status(200).send('OK');
-});
-
 // Serve static files from the public directory with increased limits for large files
 app.use(express.static(path.join(process.cwd(), 'public'), {
   maxAge: '1d', // Cache for 1 day

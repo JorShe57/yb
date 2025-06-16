@@ -187,7 +187,7 @@ export default function HomeSection() {
                 
                 <div className="border-t border-white/10 pt-3 text-center italic text-sm font-light">
                   "Whatever you do, work at it with all your heart, as working for the Lord, not for human masters."
-                  <div className="text-xs mt-1 text-accent font-medium">Colossians 3:23</div>
+                  <div className="text-xs mt-1 text-white font-medium">Colossians 3:23</div>
                 </div>
               </div>
             </div>

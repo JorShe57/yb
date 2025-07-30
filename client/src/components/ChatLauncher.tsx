@@ -111,7 +111,7 @@ export default function ChatSection() {
     
     // Create and add image to button
     const chatLauncherImg = document.createElement('img');
-    chatLauncherImg.src = 'https://i.imgur.com/OzIqYPL.jpeg';
+    chatLauncherImg.src = '/images/house-icon.png';
     chatLauncherImg.alt = 'Ask the Bros';
     chatLauncher.appendChild(chatLauncherImg);
     

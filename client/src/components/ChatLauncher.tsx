@@ -63,6 +63,17 @@ export default function ChatSection() {
         background: white;
         overflow: hidden;
       }
+      
+      #chat-mask {
+        position: absolute;
+        top: 70px;
+        left: 0;
+        right: 0;
+        height: 100px;
+        background: rgba(244, 244, 244, 0.95);
+        z-index: 1;
+        pointer-events: none;
+      }
 
       #chat-header {
         background: linear-gradient(135deg, #2f6d2f 0%, #3c9a3c 100%);
@@ -89,6 +100,18 @@ export default function ChatSection() {
         height: calc(100% - 70px);
         border: none;
         border-radius: 0 0 12px 12px;
+      }
+      
+      /* Hide any error messages or broken images from the iframe */
+      #chat-frame::after {
+        content: '';
+        position: absolute;
+        top: 70px;
+        left: 0;
+        right: 0;
+        height: 80px;
+        background: white;
+        z-index: 1;
       }
 
       @media screen and (max-width: 500px) {
@@ -131,12 +154,36 @@ export default function ChatSection() {
     // Create chat iframe
     const chatFrame = document.createElement('iframe');
     chatFrame.id = 'chat-frame';
-    chatFrame.src = 'https://ask-the-bros-jorshevel.replit.app';
+    chatFrame.src = 'https://ask-the-bros-jorshevel.replit.app?hideImage=true';
     chatFrame.allow = 'clipboard-write';
     
-    // Add header and iframe to container
+    // Try to hide the broken image when iframe loads
+    chatFrame.onload = function() {
+      try {
+        // This will only work if the iframe allows cross-origin access
+        const iframeDoc = chatFrame.contentDocument || chatFrame.contentWindow?.document;
+        if (iframeDoc) {
+          const style = iframeDoc.createElement('style');
+          style.textContent = `
+            #chatbox h3 img { display: none !important; }
+            #chatbox h3 { margin-bottom: 0.5em !important; }
+          `;
+          iframeDoc.head.appendChild(style);
+        }
+      } catch (e) {
+        // Cross-origin restrictions prevent access, which is expected
+        console.log('Cannot modify iframe content due to CORS policy');
+      }
+    };
+    
+    // Create mask to hide the broken image area in iframe
+    const chatMask = document.createElement('div');
+    chatMask.id = 'chat-mask';
+    
+    // Add header, iframe, and mask to container
     chatContainer.appendChild(chatHeader);
     chatContainer.appendChild(chatFrame);
+    chatContainer.appendChild(chatMask);
     document.body.appendChild(chatContainer);
 
     // Create chat launcher container

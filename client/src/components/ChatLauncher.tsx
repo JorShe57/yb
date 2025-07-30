@@ -49,23 +49,50 @@ export default function ChatSection() {
         object-fit: cover;
       }
 
-      #chat-frame {
+      #chat-container {
         position: fixed;
         bottom: 100px;
         right: 24px;
         width: 420px;
         height: 650px;
         max-height: 100vh;
-        border: none;
         border-radius: 12px;
         box-shadow: 0 6px 20px rgba(0,0,0,0.3);
         display: none;
         z-index: 9998;
-        overflow: auto;
+        background: white;
+        overflow: hidden;
+      }
+
+      #chat-header {
+        background: linear-gradient(135deg, #2f6d2f 0%, #3c9a3c 100%);
+        padding: 15px;
+        text-align: center;
+        color: white;
+        font-weight: 600;
+        border-radius: 12px 12px 0 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+      }
+
+      #chat-header img {
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+        object-fit: cover;
+      }
+
+      #chat-frame {
+        width: 100%;
+        height: calc(100% - 70px);
+        border: none;
+        border-radius: 0 0 12px 12px;
       }
 
       @media screen and (max-width: 500px) {
-        #chat-frame {
+        #chat-container {
           width: 94vw;
           height: 88vh;
           right: 12px;
@@ -81,14 +108,36 @@ export default function ChatSection() {
     
     document.head.appendChild(styleElement);
 
+    // Create chat container
+    const chatContainer = document.createElement('div');
+    chatContainer.id = 'chat-container';
+    chatContainer.style.display = 'none';
+    
+    // Create chat header
+    const chatHeader = document.createElement('div');
+    chatHeader.id = 'chat-header';
+    
+    // Add house icon to header
+    const headerImg = document.createElement('img');
+    headerImg.src = '/images/house-icon.png';
+    headerImg.alt = 'Yard Bros';
+    
+    const headerText = document.createElement('span');
+    headerText.textContent = 'Ask the Bros';
+    
+    chatHeader.appendChild(headerImg);
+    chatHeader.appendChild(headerText);
+    
     // Create chat iframe
     const chatFrame = document.createElement('iframe');
     chatFrame.id = 'chat-frame';
     chatFrame.src = 'https://ask-the-bros-jorshevel.replit.app';
     chatFrame.allow = 'clipboard-write';
-    chatFrame.style.overflow = 'auto';
-    chatFrame.style.display = 'none';
-    document.body.appendChild(chatFrame);
+    
+    // Add header and iframe to container
+    chatContainer.appendChild(chatHeader);
+    chatContainer.appendChild(chatFrame);
+    document.body.appendChild(chatContainer);
 
     // Create chat launcher container
     const chatLauncherContainer = document.createElement('div');
@@ -103,7 +152,7 @@ export default function ChatSection() {
     const chatLauncher = document.createElement('button');
     chatLauncher.id = 'chat-launcher';
     chatLauncher.onclick = function() {
-      const chat = document.getElementById('chat-frame');
+      const chat = document.getElementById('chat-container');
       if (chat) {
         chat.style.display = (chat.style.display === 'block') ? 'none' : 'block';
       }
@@ -124,9 +173,11 @@ export default function ChatSection() {
     
     // Clean up function to remove elements when component unmounts
     return () => {
-      document.head.removeChild(styleElement);
-      if (document.body.contains(chatFrame)) {
-        document.body.removeChild(chatFrame);
+      if (document.head.contains(styleElement)) {
+        document.head.removeChild(styleElement);
+      }
+      if (document.body.contains(chatContainer)) {
+        document.body.removeChild(chatContainer);
       }
       if (document.body.contains(chatLauncherContainer)) {
         document.body.removeChild(chatLauncherContainer);

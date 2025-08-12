@@ -149,11 +149,11 @@ export default function ChatSection() {
 
       #chat-container {
         position: fixed;
-        bottom: 125px;
+        bottom: 100px;
         right: 24px;
         width: 420px;
-        height: 500px;
-        max-height: calc(100vh - 150px);
+        height: 450px;
+        max-height: calc(100vh - 120px);
         border-radius: 16px;
         box-shadow: 0 20px 40px rgba(0,0,0,0.2), 0 10px 20px rgba(0,0,0,0.1);
         display: none;
@@ -232,7 +232,7 @@ export default function ChatSection() {
 
       #chat-frame {
         width: 100%;
-        height: calc(100% - 85px);
+        height: calc(100% - 70px);
         border: none;
         border-radius: 0 0 16px 16px;
         background: #fafafa;
@@ -262,11 +262,12 @@ export default function ChatSection() {
 
       @media screen and (max-width: 500px) {
         #chat-container {
-          width: calc(100vw - 24px);
-          height: calc(100vh - 120px);
-          right: 12px;
-          bottom: 100px;
+          width: calc(100vw - 32px);
+          height: calc(100vh - 140px);
+          right: 16px;
+          bottom: 90px;
           border-radius: 12px;
+          top: auto;
         }
 
         #chat-launcher-container {

@@ -53,9 +53,10 @@ export default function ChatSection() {
         position: fixed;
         bottom: 100px;
         right: 24px;
-        width: 420px;
-        height: 650px;
-        max-height: 100vh;
+        width: min(420px, calc(100vw - 48px));
+        height: min(650px, calc(100vh - 140px));
+        max-height: calc(100vh - 140px);
+        max-width: calc(100vw - 48px);
         border-radius: 12px;
         box-shadow: 0 6px 20px rgba(0,0,0,0.3);
         display: none;
@@ -116,15 +117,25 @@ export default function ChatSection() {
 
       @media screen and (max-width: 500px) {
         #chat-container {
-          width: 94vw;
-          height: 88vh;
+          width: calc(100vw - 24px);
+          height: calc(100vh - 120px);
           right: 12px;
           bottom: 90px;
+          max-height: calc(100vh - 120px);
         }
 
         #chat-launcher-container {
           bottom: 16px;
           right: 16px;
+        }
+      }
+
+      /* Additional responsive adjustments for very small screens */
+      @media screen and (max-height: 600px) {
+        #chat-container {
+          height: calc(100vh - 100px);
+          max-height: calc(100vh - 100px);
+          bottom: 80px;
         }
       }
     `;
@@ -140,9 +151,9 @@ export default function ChatSection() {
     const chatHeader = document.createElement('div');
     chatHeader.id = 'chat-header';
     
-    // Add house icon to header
+    // Add Yard Bros logo to header
     const headerImg = document.createElement('img');
-    headerImg.src = '/images/house-icon.png';
+    headerImg.src = '/images/yardbros-logo.png';
     headerImg.alt = 'Yard Bros';
     
     const headerText = document.createElement('span');
@@ -207,7 +218,7 @@ export default function ChatSection() {
     
     // Create and add image to button
     const chatLauncherImg = document.createElement('img');
-    chatLauncherImg.src = '/images/house-icon.png';
+    chatLauncherImg.src = '/images/yardbros-logo.png';
     chatLauncherImg.alt = 'Ask the Bros';
     chatLauncher.appendChild(chatLauncherImg);
     

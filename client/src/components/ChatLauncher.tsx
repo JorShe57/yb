@@ -232,7 +232,7 @@ export default function ChatSection() {
 
       #chat-frame {
         width: 100%;
-        height: calc(100% - 70px);
+        height: calc(100% - 160px);
         border: none;
         border-radius: 0 0 16px 16px;
         background: #fafafa;
@@ -271,7 +271,7 @@ export default function ChatSection() {
         }
 
         #chat-launcher-container {
-          bottom: 20px;
+          bottom: 50px;
           right: 16px;
         }
 

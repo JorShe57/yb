@@ -8,7 +8,7 @@ export default function ChatSection() {
     styleElement.textContent = `
       #chat-launcher-container {
         position: fixed;
-        bottom: 24px;
+        bottom: 35px;
         right: 24px;
         z-index: 9999;
         text-align: center;
@@ -54,14 +54,13 @@ export default function ChatSection() {
         bottom: 100px;
         right: 24px;
         width: 420px;
-        height: 650px;
+        height: 400px;
         max-height: 100vh;
         border-radius: 12px;
         box-shadow: 0 6px 20px rgba(0,0,0,0.3);
         display: none;
         z-index: 9998;
         background: white;
-        overflow: hidden;
       }
       
       #chat-mask {

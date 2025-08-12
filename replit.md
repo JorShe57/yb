@@ -92,6 +92,8 @@ DATABASE_URL=postgresql://...  # Required: Neon database connection
 SENDGRID_API_KEY=SG.xxx       # Required: SendGrid API key
 NOTIFICATION_EMAIL=business@example.com  # Optional: Quote notification recipient
 SENDER_EMAIL=noreply@example.com        # Optional: Email sender address
+PORT=5000                     # Optional: Server port (defaults to 5000)
+NODE_ENV=production           # Set automatically if not defined in production
 ```
 
 ### Production Considerations
@@ -99,7 +101,19 @@ SENDER_EMAIL=noreply@example.com        # Optional: Email sender address
 - Session persistence with PostgreSQL storage
 - Email verification required for sender addresses
 - CORS and security headers configured
-- Error logging and monitoring recommended
+- Enhanced error logging and monitoring with detailed startup error handling
+- Graceful shutdown handling for SIGTERM and SIGINT signals
+- Server listens explicitly on 0.0.0.0 for containerized deployments
+- Comprehensive error handling for common deployment issues (DATABASE_URL, SENDGRID_API_KEY)
+
+### Recent Deployment Fixes (August 2025)
+Applied the following deployment improvements:
+- Enhanced server startup error handling with try-catch blocks
+- Automatic NODE_ENV=production setting if not defined
+- Improved error logging with stack traces and common issue detection  
+- Added graceful shutdown handlers for production environments
+- Enhanced server listen configuration with explicit host binding
+- Added startup success confirmation logging
 
 ### Development Workflow
 - `npm run dev`: Start development server with hot reload

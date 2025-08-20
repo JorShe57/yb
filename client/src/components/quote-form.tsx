@@ -76,7 +76,7 @@ export function QuoteForm() {
           ...data,
           service: formatServiceName(data.service),
           submitted_date: new Date().toLocaleString(),
-          quote_id: dbResponse.data?.id || 'unknown'
+          quote_id: (dbResponse as any).data?.id || 'unknown'
         };
         
         await fetch('https://jordenshevel.app.n8n.cloud/webhook/22616fdf-1439-4ded-a78f-11fcf8c4c650', {

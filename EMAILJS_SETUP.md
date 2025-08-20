@@ -13,7 +13,14 @@ This project now uses EmailJS to send quote request emails directly from the fro
 2. Click "Add New Service"
 3. Choose your email provider (Gmail, Outlook, Yahoo, etc.)
 4. Follow the setup instructions for your email provider
-5. Note down the **Service ID** (you'll need this)
+5. **Important**: Make sure to click "Test Connection" and verify it works
+6. Note down the **Service ID** (should look like "service_xxxxxxx")
+
+**Troubleshooting Service ID Issues:**
+- Make sure the service is properly connected and tested
+- The service ID should start with "service_" followed by letters/numbers
+- If you get "service ID not found" error, try creating a new service
+- Ensure your email provider connection is properly authenticated
 
 ## Step 3: Create Email Template
 
@@ -61,6 +68,20 @@ Add these environment variables to your Replit project:
 ## Testing
 
 Once configured, submit a quote request on your website and you should receive an email notification automatically.
+
+**If you get errors:**
+- "Service ID not found": Check that your EmailJS service is properly set up and connected
+- "Template ID not found": Verify your template ID is correct and template is saved
+- "Public key invalid": Make sure you're using the correct public key from Account settings
+
+**Current Status:**
+Your service ID is set to: `service_61e088p`
+
+If this service ID isn't working, you may need to:
+1. Log into EmailJS dashboard
+2. Check if this service exists and is properly connected
+3. Create a new service if needed
+4. Update the VITE_EMAILJS_SERVICE_ID environment variable
 
 ## Benefits of EmailJS
 

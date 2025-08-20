@@ -71,12 +71,22 @@ export function QuoteForm() {
       };
 
       // Send email using EmailJS
-      // You'll need to set up EmailJS with your service ID, template ID, and public key
+      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+      const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
+      if (!serviceId || !templateId || !publicKey) {
+        console.warn('EmailJS not configured - email notification skipped');
+        console.log('Missing:', { serviceId: !!serviceId, templateId: !!templateId, publicKey: !!publicKey });
+        return { dbResponse, emailResult: { status: 'skipped', message: 'EmailJS not configured' } };
+      }
+
+      console.log('Sending email with EmailJS...', { serviceId, templateId });
       const emailResult = await emailjs.send(
-        import.meta.env.VITE_EMAILJS_SERVICE_ID || 'your_service_id',
-        import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'your_template_id', 
+        serviceId,
+        templateId,
         emailParams,
-        import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'your_public_key'
+        publicKey
       );
 
       return { dbResponse, emailResult };
@@ -89,13 +99,23 @@ export function QuoteForm() {
       });
       form.reset();
     },
-    onError: (error) => {
+    onError: (error: any) => {
       console.error("Error submitting quote request:", error);
-      toast({
-        title: "Submission Failed",
-        description: "There was a problem submitting your request. Please try again.",
-        variant: "destructive",
-      });
+      
+      // Check if it's an EmailJS error specifically
+      if (error?.status === 400 && error?.text?.includes('service ID not found')) {
+        toast({
+          title: "Email Configuration Issue",
+          description: "Your request was saved but email notification failed. We'll contact you soon!",
+          variant: "default",
+        });
+      } else {
+        toast({
+          title: "Submission Failed", 
+          description: "There was a problem submitting your request. Please try again.",
+          variant: "destructive",
+        });
+      }
     },
   });
 

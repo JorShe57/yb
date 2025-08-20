@@ -17,13 +17,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Save quote request to database
       const savedQuote = await storage.createQuoteRequest(quoteData);
       
-      // Send email notification to the business owner
-      try {
-        await sendQuoteRequestEmail(savedQuote);
-      } catch (emailError) {
-        // Log the error but don't fail the request
-        console.error("Failed to send email notification:", emailError);
-      }
+      // Email notification now handled by EmailJS on frontend
+      console.log(`Quote request saved with ID: ${savedQuote.id}`);
       
       // Return success response
       return res.status(201).json({

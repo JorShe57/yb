@@ -35,10 +35,11 @@ Preferred communication style: Simple, everyday language.
 - **Migration System**: Drizzle Kit for database schema management
 
 #### Email System
-- **Provider**: SendGrid with API key authentication
-- **Notification Flow**: Automatic email alerts to business owner when quotes are submitted
-- **Configuration**: Environment-based email addresses (sender and recipient)
-- **Template**: HTML-formatted emails with customer details and submission timestamp
+- **Provider**: EmailJS for client-side email sending
+- **Notification Flow**: Direct email alerts to business owner when quotes are submitted
+- **Configuration**: Environment variables for EmailJS service, template, and public key
+- **Template**: Customizable EmailJS template with customer details and submission timestamp
+- **Benefits**: No server-side configuration, reliable delivery, free tier available
 
 #### Frontend Features
 - **Responsive Design**: Mobile-first approach with Tailwind CSS
@@ -68,11 +69,12 @@ Preferred communication style: Simple, everyday language.
 
 ### Required Services
 - **Neon Database**: PostgreSQL hosting (DATABASE_URL required)
-- **SendGrid**: Email delivery service (SENDGRID_API_KEY required)
+- **EmailJS**: Email delivery service (VITE_EMAILJS_* variables required)
 
-### Optional Configurations
-- **NOTIFICATION_EMAIL**: Business owner email for quote notifications
-- **SENDER_EMAIL**: From address for outgoing emails (must be verified in SendGrid)
+### EmailJS Configuration
+- **VITE_EMAILJS_SERVICE_ID**: EmailJS service identifier
+- **VITE_EMAILJS_TEMPLATE_ID**: EmailJS email template identifier  
+- **VITE_EMAILJS_PUBLIC_KEY**: EmailJS public key for authentication
 
 ### Development Dependencies
 - **Replit Integration**: Banner and cartographer plugins for development
@@ -89,9 +91,9 @@ Preferred communication style: Simple, everyday language.
 ### Environment Variables
 ```
 DATABASE_URL=postgresql://...  # Required: Neon database connection
-SENDGRID_API_KEY=SG.xxx       # Required: SendGrid API key
-NOTIFICATION_EMAIL=business@example.com  # Optional: Quote notification recipient
-SENDER_EMAIL=noreply@example.com        # Optional: Email sender address
+VITE_EMAILJS_SERVICE_ID=service_xxx     # Required: EmailJS service ID
+VITE_EMAILJS_TEMPLATE_ID=template_xxx   # Required: EmailJS template ID
+VITE_EMAILJS_PUBLIC_KEY=user_xxx        # Required: EmailJS public key
 PORT=5000                     # Optional: Server port (defaults to 5000)
 NODE_ENV=production           # Set automatically if not defined in production
 ```

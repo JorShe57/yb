@@ -35,11 +35,11 @@ Preferred communication style: Simple, everyday language.
 - **Migration System**: Drizzle Kit for database schema management
 
 #### Email System
-- **Provider**: EmailJS for client-side email sending
-- **Notification Flow**: Direct email alerts to business owner when quotes are submitted
-- **Configuration**: Environment variables for EmailJS service, template, and public key
-- **Template**: Customizable EmailJS template with customer details and submission timestamp
-- **Benefits**: No server-side configuration, reliable delivery, free tier available
+- **Provider**: Webhook-based approach with external form services
+- **Notification Flow**: External services (Formspree, Zapier) handle email notifications
+- **Configuration**: Webhook endpoint at `/webhook/quote` for form submissions
+- **Template**: Configurable through external service providers
+- **Benefits**: More reliable than EmailJS, better spam protection, easier setup
 
 #### Frontend Features
 - **Responsive Design**: Mobile-first approach with Tailwind CSS
@@ -69,12 +69,13 @@ Preferred communication style: Simple, everyday language.
 
 ### Required Services
 - **Neon Database**: PostgreSQL hosting (DATABASE_URL required)
-- **EmailJS**: Email delivery service (VITE_EMAILJS_* variables required)
+- **Webhook Service**: External form service for email notifications (optional)
 
-### EmailJS Configuration
-- **VITE_EMAILJS_SERVICE_ID**: EmailJS service identifier
-- **VITE_EMAILJS_TEMPLATE_ID**: EmailJS email template identifier  
-- **VITE_EMAILJS_PUBLIC_KEY**: EmailJS public key for authentication
+### Webhook Configuration
+- **Endpoint**: `/webhook/quote` accepts POST requests with form data
+- **Supported Services**: Formspree, Netlify Forms, Zapier, direct form submission
+- **Data Mapping**: Flexible field mapping from various form services
+- **Benefits**: Reliable email delivery, spam protection, multiple integration options
 
 ### Development Dependencies
 - **Replit Integration**: Banner and cartographer plugins for development
@@ -91,11 +92,16 @@ Preferred communication style: Simple, everyday language.
 ### Environment Variables
 ```
 DATABASE_URL=postgresql://...  # Required: Neon database connection
-VITE_EMAILJS_SERVICE_ID=service_xxx     # Required: EmailJS service ID
-VITE_EMAILJS_TEMPLATE_ID=template_xxx   # Required: EmailJS template ID
-VITE_EMAILJS_PUBLIC_KEY=user_xxx        # Required: EmailJS public key
 PORT=5000                     # Optional: Server port (defaults to 5000)
 NODE_ENV=production           # Set automatically if not defined in production
+```
+
+### Webhook Endpoints
+```
+POST /api/quotes              # Internal form submission endpoint
+POST /webhook/quote           # External webhook for form services
+GET /api/quotes               # Retrieve all quotes (admin)
+GET /api/quotes/:id           # Retrieve specific quote
 ```
 
 ### Production Considerations
@@ -116,6 +122,14 @@ Applied the following deployment improvements:
 - Added graceful shutdown handlers for production environments
 - Enhanced server listen configuration with explicit host binding
 - Added startup success confirmation logging
+
+### Email System Migration (August 2025)
+Replaced EmailJS with webhook-based email notifications:
+- Removed EmailJS dependencies and configuration issues
+- Created webhook endpoint `/webhook/quote` for external form services
+- Simplified quote form to focus on database storage
+- Added support for Formspree, Zapier, and other webhook services
+- Improved reliability and reduced configuration complexity
 
 ### Development Workflow
 - `npm run dev`: Start development server with hot reload

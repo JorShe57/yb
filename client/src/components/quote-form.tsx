@@ -4,9 +4,7 @@ import { useMutation } from "@tanstack/react-query";
 import { z } from "zod";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
-import emailjs from '@emailjs/browser';
-
-// Note: EmailJS will be initialized with public key on first send call
+// EmailJS removed - using webhook approach for notifications
 
 import {
   Form,
@@ -36,6 +34,19 @@ const quoteFormSchema = z.object({
 // Type definition for our form values
 type QuoteFormValues = z.infer<typeof quoteFormSchema>;
 
+// Helper function to format service names
+function formatServiceName(service: string): string {
+  const serviceMap: Record<string, string> = {
+    'sod': 'Sod Installation',
+    'landscaping': 'Landscaping', 
+    'maintenance': 'Yard Maintenance',
+    'topsoil': 'Topsoil Delivery',
+    'other': 'Other Services'
+  };
+  
+  return serviceMap[service] || service;
+}
+
 export function QuoteForm() {
   const { toast } = useToast();
   
@@ -53,77 +64,36 @@ export function QuoteForm() {
     },
   });
 
-  // Handle form submission with EmailJS and database storage
+  // Handle form submission - save to database and send to n8n webhook
   const quoteRequestMutation = useMutation({
     mutationFn: async (data: QuoteFormValues) => {
-      // First, save to database
+      // Save to database first
       const dbResponse = await apiRequest("POST", "/api/quotes", data);
       
-      // Then send email via EmailJS
-      const emailParams = {
-        from_name: data.name,
-        from_email: data.email,
-        phone: data.phone,
-        city: data.city,
-        address: data.address,
-        service: formatServiceName(data.service),
-        comments: data.comments || 'None provided',
-        submitted_date: new Date().toLocaleString(),
-        reply_to: data.email
-      };
-
-      // Send email using EmailJS
-      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
-      const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
-
-      if (!serviceId || !templateId || !publicKey) {
-        console.warn('EmailJS not configured - email notification skipped');
-        console.log('Missing:', { serviceId: !!serviceId, templateId: !!templateId, publicKey: !!publicKey });
-        return { dbResponse, emailResult: { status: 'skipped', message: 'EmailJS not configured' } };
-      }
-
-      console.log('Sending email with EmailJS...');
-      console.log('Service ID:', serviceId);
-      console.log('Template ID:', templateId);
-      console.log('Public Key:', publicKey);
-      console.log('Email params:', emailParams);
-      
-      // Initialize EmailJS and send email
+      // Send to n8n webhook for email notifications
       try {
-        // Initialize EmailJS with public key
-        emailjs.init({
-          publicKey: publicKey,
-        });
-        
-        // Send email with service ID and template ID
-        const emailResult = await emailjs.send(
-          serviceId,
-          templateId,
-          emailParams
-        );
-        
-        console.log('EmailJS success:', emailResult);
-        return { dbResponse, emailResult };
-        
-      } catch (emailError: any) {
-        console.error('EmailJS specific error:', emailError);
-        console.error('Error details:', {
-          status: emailError.status,
-          text: emailError.text,
-          name: emailError.name
-        });
-        
-        // If EmailJS fails, still return successful DB response
-        return { 
-          dbResponse, 
-          emailResult: { 
-            status: 'error', 
-            message: emailError.text || emailError.message,
-            error: emailError
-          } 
+        const webhookData = {
+          ...data,
+          service: formatServiceName(data.service),
+          submitted_date: new Date().toLocaleString(),
+          quote_id: dbResponse.data?.id || 'unknown'
         };
+        
+        await fetch('https://jordenshevel.app.n8n.cloud/webhook/22616fdf-1439-4ded-a78f-11fcf8c4c650', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(webhookData)
+        });
+        
+        console.log('n8n webhook notification sent successfully');
+      } catch (webhookError) {
+        console.warn('n8n webhook failed:', webhookError);
+        // Don't fail the main request if webhook fails
       }
+      
+      return dbResponse;
     },
     onSuccess: () => {
       toast({
@@ -135,36 +105,15 @@ export function QuoteForm() {
     },
     onError: (error: any) => {
       console.error("Error submitting quote request:", error);
-      
-      // Check if it's an EmailJS error specifically
-      if (error?.status === 400 && error?.text?.includes('service ID not found')) {
-        toast({
-          title: "Email Configuration Issue",
-          description: "Your request was saved but email notification failed. We'll contact you soon!",
-          variant: "default",
-        });
-      } else {
-        toast({
-          title: "Submission Failed", 
-          description: "There was a problem submitting your request. Please try again.",
-          variant: "destructive",
-        });
-      }
+      toast({
+        title: "Submission Failed", 
+        description: "There was a problem submitting your request. Please try again.",
+        variant: "destructive",
+      });
     },
   });
 
-  // Helper function to format service names
-  function formatServiceName(service: string): string {
-    const serviceMap: Record<string, string> = {
-      'sod': 'Sod Installation',
-      'landscaping': 'Landscaping', 
-      'maintenance': 'Yard Maintenance',
-      'topsoil': 'Topsoil Delivery',
-      'other': 'Other Services'
-    };
-    
-    return serviceMap[service] || service;
-  }
+
 
   // Submit handler
   function onSubmit(data: QuoteFormValues) {

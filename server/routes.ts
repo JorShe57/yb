@@ -42,6 +42,48 @@ export async function registerRoutes(app: Express): Promise<Server> {
       });
     }
   });
+
+  // Webhook endpoint for external form services (like Formspree, Netlify Forms, etc.)
+  app.post("/webhook/quote", async (req: Request, res: Response) => {
+    try {
+      console.log("Webhook received:", req.body);
+      
+      // Parse form data - could come from various sources
+      const formData = req.body;
+      
+      // Map webhook data to our schema format
+      const quoteData = {
+        name: formData.name || formData.Name || '',
+        email: formData.email || formData.Email || '',
+        phone: formData.phone || formData.Phone || '',
+        city: formData.city || formData.City || '',
+        address: formData.address || formData.Address || '',
+        service: formData.service || formData.Service || 'other',
+        comments: formData.comments || formData.Comments || formData.message || ''
+      };
+      
+      // Validate and save
+      const validatedData = insertQuoteRequestSchema.parse(quoteData);
+      const savedQuote = await storage.createQuoteRequest(validatedData);
+      
+      console.log(`Webhook quote request saved with ID: ${savedQuote.id}`);
+      
+      // Return success response for webhook
+      return res.status(200).json({
+        success: true,
+        message: "Webhook processed successfully",
+        id: savedQuote.id
+      });
+      
+    } catch (error) {
+      console.error("Webhook processing error:", error);
+      return res.status(200).json({
+        success: false,
+        message: "Webhook processing failed",
+        error: error instanceof Error ? error.message : 'Unknown error'
+      });
+    }
+  });
   
   // GET endpoint to retrieve all quote requests (admin only in a real app)
   app.get("/api/quotes", async (req: Request, res: Response) => {

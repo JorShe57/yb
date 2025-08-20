@@ -6,6 +6,8 @@ import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import emailjs from '@emailjs/browser';
 
+// Note: EmailJS will be initialized with public key on first send call
+
 import {
   Form,
   FormControl,
@@ -81,15 +83,47 @@ export function QuoteForm() {
         return { dbResponse, emailResult: { status: 'skipped', message: 'EmailJS not configured' } };
       }
 
-      console.log('Sending email with EmailJS...', { serviceId, templateId });
-      const emailResult = await emailjs.send(
-        serviceId,
-        templateId,
-        emailParams,
-        publicKey
-      );
-
-      return { dbResponse, emailResult };
+      console.log('Sending email with EmailJS...');
+      console.log('Service ID:', serviceId);
+      console.log('Template ID:', templateId);
+      console.log('Public Key:', publicKey);
+      console.log('Email params:', emailParams);
+      
+      // Initialize EmailJS and send email
+      try {
+        // Initialize EmailJS with public key
+        emailjs.init({
+          publicKey: publicKey,
+        });
+        
+        // Send email with service ID and template ID
+        const emailResult = await emailjs.send(
+          serviceId,
+          templateId,
+          emailParams
+        );
+        
+        console.log('EmailJS success:', emailResult);
+        return { dbResponse, emailResult };
+        
+      } catch (emailError: any) {
+        console.error('EmailJS specific error:', emailError);
+        console.error('Error details:', {
+          status: emailError.status,
+          text: emailError.text,
+          name: emailError.name
+        });
+        
+        // If EmailJS fails, still return successful DB response
+        return { 
+          dbResponse, 
+          emailResult: { 
+            status: 'error', 
+            message: emailError.text || emailError.message,
+            error: emailError
+          } 
+        };
+      }
     },
     onSuccess: () => {
       toast({

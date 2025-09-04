@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from "react";
-import chatImage from "@assets/Screenshot 2025-09-04 at 9.08.45 AM.png";
+import chatImage from "@assets/House.png";
 
 export default function ChatSection() {
   const [isVisible, setIsVisible] = useState(true);

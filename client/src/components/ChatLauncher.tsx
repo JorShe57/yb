@@ -333,7 +333,7 @@ export default function ChatSection() {
     
     // Add house icon to header with better styling
     const headerImg = document.createElement('img');
-    headerImg.src = '/images/house-icon.png';
+    headerImg.src = '/images/yardbros-logo.png';
     headerImg.alt = 'Yard Bros';
     headerImg.onerror = function() {
       // Fallback if image doesn't load
@@ -423,7 +423,7 @@ export default function ChatSection() {
     
     // Create and add enhanced image to button
     const chatLauncherImg = document.createElement('img');
-    chatLauncherImg.src = '/images/house-icon.png';
+    chatLauncherImg.src = '/images/yardbros-logo.png';
     chatLauncherImg.alt = 'Chat with Yard Bros';
     chatLauncherImg.onerror = function() {
       // Fallback: create a text-based button

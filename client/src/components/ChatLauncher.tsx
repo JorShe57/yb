@@ -135,12 +135,18 @@ export default function ChatSection() {
       }
       
       #chat-launcher img {
-        width: 85%;
-        height: 85%;
-        border-radius: 50%;
-        object-fit: cover;
+        width: 70%;
+        height: 70%;
+        border-radius: 8px;
+        object-fit: contain;
+        background: white;
+        padding: 6px;
         transition: all 0.3s ease;
         filter: brightness(1.1) contrast(1.1);
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
       }
 
       #chat-launcher:hover img {
@@ -217,10 +223,12 @@ export default function ChatSection() {
       }
 
       #chat-header img {
-        width: 45px;
-        height: 45px;
-        border-radius: 12px;
-        object-fit: cover;
+        width: 55px;
+        height: 55px;
+        border-radius: 8px;
+        object-fit: contain;
+        background: white;
+        padding: 4px;
         border: 2px solid rgba(255, 255, 255, 0.3);
         transition: all 0.3s ease;
       }
@@ -291,8 +299,8 @@ export default function ChatSection() {
         }
 
         #chat-header img {
-          width: 40px;
-          height: 40px;
+          width: 50px;
+          height: 50px;
         }
       }
 

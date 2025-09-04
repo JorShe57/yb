@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from "react";
-import chatImage from "@assets/House.png";
+import chatImage from "@assets/Screenshot 2025-09-04 at 9.08.45 AM.png";
 
 export default function ChatSection() {
   const [isVisible, setIsVisible] = useState(true);
@@ -158,8 +158,8 @@ export default function ChatSection() {
         position: fixed;
         bottom: 100px;
         right: 24px;
-        width: 420px;
-        height: 450px;
+        width: 520px;
+        height: 600px;
         max-height: calc(100vh - 120px);
         border-radius: 16px;
         box-shadow: 0 20px 40px rgba(0,0,0,0.2), 0 10px 20px rgba(0,0,0,0.1);

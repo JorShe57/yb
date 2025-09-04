@@ -1,5 +1,6 @@
 
 import { useEffect, useState } from "react";
+import chatImage from "@assets/Screenshot 2025-09-04 at 9.08.45 AM.png";
 
 export default function ChatSection() {
   const [isVisible, setIsVisible] = useState(true);
@@ -97,8 +98,8 @@ export default function ChatSection() {
         background: linear-gradient(135deg, #ffffff 0%, #f8fffe 100%);
         border: 2px solid rgba(47, 109, 47, 0.2);
         border-radius: 50%;
-        width: 75px;
-        height: 75px;
+        width: 90px;
+        height: 90px;
         padding: 0;
         cursor: pointer;
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -135,8 +136,8 @@ export default function ChatSection() {
       }
       
       #chat-launcher img {
-        width: 70%;
-        height: 70%;
+        width: 75%;
+        height: 75%;
         border-radius: 8px;
         object-fit: contain;
         background: white;
@@ -223,8 +224,8 @@ export default function ChatSection() {
       }
 
       #chat-header img {
-        width: 55px;
-        height: 55px;
+        width: 70px;
+        height: 70px;
         border-radius: 8px;
         object-fit: contain;
         background: white;
@@ -284,8 +285,8 @@ export default function ChatSection() {
         }
 
         #chat-launcher {
-          width: 65px;
-          height: 65px;
+          width: 80px;
+          height: 80px;
         }
 
         #chat-launcher-label {
@@ -299,8 +300,8 @@ export default function ChatSection() {
         }
 
         #chat-header img {
-          width: 50px;
-          height: 50px;
+          width: 65px;
+          height: 65px;
         }
       }
 
@@ -341,7 +342,7 @@ export default function ChatSection() {
     
     // Add house icon to header with better styling
     const headerImg = document.createElement('img');
-    headerImg.src = '/images/yardbros-logo.png';
+    headerImg.src = chatImage;
     headerImg.alt = 'Yard Bros';
     headerImg.onerror = function() {
       // Fallback if image doesn't load
@@ -431,7 +432,7 @@ export default function ChatSection() {
     
     // Create and add enhanced image to button
     const chatLauncherImg = document.createElement('img');
-    chatLauncherImg.src = '/images/yardbros-logo.png';
+    chatLauncherImg.src = chatImage;
     chatLauncherImg.alt = 'Chat with Yard Bros';
     chatLauncherImg.onerror = function() {
       // Fallback: create a text-based button

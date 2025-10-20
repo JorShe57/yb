@@ -79,7 +79,9 @@ export function QuoteForm() {
           quote_id: (dbResponse as any).data?.id || 'unknown'
         };
         
-        await fetch('https://jordenshevel.app.n8n.cloud/webhook/22616fdf-1439-4ded-a78f-11fcf8c4c650', {
+        const webhookUrl = import.meta.env.VITE_N8N_WEBHOOK_URL || 'https://jordenshevel.app.n8n.cloud/webhook-test/25d0e113-92eb-4e42-b7ae-d3288395729c';
+        
+        await fetch(webhookUrl, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

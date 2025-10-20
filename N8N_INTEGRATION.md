@@ -4,7 +4,7 @@ Your n8n webhook is now integrated with the quote form! Here's how it works:
 
 ## Integration Details
 
-**Webhook URL**: `https://jordenshevel.app.n8n.cloud/webhook-test/25d0e113-92eb-4e42-b7ae-d3288395729c`
+**Webhook URL**: `https://jordenshevel.app.n8n.cloud/webhook/25d0e113-92eb-4e42-b7ae-d3288395729c`
 
 **Data Flow**:
 1. Customer submits quote form
@@ -65,7 +65,7 @@ The raw service values are automatically formatted for better readability:
 
 You can test the webhook directly:
 ```bash
-curl -X POST https://jordenshevel.app.n8n.cloud/webhook-test/25d0e113-92eb-4e42-b7ae-d3288395729c \
+curl -X POST https://jordenshevel.app.n8n.cloud/webhook/25d0e113-92eb-4e42-b7ae-d3288395729c \
   -H "Content-Type: application/json" \
   -d '{"name":"Test","email":"test@test.com","service":"Landscaping"}'
 ```

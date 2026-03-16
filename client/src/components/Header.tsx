@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { Menu, X } from "lucide-react";
 import { motion } from "framer-motion";
-import yardBrosLogo from "@/assets/yardbros-logo.jpg";
+import yardBrosLogo from "@/assets/yardbros-logo.png";
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);

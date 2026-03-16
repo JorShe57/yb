@@ -118,14 +118,13 @@ export default function ServicesSection() {
         </motion.div>
         
         <motion.p
-          className="max-w-2xl mx-auto text-center mb-12 text-foreground/80"
+          className="max-w-3xl mx-auto text-center mb-12 text-foreground/80"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.2, duration: 0.5 }}
         >
-          We provide comprehensive landscaping services that transform your outdoor spaces with professional 
-          care and attention to detail. Explore our offerings below.
+          YardBros Landscaping provides professional lawn and landscape installation services throughout Lorain County and surrounding communities. Our team specializes in new lawn installation, sod installation, mulch beds, french drain systems, lawn grading, and complete landscaping solutions. Whether you need to repair a damaged yard, install a brand-new lawn, or improve drainage with a French drain, YardBros delivers reliable and professional results.
         </motion.p>
         
         {/* Services Carousel for all screen sizes */}

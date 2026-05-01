@@ -1,5 +1,4 @@
 import express, { type Express, type Request, type Response, type NextFunction } from "express";
-import path from "path";
 import { registerRoutes } from "./routes";
 import { log } from "./vite";
 
@@ -8,19 +7,6 @@ export async function createApp(): Promise<Express> {
 
   app.use(express.json());
   app.use(express.urlencoded({ extended: false }));
-
-  // Serve static files from the public directory with increased limits for large files
-  // (Used for local/dev hosting; Vercel serves built assets separately.)
-  app.use(
-    express.static(path.join(process.cwd(), "public"), {
-      maxAge: "1d",
-      setHeaders: (res, filePath) => {
-        if (filePath.endsWith(".mp4")) {
-          res.set("Accept-Ranges", "bytes");
-        }
-      },
-    }),
-  );
 
   app.use((req, res, next) => {
     const start = Date.now();

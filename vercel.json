@@ -3,6 +3,7 @@
   "outputDirectory": "dist/public",
   "rewrites": [
     { "source": "/webhook/quote", "destination": "/api/webhook/quote" },
+    { "source": "/api/(.*)", "destination": "/api/$1" },
     { "source": "/images/(.*)", "destination": "/images/$1" },
     { "source": "/videos/(.*)", "destination": "/videos/$1" },
     { "source": "/(.*)", "destination": "/index.html" }

@@ -1,4 +1,9 @@
+import { GoogleReviewButton } from "@/components/GoogleReviewButton";
+import { getGoogleReviewUrl } from "@/lib/googleReview";
+
 export default function Footer() {
+  const reviewUrl = getGoogleReviewUrl();
+
   return (
     <footer className="bg-primary text-white py-10">
       <div className="container mx-auto px-4">
@@ -45,6 +50,12 @@ export default function Footer() {
             </ul>
           </div>
         </div>
+
+        {reviewUrl ? (
+          <div className="mt-8 flex justify-center">
+            <GoogleReviewButton surface="footer" />
+          </div>
+        ) : null}
         
         <div className="mt-8 pt-6 border-t border-white/15 text-center">
           <p>&copy; {new Date().getFullYear()} Yard Bros Landscaping. All Rights Reserved.</p>

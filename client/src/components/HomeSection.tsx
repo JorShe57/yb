@@ -6,6 +6,8 @@ import {
   MotionList, 
   MotionListItem
 } from '@/components/ui/motion';
+import { GoogleReviewButton } from '@/components/GoogleReviewButton';
+import { getGoogleReviewUrl } from '@/lib/googleReview';
 
 // Animation variants for this component
 const animations = {
@@ -25,7 +27,9 @@ const animations = {
 
 export default function HomeSection() {
   const [scrollIndicator, setScrollIndicator] = useState(true);
+  const [heroVideoVisible, setHeroVideoVisible] = useState(false);
   const { scrollY } = useScroll();
+  const googleReviewUrl = getGoogleReviewUrl();
   
   // Parallax effect for video background
   const backgroundY = useTransform(scrollY, [0, 500], [0, 100]);
@@ -44,6 +48,11 @@ export default function HomeSection() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    const t = window.setTimeout(() => setHeroVideoVisible(true), 4000);
+    return () => window.clearTimeout(t);
+  }, []);
+
   const benefitsList = [
     { text: "Licensed & Insured Pros" },
     { text: "Free Professional Estimates" },
@@ -54,21 +63,29 @@ export default function HomeSection() {
     <section id="home" className="relative min-h-[90vh] flex items-center overflow-hidden">
       {/* Video Background with Parallax Effect */}
       <motion.div 
-        className="absolute inset-0 w-full h-full z-0"
+        className="absolute inset-0 w-full h-full z-0 bg-[#142818]"
         style={{ y: backgroundY }}
       >
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/60 z-10"></div>
-        <video 
-          className="absolute inset-0 min-w-full min-h-full object-cover scale-110"
-          autoPlay 
-          loop 
-          muted 
+        <video
+          className={[
+            "absolute inset-0 z-0 min-w-full min-h-full object-cover scale-110 transition-opacity duration-700 ease-out",
+            heroVideoVisible ? "opacity-100" : "opacity-0",
+          ].join(" ")}
+          autoPlay
+          loop
+          muted
           playsInline
-          poster="/images/rolling-watering-poster.jpg"
+          preload="auto"
+          onPlaying={() => setHeroVideoVisible(true)}
+          onLoadedData={(e) => {
+            const el = e.currentTarget;
+            void el.play().catch(() => {});
+          }}
         >
           <source src="/videos/background-new.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
+        <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/60 via-black/50 to-black/60 pointer-events-none" />
       </motion.div>
       
       {/* Content */}
@@ -184,8 +201,14 @@ export default function HomeSection() {
                   </div>
                   <span className="text-sm">Trusted by over 500+ homeowners in your area</span>
                 </div>
+
+                {googleReviewUrl ? (
+                  <div className="mt-4 flex justify-center">
+                    <GoogleReviewButton surface="hero" />
+                  </div>
+                ) : null}
                 
-                <div className="border-t border-white/10 pt-3 text-center italic text-sm font-light">
+                <div className="border-t border-white/10 pt-3 mt-4 text-center italic text-sm font-light">
                   "Whatever you do, work at it with all your heart, as working for the Lord, not for human masters."
                   <div className="text-xs mt-1 text-white font-medium">Colossians 3:23</div>
                 </div>

@@ -88,7 +88,7 @@ export function ServiceCard({
             ease: [0.4, 0, 0.2, 1]
           }}
         >
-          <h3 className="text-lg md:text-xl font-bold relative mb-1 px-3 py-2 rounded-md bg-secondary/90 backdrop-blur-md text-secondary-foreground font-heading uppercase shadow-md">
+          <h3 className="text-lg md:text-xl font-bold relative z-10 mb-1 px-3 py-2 rounded-md bg-secondary/90 backdrop-blur-md text-white font-heading uppercase shadow-md drop-shadow-sm">
             {title}
           </h3>
         </motion.div>

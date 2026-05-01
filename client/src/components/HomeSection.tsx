@@ -64,9 +64,9 @@ export default function HomeSection() {
           loop 
           muted 
           playsInline
+          poster="/images/rolling-watering-poster.jpg"
         >
           <source src="/videos/background-new.mp4" type="video/mp4" />
-          <img src="/images/fallback-bg.jpg" alt="Landscaping background" className="absolute inset-0 min-w-full min-h-full object-cover" />
           Your browser does not support the video tag.
         </video>
       </motion.div>

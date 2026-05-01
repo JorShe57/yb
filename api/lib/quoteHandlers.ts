@@ -1,6 +1,16 @@
 import type { IncomingMessage, ServerResponse } from "http";
-import { ZodError } from "zod";
-import { insertQuoteRequestSchema } from "../../shared/schema";
+import { z, ZodError } from "zod";
+
+/** Keep fields in sync with `shared/schema.ts` (used by the Express dev server + client types). */
+const insertQuoteRequestSchema = z.object({
+  name: z.string().min(1),
+  email: z.string().min(1),
+  city: z.string().min(1),
+  address: z.string().min(1),
+  phone: z.string().min(1),
+  service: z.string().optional(),
+  comments: z.string().optional(),
+});
 
 type JsonObject = Record<string, unknown>;
 

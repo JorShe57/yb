@@ -1,5 +1,5 @@
 import type { IncomingMessage, ServerResponse } from "http";
-import { handleQuoteWebhook } from "../lib/quoteHandlers";
+import { handleQuoteWebhook } from "../lib/quoteHandlers.js";
 
 export default async function handler(req: IncomingMessage, res: ServerResponse) {
   try {

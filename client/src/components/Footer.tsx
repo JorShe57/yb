@@ -2,13 +2,17 @@ import { GoogleReviewButton } from "@/components/GoogleReviewButton";
 
 export default function Footer() {
   return (
-    <footer className="bg-primary text-white py-10">
+    <footer className="bg-primary text-white py-12 border-t border-white/10">
       <div className="container mx-auto px-4">
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid gap-10 md:grid-cols-4">
           <div>
-            <h3 className="text-xl font-heading font-bold mb-4">Yard Bros Landscaping</h3>
-            <p className="mb-4">Professional landscaping services for residential and commercial properties.</p>
-            <p>Serving the local area since 2010</p>
+            <h3 className="text-xl font-heading font-bold mb-3">Yard Bros Landscaping</h3>
+            <p className="text-white/80">
+              Professional lawn & landscape installs with clean prep work, clear estimates, and on-time execution.
+            </p>
+            <div className="mt-5">
+              <GoogleReviewButton surface="footer" className="w-full justify-center" />
+            </div>
           </div>
           
           <div>
@@ -46,10 +50,17 @@ export default function Footer() {
               </li>
             </ul>
           </div>
-        </div>
 
-        <div className="mt-8 flex justify-center">
-          <GoogleReviewButton surface="footer" />
+          <div>
+            <h3 className="text-xl font-heading font-bold mb-4">Quick Links</h3>
+            <ul className="space-y-2 text-white/85">
+              <li><a className="text-white/85 hover:text-white" href="#quotes">Request a quote</a></li>
+              <li><a className="text-white/85 hover:text-white" href="#services">Services</a></li>
+              <li><a className="text-white/85 hover:text-white" href="#sod">Sod</a></li>
+              <li><a className="text-white/85 hover:text-white" href="#calculator">Topsoil calculator</a></li>
+              <li><a className="text-white/85 hover:text-white" href="#chat">Ask The Bros</a></li>
+            </ul>
+          </div>
         </div>
         
         <div className="mt-8 pt-6 border-t border-white/15 text-center">

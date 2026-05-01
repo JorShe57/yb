@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { ArrowLeft, Shield } from "lucide-react";
+import { Shield, Sprout, Droplets, Clock, ChevronDown } from "lucide-react";
 import { SodCard } from "@/components/ui/sod-card";
 
 export default function SodSection() {
@@ -90,21 +90,41 @@ export default function SodSection() {
           transition={{ delay: 0.2, duration: 0.5 }}
         >
           <p className="text-lg text-foreground/90 max-w-4xl">
-            YardBros Landscaping offers two premium sod blends, carefully
-            developed to thrive in different conditions. Our sod is freshly
-            harvested, delivered directly to your location, and professionally
-            installed for immediate curb appeal.
+            Two premium blends, cut fresh and installed with the prep work that makes sod last:
+            grading, soil conditioning, clean seams, and a real watering plan.
           </p>
 
-          <div className="flex items-center mt-4 bg-primary/5 p-4 rounded-lg border border-primary/10">
-            <div className="text-primary mr-3">
-              <Shield className="h-6 w-6" />
+          <div className="mt-6 rounded-2xl border border-secondary/20 bg-gradient-to-r from-secondary/10 via-card/70 to-card/70 p-5 shadow-sm">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+              <div className="flex items-start gap-3">
+                <div className="mt-0.5 rounded-xl bg-secondary/15 p-2 text-secondary">
+                  <Shield className="h-6 w-6" />
+                </div>
+                <div>
+                  <h3 className="font-heading font-semibold text-xl">
+                    30‑Day Establishment Guarantee
+                  </h3>
+                  <p className="mt-1 text-sm text-foreground/80 max-w-xl">
+                    Follow our care guide and watering schedule. If something isn’t establishing as expected, we’ll come take a look and make it right.
+                  </p>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-3 gap-2 sm:gap-3 sm:max-w-sm">
+                <div className="rounded-xl bg-card/80 border border-border p-3 text-center">
+                  <Sprout className="h-5 w-5 mx-auto text-secondary" aria-hidden />
+                  <div className="mt-1 text-xs font-medium">Fresh cut</div>
+                </div>
+                <div className="rounded-xl bg-card/80 border border-border p-3 text-center">
+                  <Droplets className="h-5 w-5 mx-auto text-secondary" aria-hidden />
+                  <div className="mt-1 text-xs font-medium">Water plan</div>
+                </div>
+                <div className="rounded-xl bg-card/80 border border-border p-3 text-center">
+                  <Clock className="h-5 w-5 mx-auto text-secondary" aria-hidden />
+                  <div className="mt-1 text-xs font-medium">30 days</div>
+                </div>
+              </div>
             </div>
-            <p className="text-sm text-foreground/80">
-              All YardBros sod varieties are backed by our 30-day establishment
-              guarantee and include a complimentary post-installation care
-              guide.
-            </p>
           </div>
         </motion.div>
 
@@ -362,7 +382,7 @@ export default function SodSection() {
           </div>
         </motion.div>
 
-        {/* FAQ Section - Optimized for Mobile */}
+        {/* FAQ Section */}
         <motion.div
           className="mb-16"
           initial={{ opacity: 0, y: 40 }}
@@ -374,63 +394,36 @@ export default function SodSection() {
             Frequently Asked Questions
           </h3>
 
-          <div className="space-y-4">
-            {/* FAQ Item 1 */}
-            <motion.div
-              className="bg-card p-5 rounded-xl shadow-sm border border-border"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.5, duration: 0.4 }}
-            >
-              <h4 className="font-medium text-lg mb-2">
+          <div className="space-y-3">
+            <details className="group rounded-xl border border-border bg-card/80 p-5 shadow-sm">
+              <summary className="cursor-pointer list-none font-medium text-lg flex items-center justify-between">
                 How soon can I walk on my new sod?
-              </h4>
-              <p className="text-foreground/80">
-                You can walk on your new sod immediately after installation when
-                necessary, but we recommend limiting foot traffic for the first
-                2-3 weeks while the roots establish. After about 3 weeks, your
-                sod should be firmly rooted.
+                <ChevronDown className="h-5 w-5 text-secondary group-open:rotate-180 transition-transform" aria-hidden />
+              </summary>
+              <p className="mt-3 text-foreground/80">
+                Light foot traffic is okay when necessary, but keep it minimal for the first 2–3 weeks while roots establish. By around week 3, it should be much more anchored.
               </p>
-            </motion.div>
+            </details>
 
-            {/* FAQ Item 2 */}
-            <motion.div
-              className="bg-card p-5 rounded-xl shadow-sm border border-border"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.6, duration: 0.4 }}
-            >
-              <h4 className="font-medium text-lg mb-2">
+            <details className="group rounded-xl border border-border bg-card/80 p-5 shadow-sm">
+              <summary className="cursor-pointer list-none font-medium text-lg flex items-center justify-between">
                 How often should I water my new sod?
-              </h4>
-              <p className="text-foreground/80">
-                For the first 2 weeks, water your new sod 2-3 times daily
-                (morning, noon, and early evening) for about 15-20 minutes each
-                session. After 2 weeks, reduce to once daily for 30 minutes for
-                another week, then transition to your normal watering schedule.
+                <ChevronDown className="h-5 w-5 text-secondary group-open:rotate-180 transition-transform" aria-hidden />
+              </summary>
+              <p className="mt-3 text-foreground/80">
+                The first two weeks are about keeping it consistently moist (not flooded). We’ll provide a schedule based on sun/shade, temps, and your soil so you don’t guess.
               </p>
-            </motion.div>
+            </details>
 
-            {/* FAQ Item 3 */}
-            <motion.div
-              className="bg-card p-5 rounded-xl shadow-sm border border-border"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.7, duration: 0.4 }}
-            >
-              <h4 className="font-medium text-lg mb-2">
+            <details className="group rounded-xl border border-border bg-card/80 p-5 shadow-sm">
+              <summary className="cursor-pointer list-none font-medium text-lg flex items-center justify-between">
                 When should I first mow my new sod?
-              </h4>
-              <p className="text-foreground/80">
-                Wait until your sod is firmly rooted and about 3-4 inches tall,
-                typically 2-3 weeks after installation. For the first mow, set
-                your mower to a higher setting and remove no more than 1/3 of
-                the blade length. Never mow wet sod.
+                <ChevronDown className="h-5 w-5 text-secondary group-open:rotate-180 transition-transform" aria-hidden />
+              </summary>
+              <p className="mt-3 text-foreground/80">
+                Typically 2–3 weeks after install once it’s rooted and the grass reaches 3–4 inches. First mow should be higher and remove no more than 1/3 of the blade length.
               </p>
-            </motion.div>
+            </details>
           </div>
         </motion.div>
 
@@ -444,7 +437,7 @@ export default function SodSection() {
         >
           <a
             href="#quotes"
-            className="bg-accent hover:bg-yellow-500 text-white font-semibold py-4 px-8 rounded-lg transition-colors inline-block shadow-lg text-lg"
+            className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold py-4 px-8 rounded-lg transition-colors inline-block shadow-lg text-lg"
           >
             Request Sod Installation
           </a>

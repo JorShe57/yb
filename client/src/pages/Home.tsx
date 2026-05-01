@@ -6,7 +6,6 @@ import SodSection from "@/components/SodSection";
 import CalculatorSection from "@/components/CalculatorSection";
 import Footer from "@/components/Footer";
 import ChatSection from "@/components/ChatLauncher"; // Still using the same file but different component name
-import { ScrollToTop } from "@/components/ui/scroll-to-top";
 import { ScrollIndicator } from "@/components/ui/scroll-indicator";
 
 
@@ -27,7 +26,6 @@ export default function Home() {
         </div>
       </main>
       <Footer />
-      <ScrollToTop />
     </div>
   );
 }

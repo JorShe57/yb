@@ -165,14 +165,14 @@ export const LawnTransformAnimation = ({
       }}
     >
       {/* Base ground */}
-      <div className="absolute inset-0 bg-yellow-800/30" />
+      <div className="absolute inset-0 bg-accent/20" />
       
       {/* Patchy grass that's visible initially */}
       <div className="absolute inset-0">
         {patches.map((patch, i) => (
           <div
             key={`patch-${i}`}
-            className="absolute bg-green-600/40"
+            className="absolute bg-secondary/35"
             style={{
               width: patch.width,
               height: patch.height,
@@ -186,7 +186,7 @@ export const LawnTransformAnimation = ({
       
       {/* Growing lush grass overlay */}
       <motion.div 
-        className="absolute inset-0 bg-gradient-to-b from-green-500 to-green-700"
+        className="absolute inset-0 bg-gradient-to-b from-secondary/80 to-primary/90"
         initial={{ opacity: 0 }}
         animate={isAnimating ? { opacity: 0.85 } : { opacity: 0 }}
         transition={{ duration, ease: [0.2, 0.8, 0.2, 1] }}
@@ -198,7 +198,7 @@ export const LawnTransformAnimation = ({
           {blades.map((blade, i) => (
             <motion.div
               key={`blade-${i}`}
-              className="absolute bottom-0 origin-bottom bg-green-500 will-change-transform"
+              className="absolute bottom-0 origin-bottom bg-secondary will-change-transform"
               style={{ 
                 left: blade.left,
                 width: blade.width,

@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
-import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { Menu, X } from "lucide-react";
 import { motion } from "framer-motion";
-import yardBrosLogo from "@/assets/yardbros-logo.png";
 import { Button } from "@/components/ui/button";
 import { getGoogleReviewUrl } from "@/lib/googleReview";
 
@@ -49,9 +47,13 @@ export default function Header() {
         >
           <a href="#home" className="flex items-center">
             <img 
-              src={yardBrosLogo} 
+              src="/images/yardbros-logo.png"
               alt="Yard Bros Landscaping Logo" 
-              className="h-16 md:h-20 rounded-full"
+              width={160}
+              height={160}
+              loading="eager"
+              decoding="async"
+              className="h-16 w-16 md:h-20 md:w-20 rounded-full"
             />
           </a>
         </motion.div>
@@ -65,14 +67,17 @@ export default function Header() {
             <Button asChild variant="accent" size="sm" className="hidden md:inline-flex mr-4">
               <a href="#quotes">Get a Free Quote</a>
             </Button>
-            <Button asChild variant="outline" size="sm" className="hidden md:inline-flex mr-2 border-primary/30 bg-background/80 text-foreground hover:bg-muted">
+            <Button
+              asChild
+              variant="secondary"
+              size="sm"
+              className="hidden md:inline-flex mr-2 shadow-sm"
+            >
               <a href={getGoogleReviewUrl()} target="_blank" rel="noopener noreferrer">
                 Google Reviews
               </a>
             </Button>
           </motion.div>
-          
-          <ThemeToggle />
           
           <button 
             className="md:hidden text-foreground focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary p-1.5 rounded-md" 

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, Variants } from 'framer-motion';
-import { CheckCircle, Star, ChevronDown } from 'lucide-react';
+import { CheckCircle, ChevronDown } from 'lucide-react';
 import { 
   MotionDiv, 
   MotionList, 
@@ -26,7 +26,7 @@ const animations = {
 
 export default function HomeSection() {
   const [scrollIndicator, setScrollIndicator] = useState(true);
-  const [heroVideoVisible, setHeroVideoVisible] = useState(false);
+  const [heroVideoVisible, setHeroVideoVisible] = useState(true);
   const { scrollY } = useScroll();
   
   // Parallax effect for video background
@@ -46,10 +46,7 @@ export default function HomeSection() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  useEffect(() => {
-    const t = window.setTimeout(() => setHeroVideoVisible(true), 4000);
-    return () => window.clearTimeout(t);
-  }, []);
+  // Video should appear as soon as it can play; use poster as fallback.
 
   const benefitsList = [
     { text: "Licensed & Insured Pros" },
@@ -73,6 +70,7 @@ export default function HomeSection() {
           loop
           muted
           playsInline
+          poster="/images/mulching-service.jpg"
           preload="auto"
           onPlaying={() => setHeroVideoVisible(true)}
           onLoadedData={(e) => {
@@ -157,24 +155,24 @@ export default function HomeSection() {
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-8 w-full max-w-md mx-auto">
                 <motion.a 
                   href="#services" 
-                  className="bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white font-semibold py-3 px-6 rounded-lg transition-colors text-center flex items-center justify-center border border-white/10"
-                  whileHover={{ y: -1, backgroundColor: "rgba(255,255,255,0.2)" }}
+                  className="bg-secondary text-secondary-foreground font-semibold py-3 px-6 rounded-lg transition-colors text-center flex items-center justify-center shadow-md hover:bg-secondary/90"
+                  whileHover={{ y: -1 }}
                   whileTap={{ scale: 0.95 }}
                 >
                   Services
                 </motion.a>
                 <motion.a 
                   href="#sod" 
-                  className="bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white font-semibold py-3 px-6 rounded-lg transition-colors text-center flex items-center justify-center border border-white/10"
-                  whileHover={{ y: -1, backgroundColor: "rgba(255,255,255,0.2)" }}
+                  className="bg-secondary text-secondary-foreground font-semibold py-3 px-6 rounded-lg transition-colors text-center flex items-center justify-center shadow-md hover:bg-secondary/90"
+                  whileHover={{ y: -1 }}
                   whileTap={{ scale: 0.95 }}
                 >
                   Sod
                 </motion.a>
                 <motion.a 
                   href="#calculator" 
-                  className="bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white font-semibold py-3 px-6 rounded-lg transition-colors text-center flex items-center justify-center border border-white/10"
-                  whileHover={{ y: -1, backgroundColor: "rgba(255,255,255,0.2)" }}
+                  className="bg-secondary text-secondary-foreground font-semibold py-3 px-6 rounded-lg transition-colors text-center flex items-center justify-center shadow-md hover:bg-secondary/90"
+                  whileHover={{ y: -1 }}
                   whileTap={{ scale: 0.95 }}
                 >
                   Calculator
@@ -189,19 +187,13 @@ export default function HomeSection() {
             delay={1.2}
             className="inline-block"
           >
-            <div className="bg-white/10 backdrop-blur-sm p-4 rounded-lg inline-block border border-white/10 shadow-glow">
+            <div className="bg-white/10 backdrop-blur-sm p-5 rounded-xl inline-block border border-white/10 shadow-glow">
               <div className="flex flex-col">
-                <div className="flex items-center mb-3">
-                  <div className="flex text-yellow-400 mr-3">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="h-5 w-5 fill-current" />
-                    ))}
-                  </div>
-                  <span className="text-sm">Trusted by over 500+ homeowners in your area</span>
-                </div>
-
-                <div className="mt-4 flex justify-center">
-                  <GoogleReviewButton surface="hero" />
+                <div className="flex justify-center">
+                  <GoogleReviewButton
+                    surface="hero"
+                    className="w-full max-w-md text-base px-6 py-3.5 bg-white text-primary hover:bg-white/95 border border-white/30 shadow-lg"
+                  />
                 </div>
                 
                 <div className="border-t border-white/10 pt-3 mt-4 text-center italic text-sm font-light">

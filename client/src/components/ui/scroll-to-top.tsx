@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowUp } from 'lucide-react';
-import { useInView } from '@/hooks/use-smooth-scroll-animation';
 
 export function ScrollToTop() {
   const [showButton, setShowButton] = useState(false);
@@ -37,7 +36,7 @@ export function ScrollToTop() {
       {showButton && (
         <motion.button
           onClick={scrollToTop}
-          className="fixed bottom-6 right-6 z-50 rounded-full bg-primary p-3 text-white shadow-lg hover:bg-primary/90 dark:bg-primary/80 dark:hover:bg-primary/70"
+          className="fixed bottom-6 right-6 z-50 rounded-full bg-primary p-3 text-white shadow-lg hover:bg-primary/90"
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.8 }}

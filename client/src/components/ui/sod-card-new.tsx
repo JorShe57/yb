@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Check, ChevronDown, Zap } from 'lucide-react';
+import { Check, ChevronDown } from 'lucide-react';
 
 interface SodCardProps {
   name: string;
@@ -35,8 +35,8 @@ export function SodCard({
   
   // Set custom styling based on sod type
   const titleStyle = isSunGold
-    ? "bg-gradient-to-r from-yellow-500/80 to-green-600/80 backdrop-blur-sm"
-    : "bg-gradient-to-r from-blue-600/80 to-green-700/80 backdrop-blur-sm";
+    ? "bg-secondary/90 backdrop-blur-sm"
+    : "bg-secondary/90 backdrop-blur-sm";
 
   return (
     <motion.div
@@ -90,13 +90,13 @@ export function SodCard({
               {name}
               {isSunGold && (
                 <span className="flex items-center text-xs font-normal mt-1 opacity-90">
-                  <span className="inline-block w-3 h-3 rounded-full bg-yellow-300 mr-1.5"></span>
+                  <span className="inline-block w-3 h-3 rounded-full bg-secondary mr-1.5"></span>
                   Kentucky/Rye Blend
                 </span>
               )}
               {isShadeBlend && (
                 <span className="flex items-center text-xs font-normal mt-1 opacity-90">
-                  <span className="inline-block w-3 h-3 rounded-full bg-blue-300 mr-1.5"></span>
+                  <span className="inline-block w-3 h-3 rounded-full bg-primary mr-1.5"></span>
                   Fescue/Blue Blend
                 </span>
               )}
@@ -136,21 +136,21 @@ export function SodCard({
                 <motion.div
                   className={`mt-4 p-3 rounded-lg border ${
                     isSunGold 
-                      ? "bg-yellow-500/5 border-yellow-500/20" 
-                      : "bg-blue-500/5 border-blue-500/20"
+                      ? "bg-secondary/5 border-secondary/20" 
+                      : "bg-secondary/5 border-secondary/20"
                   }`}
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.15 }}
                 >
                   <h4 className={`text-sm font-semibold mb-2 ${
-                    isSunGold ? "text-yellow-600 dark:text-yellow-500" : "text-blue-600 dark:text-blue-500"
+                    isSunGold ? "text-secondary" : "text-secondary"
                   }`}>When to Use:</h4>
                   <ul className="space-y-2">
                     {whenToUse.map((item, idx) => (
                       <li key={idx} className="flex items-start text-sm">
                         <Check size={16} className={`mt-0.5 mr-2 flex-shrink-0 ${
-                          isSunGold ? "text-yellow-600 dark:text-yellow-500" : "text-blue-600 dark:text-blue-500"
+                          isSunGold ? "text-secondary" : "text-secondary"
                         }`} />
                         <span>{item}</span>
                       </li>
@@ -164,21 +164,21 @@ export function SodCard({
                 <motion.div
                   className={`mt-4 p-3 rounded-lg border ${
                     isSunGold 
-                      ? "bg-green-500/5 border-green-500/20" 
-                      : "bg-teal-500/5 border-teal-500/20"
+                      ? "bg-primary/5 border-primary/15" 
+                      : "bg-primary/5 border-primary/15"
                   }`}
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2 }}
                 >
                   <h4 className={`text-sm font-semibold mb-2 ${
-                    isSunGold ? "text-green-600 dark:text-green-500" : "text-teal-600 dark:text-teal-500"
+                    isSunGold ? "text-primary" : "text-primary"
                   }`}>Additional Benefits:</h4>
                   <ul className="space-y-2">
                     {benefits.map((item, idx) => (
                       <li key={idx} className="flex items-start text-sm">
                         <Check size={16} className={`mt-0.5 mr-2 flex-shrink-0 ${
-                          isSunGold ? "text-green-600 dark:text-green-500" : "text-teal-600 dark:text-teal-500"
+                          isSunGold ? "text-primary" : "text-primary"
                         }`} />
                         <span>{item}</span>
                       </li>
@@ -198,12 +198,12 @@ export function SodCard({
                     key={idx} 
                     className={`flex flex-col p-2 rounded-lg ${
                       isSunGold
-                        ? "bg-gradient-to-br from-yellow-500/10 to-green-500/10 border border-yellow-500/10"
-                        : "bg-gradient-to-br from-blue-500/10 to-teal-500/10 border border-blue-500/10"
+                        ? "bg-secondary/5 border border-secondary/10"
+                        : "bg-secondary/5 border border-secondary/10"
                     }`}
                   >
                     <span className={`text-xs ${
-                      isSunGold ? "text-yellow-700 dark:text-yellow-400" : "text-blue-700 dark:text-blue-400"
+                      isSunGold ? "text-secondary" : "text-secondary"
                     }`}>
                       {feature.label}
                     </span>
@@ -220,13 +220,8 @@ export function SodCard({
               >
                 <a 
                   href="#quotes" 
-                  className={`block w-auto mx-auto font-medium py-1.5 px-5 rounded-md text-center transition-colors flex items-center justify-center gap-2 shadow-md ${
-                    isSunGold
-                      ? "bg-gradient-to-r from-yellow-500 to-green-600 text-white hover:from-yellow-500 hover:to-yellow-500 hover:text-primary"
-                      : "bg-gradient-to-r from-blue-600 to-teal-600 text-white hover:from-blue-400 hover:to-blue-400 hover:text-blue-700"
-                  }`}
+                  className="block w-auto mx-auto font-medium py-2 px-5 rounded-md text-center transition-colors shadow-md bg-accent text-accent-foreground hover:bg-accent/90"
                 >
-                  <Zap size={14} />
                   <span className="text-sm">Get a Quote</span>
                 </a>
               </motion.div>
@@ -246,10 +241,10 @@ export function SodCard({
               
               <div className="flex items-center">
                 <div className={`h-2 w-2 rounded-full mr-2 ${
-                  isSunGold ? "bg-yellow-500" : "bg-blue-500"
+                  isSunGold ? "bg-secondary" : "bg-secondary"
                 }`}></div>
                 <span className={`text-xs font-medium ${
-                  isSunGold ? "text-yellow-600 dark:text-yellow-500" : "text-blue-600 dark:text-blue-500"
+                  isSunGold ? "text-secondary" : "text-secondary"
                 }`}>
                   {isSunGold ? "Full Sun Premium Blend" : "Shade Tolerant Premium Blend"}
                 </span>
@@ -260,11 +255,7 @@ export function SodCard({
         
         {/* Toggle expand button */}
         <motion.button
-          className={`absolute bottom-5 right-4 w-8 h-8 rounded-full flex items-center justify-center shadow-md border border-white/20 transition-colors ${
-            isSunGold 
-              ? 'bg-gradient-to-br from-yellow-500 to-green-600 text-white hover:from-yellow-500 hover:to-yellow-500 hover:text-primary'
-              : 'bg-gradient-to-br from-blue-600 to-teal-600 text-white hover:from-blue-400 hover:to-blue-400 hover:text-blue-700'
-          }`}
+          className="absolute bottom-5 right-4 w-8 h-8 rounded-full flex items-center justify-center shadow-md border border-white/20 transition-colors bg-secondary text-secondary-foreground hover:bg-secondary/90"
           onClick={() => setIsExpanded(!isExpanded)}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}

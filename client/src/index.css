@@ -23,11 +23,11 @@
   /* Calculator Inputs */
   .calculator-input {
     @apply w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary;
-    @apply bg-white dark:bg-gray-800 dark:text-white dark:border-gray-600;
+    @apply bg-white;
   }
   
   .calculator-label {
-    @apply block text-sm font-semibold mb-2 dark:text-gray-200;
+    @apply block text-sm font-semibold mb-2;
   }
 
   /* Navigation Bar */
@@ -179,42 +179,6 @@
   /* Neutral color for backgrounds */
   --neutral: 42 38% 95%;
   --dark-text: 90 6% 12%;
-}
-
-.dark {
-  /* Dark theme: deep olive-charcoal, still warm and readable. */
-  --background: 150 10% 8%;
-  --foreground: 42 18% 92%;
-  
-  /* Component colors */
-  --muted: 150 10% 14%;
-  --muted-foreground: 42 12% 72%;
-  --popover: 150 10% 10%;
-  --popover-foreground: 42 18% 92%;
-  --card: 150 10% 12%;
-  --card-foreground: 42 18% 92%;
-  --border: 150 8% 20%;
-  --input: 150 8% 20%;
-  
-  /* Brand roles - adjusted for dark surfaces */
-  --primary: 144 30% 52%;
-  --primary-foreground: 150 10% 8%;
-  --secondary: 144 24% 44%;
-  --secondary-foreground: 150 10% 8%;
-  --accent: 22 52% 58%;
-  --accent-foreground: 150 10% 8%;
-  --ring: 144 30% 52%;
-  
-  /* System colors */
-  --destructive: 0 62.8% 30.6%;
-  --destructive-foreground: 0 0% 98%;
-  
-  /* Maintain border radius */
-  --radius: 0.75rem;
-  
-  /* Neutral color for backgrounds in dark mode */
-  --neutral: 150 10% 8%;
-  --dark-text: 42 18% 92%;
 }
 
 @layer base {
@@ -439,19 +403,6 @@ img, video {
   z-index: 1;
   pointer-events: none;
   transition: opacity 0.3s ease;
-}
-
-.dark .section-transition::after {
-  background: linear-gradient(to bottom, transparent, rgba(20,30,20,0.5));
-}
-
-/* Font settings */
-.font-heading {
-  font-family: 'Montserrat', sans-serif;
-}
-
-.font-body {
-  font-family: 'Open Sans', sans-serif;
 }
 
 /* Flip Card Styles */

@@ -1,47 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import { ServiceCard } from "@/components/ui/service-card";
 import { Button } from "@/components/ui/button";
-import { 
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious
-} from "@/components/ui/carousel";
-import { CarouselDots } from "@/components/ui/carousel-dots";
-
 
 export default function ServicesSection() {
-  // Detect mobile viewport for conditional rendering
-  const [isMobile, setIsMobile] = useState(false);
-  // Track active slide for indicators
-  const [activeSlide, setActiveSlide] = useState(0);
-  // Store carousel API reference
-  const [carouselApi, setCarouselApi] = useState<any>(null);
-  
-  useEffect(() => {
-    // Check if we're on mobile
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    
-    // Initial check
-    checkMobile();
-    
-    // Add event listener for resize
-    window.addEventListener('resize', checkMobile);
-    
-    // Cleanup
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-  
-  // Handle manual active slide changes by syncing with carousel
-  useEffect(() => {
-    if (carouselApi) {
-      carouselApi.scrollTo(activeSlide);
-    }
-  }, [activeSlide, carouselApi]);
   const services = [
     {
       title: "Site Preparation & Grading",
@@ -90,108 +52,51 @@ export default function ServicesSection() {
   return (
     <section 
       id="services" 
-      className="py-20 bg-gradient-to-br from-background/80 to-background relative overflow-hidden"
+      className="py-20 bg-gradient-to-br from-background via-background to-secondary/5 relative overflow-hidden"
     >
       {/* Background circles decoration */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full -translate-y-1/2 translate-x-1/2" />
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent/5 rounded-full translate-y-1/2 -translate-x-1/2" />
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-secondary/10 rounded-full translate-y-1/2 -translate-x-1/2" />
       
       <div className="container mx-auto px-4 relative z-10">
-        <motion.div 
-          className="flex items-center mb-10 md:mb-16"
+        <motion.div
+          className="mb-8 md:mb-10"
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          
-          <h2 className="text-3xl md:text-4xl font-heading font-bold relative inline-block">
+          <h2 className="text-3xl md:text-4xl font-heading font-bold tracking-tight">
             Our <span className="text-primary">Services</span>
-            <motion.div 
-              className="absolute -bottom-2 left-0 h-1 bg-accent/50 rounded-full"
-              initial={{ width: 0 }}
-              whileInView={{ width: "100%" }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.3, duration: 0.8 }}
-            />
           </h2>
+          <p className="mt-3 max-w-3xl text-foreground/80">
+            From grading and drainage to new lawns and beds, we do the prep work right so your yard looks great and stays that way.
+          </p>
         </motion.div>
-        
-        <motion.p
-          className="max-w-3xl mx-auto text-center mb-12 text-foreground/80"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.2, duration: 0.5 }}
-        >
-          YardBros Landscaping provides professional lawn and landscape installation services throughout Lorain County and surrounding communities. Our team specializes in new lawn installation, sod installation, mulch beds, french drain systems, lawn grading, and complete landscaping solutions. Whether you need to repair a damaged yard, install a brand-new lawn, or improve drainage with a French drain, YardBros delivers reliable and professional results.
-        </motion.p>
-        
-        {/* Services Carousel for all screen sizes */}
-        <div className="mb-16">
-          <Carousel
-            opts={{
-              align: "center",
-              loop: true,
-              dragFree: true,
-            }}
-            className="w-full"
-            setApi={(api) => {
-              // Set up callback to update active slide index
-              api?.on("select", () => {
-                setActiveSlide(api.selectedScrollSnap());
-              });
-              // Store API reference for dot navigation
-              setCarouselApi(api);
-            }}
-          >
-            <CarouselContent>
-              {services.map((service, index) => (
-                <CarouselItem 
-                  key={index} 
-                  className="pl-4 pr-4 basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/3"
-                >
-                  <motion.div 
-                    className="p-1 h-full flex flex-col"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ 
-                      duration: 0.5, 
-                      delay: index * 0.1,
-                      ease: [0.2, 0.65, 0.3, 0.9] 
-                    }}
-                  >
-                    <ServiceCard
-                      key={index}
-                      index={index}
-                      title={service.title}
-                      description={service.description}
-                      image={service.image}
-                      alt={service.alt}
-                    />
-                  </motion.div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            
-            {/* Navigation Controls */}
-            <div className="flex justify-center mt-6 gap-4">
-              <CarouselPrevious className="relative static left-0 right-0 translate-x-0 bg-background border border-primary/20 hover:bg-primary hover:text-white transition-colors" />
-              <CarouselNext className="relative static left-0 right-0 translate-x-0 bg-background border border-primary/20 hover:bg-primary hover:text-white transition-colors" />
-            </div>
-            
-            {/* Indicator dots using the CarouselDots component */}
-            <CarouselDots 
-              count={services.length} 
-              activeIndex={activeSlide} 
-              onDotClick={(index) => carouselApi?.scrollTo(index)}
-              className="mt-4"
-            />
-          </Carousel>
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {services.map((service, index) => (
+            <motion.div
+              key={service.title}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.45, delay: Math.min(index * 0.05, 0.25) }}
+              className="h-full"
+            >
+              <ServiceCard
+                index={index}
+                title={service.title}
+                description={service.description}
+                image={service.image}
+                alt={service.alt}
+                className="h-full"
+              />
+            </motion.div>
+          ))}
         </div>
         
         <motion.div 
-          className="text-center"
+          className="mt-12 text-center"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}

@@ -1,6 +1,6 @@
 import type { IncomingMessage, ServerResponse } from "http";
 import { ZodError } from "zod";
-import { insertQuoteRequestSchema } from "../shared/schema";
+import { insertQuoteRequestSchema } from "../../shared/schema";
 
 type JsonObject = Record<string, unknown>;
 
@@ -10,21 +10,45 @@ function sendJson(res: ServerResponse, status: number, body: JsonObject) {
   res.end(JSON.stringify(body));
 }
 
+function isPlainObject(value: unknown): value is JsonObject {
+  if (value === null || typeof value !== "object") return false;
+  if (Buffer.isBuffer(value)) return false;
+  if (Array.isArray(value)) return false;
+  const proto = Object.getPrototypeOf(value);
+  return proto === Object.prototype || proto === null;
+}
+
 async function readJsonBody(req: IncomingMessage): Promise<JsonObject> {
-  const existingBody = (req as IncomingMessage & { body?: unknown }).body;
-  if (existingBody && typeof existingBody === "object") {
-    return existingBody as JsonObject;
+  const raw = (req as IncomingMessage & { body?: unknown }).body;
+
+  if (raw !== undefined && raw !== null) {
+    if (typeof raw === "string") {
+      if (!raw.trim()) return {};
+      return JSON.parse(raw) as JsonObject;
+    }
+    if (Buffer.isBuffer(raw)) {
+      const s = raw.toString("utf8");
+      if (!s.trim()) return {};
+      return JSON.parse(s) as JsonObject;
+    }
+    if (isPlainObject(raw)) {
+      return raw;
+    }
   }
 
   const chunks: Buffer[] = [];
-  for await (const chunk of req) {
-    chunks.push(Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk));
-  }
+  await new Promise<void>((resolve, reject) => {
+    req.on("data", (chunk: Buffer | string) => {
+      chunks.push(Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk));
+    });
+    req.on("end", () => resolve());
+    req.on("error", reject);
+  });
 
-  const rawBody = Buffer.concat(chunks).toString("utf8");
-  if (!rawBody) return {};
+  const text = Buffer.concat(chunks).toString("utf8");
+  if (!text.trim()) return {};
 
-  return JSON.parse(rawBody) as JsonObject;
+  return JSON.parse(text) as JsonObject;
 }
 
 async function forwardToN8n(payload: unknown) {
@@ -75,7 +99,7 @@ export async function handleQuoteRequest(req: IncomingMessage, res: ServerRespon
       message: "Quote request submitted successfully",
     });
   } catch (error) {
-    if (error instanceof SyntaxError) {
+    if (error instanceof SyntaxError || error instanceof TypeError) {
       sendJson(res, 400, { success: false, message: "Invalid JSON body" });
       return;
     }

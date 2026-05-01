@@ -1,6 +1,11 @@
 {
   "buildCommand": "npm run build",
   "outputDirectory": "dist/public",
+  "functions": {
+    "api/**/*.ts": {
+      "includeFiles": "shared/**"
+    }
+  },
   "routes": [
     { "handle": "filesystem" },
 

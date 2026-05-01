@@ -14,18 +14,20 @@ export default function QuotesSection() {
     <AnimatedSection 
       id="quotes" 
       animation="from-bottom"
-      className="py-20 bg-gradient-to-br from-background/80 to-background"
+      className="py-20 bg-gradient-to-br from-background to-muted/50"
       showTransitionToNext={true}
     >
       <div className="container mx-auto px-4">
-        <div className="flex items-center mb-8">
-          
-          <h2 className="text-3xl md:text-4xl font-heading font-bold">
-            Request a <span className="text-primary">Free Quote</span>
+        <div className="max-w-3xl mx-auto mb-8">
+          <h2 className="text-3xl md:text-4xl font-heading font-semibold tracking-tight">
+            Request a quote
           </h2>
+          <p className="mt-2 text-muted-foreground">
+            Tell us what you’re working on, we’ll reply with a clear estimate and next steps.
+          </p>
         </div>
         
-        <Card className="max-w-3xl mx-auto bg-card/80 backdrop-blur-sm border-card-foreground/10 shadow-xl">
+        <Card className="max-w-3xl mx-auto bg-card/80 backdrop-blur-sm border-border/60 shadow-xl">
           <CardContent className="p-6 md:p-8">
             <div 
               ref={formRef} 

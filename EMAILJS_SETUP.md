@@ -59,7 +59,7 @@ Reply directly to {{reply_to}} to contact the customer.
 
 ## Step 5: Add Environment Variables
 
-Add these environment variables to your Replit project:
+Add these environment variables to your deployment environment (for example, Vercel Project Settings → Environment Variables):
 
 - `VITE_EMAILJS_SERVICE_ID` - Your Service ID from Step 2
 - `VITE_EMAILJS_TEMPLATE_ID` - Your Template ID from Step 3  

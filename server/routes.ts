@@ -1,11 +1,28 @@
 import type { Express, Request, Response } from "express";
-import { createServer, type Server } from "http";
-import { storage } from "./storage";
 import { insertQuoteRequestSchema } from "@shared/schema";
 import { ZodError } from "zod";
 import { sendQuoteRequestEmail } from "./email";
 
-export async function registerRoutes(app: Express): Promise<Server> {
+export async function registerRoutes(app: Express): Promise<void> {
+  const forwardToN8n = async (payload: unknown) => {
+    const url = process.env.N8N_WEBHOOK_URL;
+    if (!url) {
+      console.log("Quote submission (no N8N_WEBHOOK_URL configured):", payload);
+      return;
+    }
+
+    const res = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+
+    if (!res.ok) {
+      const text = await res.text().catch(() => "");
+      throw new Error(`n8n webhook failed: ${res.status} ${res.statusText}${text ? ` :: ${text}` : ""}`);
+    }
+  };
+
   // Quote requests API endpoints
   
   // POST endpoint to create a new quote request
@@ -14,17 +31,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Validate request body using Zod schema
       const quoteData = insertQuoteRequestSchema.parse(req.body);
       
-      // Save quote request to database
-      const savedQuote = await storage.createQuoteRequest(quoteData);
-      
-      // Email notification now handled by EmailJS on frontend
-      console.log(`Quote request saved with ID: ${savedQuote.id}`);
+      await forwardToN8n({
+        source: "api/quotes",
+        receivedAt: new Date().toISOString(),
+        quote: quoteData,
+      });
       
       // Return success response
       return res.status(201).json({
         success: true,
         message: "Quote request submitted successfully",
-        data: savedQuote
       });
     } catch (error) {
       if (error instanceof ZodError) {
@@ -44,7 +60,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   // Webhook endpoint for external form services (like Formspree, Netlify Forms, etc.)
-  app.post("/webhook/quote", async (req: Request, res: Response) => {
+  const webhookHandler = async (req: Request, res: Response) => {
     try {
       console.log("Webhook received:", req.body);
       
@@ -62,17 +78,19 @@ export async function registerRoutes(app: Express): Promise<Server> {
         comments: formData.comments || formData.Comments || formData.message || ''
       };
       
-      // Validate and save
+      // Validate and forward
       const validatedData = insertQuoteRequestSchema.parse(quoteData);
-      const savedQuote = await storage.createQuoteRequest(validatedData);
-      
-      console.log(`Webhook quote request saved with ID: ${savedQuote.id}`);
+      await forwardToN8n({
+        source: "webhook/quote",
+        receivedAt: new Date().toISOString(),
+        quote: validatedData,
+        raw: req.body,
+      });
       
       // Return success response for webhook
       return res.status(200).json({
         success: true,
         message: "Webhook processed successfully",
-        id: savedQuote.id
       });
       
     } catch (error) {
@@ -83,60 +101,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
         error: error instanceof Error ? error.message : 'Unknown error'
       });
     }
-  });
-  
-  // GET endpoint to retrieve all quote requests (admin only in a real app)
-  app.get("/api/quotes", async (req: Request, res: Response) => {
-    try {
-      const quotes = await storage.getAllQuoteRequests();
-      return res.status(200).json({
-        success: true,
-        data: quotes
-      });
-    } catch (error) {
-      console.error("Error retrieving quote requests:", error);
-      return res.status(500).json({
-        success: false,
-        message: "Failed to retrieve quote requests"
-      });
-    }
-  });
-  
-  // GET endpoint to retrieve a specific quote request by ID
-  app.get("/api/quotes/:id", async (req: Request, res: Response) => {
-    try {
-      const id = parseInt(req.params.id);
-      
-      if (isNaN(id)) {
-        return res.status(400).json({
-          success: false,
-          message: "Invalid quote request ID"
-        });
-      }
-      
-      const quote = await storage.getQuoteRequest(id);
-      
-      if (!quote) {
-        return res.status(404).json({
-          success: false,
-          message: "Quote request not found"
-        });
-      }
-      
-      return res.status(200).json({
-        success: true,
-        data: quote
-      });
-    } catch (error) {
-      console.error("Error retrieving quote request:", error);
-      return res.status(500).json({
-        success: false,
-        message: "Failed to retrieve quote request"
-      });
-    }
-  });
+  };
 
-  const httpServer = createServer(app);
-
-  return httpServer;
+  // Keep legacy path
+  app.post("/webhook/quote", webhookHandler);
+  // Also expose under /api for serverless routing convenience
+  app.post("/api/webhook/quote", webhookHandler);
 }

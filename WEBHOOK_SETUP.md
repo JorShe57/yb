@@ -4,7 +4,7 @@ I've created a webhook endpoint at `/webhook/quote` that can receive form submis
 
 ## Webhook URL
 
-Your webhook endpoint is: `https://your-replit-app.replit.app/webhook/quote`
+Your webhook endpoint is: `https://your-domain.com/webhook/quote`
 
 ## Supported Services
 
@@ -12,7 +12,7 @@ Your webhook endpoint is: `https://your-replit-app.replit.app/webhook/quote`
 1. Go to [Formspree.io](https://formspree.io/)
 2. Create a free account
 3. Create a new form
-4. Set the endpoint to: `https://your-replit-app.replit.app/webhook/quote`
+4. Set the endpoint to: `https://your-domain.com/webhook/quote`
 5. Use the Formspree form HTML in your website
 
 **Formspree Benefits:**
@@ -31,13 +31,13 @@ If you deploy on Netlify:
 1. Create a Zapier account
 2. Set up a webhook trigger
 3. Connect to Gmail, Slack, or any notification service
-4. Point webhook to: `https://your-replit-app.replit.app/webhook/quote`
+4. Point webhook to: `https://your-domain.com/webhook/quote`
 
 ### 4. Direct Form Submission
 You can also modify your existing form to submit directly to the webhook:
 
 ```html
-<form action="https://your-replit-app.replit.app/webhook/quote" method="POST">
+<form action="https://your-domain.com/webhook/quote" method="POST">
   <input type="text" name="name" required />
   <input type="email" name="email" required />
   <input type="tel" name="phone" required />
@@ -68,7 +68,7 @@ You can also modify your existing form to submit directly to the webhook:
 You can test the webhook with curl:
 
 ```bash
-curl -X POST https://your-replit-app.replit.app/webhook/quote \
+curl -X POST https://your-domain.com/webhook/quote \
   -H "Content-Type: application/json" \
   -d '{
     "name": "Test Customer",

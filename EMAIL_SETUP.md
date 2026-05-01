@@ -56,7 +56,7 @@ The email system uses environment variables to make it easy to configure without
 
 4. **Update Environment Variables**:
    - Provide your API key, notification email, and sender email to your hosting provider
-   - If using Replit, these can be set in the Secrets tab of your project
+   - Add these as environment variables in your deployment platform (for example, Vercel Project Settings → Environment Variables)
 
 ## Testing
 

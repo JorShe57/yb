@@ -1,0 +1,9 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist/public",
+  "rewrites": [
+    { "source": "/webhook/quote", "destination": "/api/webhook/quote" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}
+

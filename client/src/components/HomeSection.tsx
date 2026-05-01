@@ -80,11 +80,11 @@ export default function HomeSection() {
             delay={0.3}
             className="mb-6"
           >
-            <h1 className="text-6xl md:text-7xl font-heading font-bold text-white leading-tight">
-              Custom <span className="text-[#4CAF50] relative">
-                Lawns
-                <span className="absolute bottom-1 left-0 w-full h-1 bg-accent/30 rounded-full"></span>
-              </span> & Complete Landscapes
+            <h1 className="text-6xl md:text-7xl font-heading font-semibold text-white leading-[0.95] tracking-tight">
+              Lawns with <span className="relative inline-block">
+                craft
+                <span className="absolute -bottom-1 left-0 w-full h-[3px] bg-white/25 rounded-full"></span>
+              </span>, landscapes that last.
             </h1>
           </MotionDiv>
           
@@ -93,9 +93,9 @@ export default function HomeSection() {
             delay={0.5}
             className="mb-12"
           >
-            <h2 className="text-3xl md:text-4xl font-heading text-white/90 tracking-wide">
-              Expertly Crafted from the Ground Up
-            </h2>
+            <p className="text-xl md:text-2xl font-body text-white/85 max-w-3xl mx-auto">
+              Premium installs, grading, drainage, and finish work. Clear estimates, clean execution.
+            </p>
           </MotionDiv>
           
           {/* Benefits List with Staggered Animation */}
@@ -131,9 +131,9 @@ export default function HomeSection() {
                     delay: 1.0, 
                     ease: "easeOut" 
                   }}
-                  whileHover={{ scale: 1.05 }}
+                  whileHover={{ y: -1 }}
                   whileTap={{ scale: 0.95 }}
-                  className="bg-accent hover:bg-yellow-500 hover:text-white text-white font-semibold py-4 px-8 rounded-lg transition-colors shadow-lg text-center text-lg flex items-center justify-center w-full max-w-md"
+                  className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold py-4 px-8 rounded-lg transition-colors shadow-lg text-center text-lg flex items-center justify-center w-full max-w-md"
                 >
                   Get a Free Quote
                 </motion.a>
@@ -143,7 +143,7 @@ export default function HomeSection() {
                 <motion.a 
                   href="#services" 
                   className="bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white font-semibold py-3 px-6 rounded-lg transition-colors text-center flex items-center justify-center border border-white/10"
-                  whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.2)" }}
+                  whileHover={{ y: -1, backgroundColor: "rgba(255,255,255,0.2)" }}
                   whileTap={{ scale: 0.95 }}
                 >
                   Services
@@ -151,7 +151,7 @@ export default function HomeSection() {
                 <motion.a 
                   href="#sod" 
                   className="bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white font-semibold py-3 px-6 rounded-lg transition-colors text-center flex items-center justify-center border border-white/10"
-                  whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.2)" }}
+                  whileHover={{ y: -1, backgroundColor: "rgba(255,255,255,0.2)" }}
                   whileTap={{ scale: 0.95 }}
                 >
                   Sod
@@ -159,7 +159,7 @@ export default function HomeSection() {
                 <motion.a 
                   href="#calculator" 
                   className="bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white font-semibold py-3 px-6 rounded-lg transition-colors text-center flex items-center justify-center border border-white/10"
-                  whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.2)" }}
+                  whileHover={{ y: -1, backgroundColor: "rgba(255,255,255,0.2)" }}
                   whileTap={{ scale: 0.95 }}
                 >
                   Calculator

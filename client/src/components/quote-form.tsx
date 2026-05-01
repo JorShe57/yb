@@ -12,6 +12,7 @@ import {
   FormField,
   FormItem,
   FormLabel,
+  FormDescription,
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -64,38 +65,14 @@ export function QuoteForm() {
     },
   });
 
-  // Handle form submission - save to database and send to n8n webhook
+  // Handle form submission - send to API (which forwards to n8n)
   const quoteRequestMutation = useMutation({
     mutationFn: async (data: QuoteFormValues) => {
-      // Save to database first
-      const dbResponse = await apiRequest("POST", "/api/quotes", data);
-      
-      // Send to n8n webhook for email notifications
-      try {
-        const webhookData = {
-          ...data,
-          service: formatServiceName(data.service),
-          submitted_date: new Date().toLocaleString(),
-          quote_id: (dbResponse as any).data?.id || 'unknown'
-        };
-        
-        const webhookUrl = import.meta.env.VITE_N8N_WEBHOOK_URL || 'https://jordenshevel.app.n8n.cloud/webhook/25d0e113-92eb-4e42-b7ae-d3288395729c';
-        
-        await fetch(webhookUrl, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(webhookData)
-        });
-        
-        console.log('n8n webhook notification sent successfully');
-      } catch (webhookError) {
-        console.warn('n8n webhook failed:', webhookError);
-        // Don't fail the main request if webhook fails
-      }
-      
-      return dbResponse;
+      return await apiRequest("POST", "/api/quotes", {
+        ...data,
+        service: formatServiceName(data.service),
+        submitted_date: new Date().toLocaleString(),
+      });
     },
     onSuccess: () => {
       toast({
@@ -125,16 +102,23 @@ export function QuoteForm() {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+        <div className="rounded-lg border border-border bg-muted/30 p-4">
+          <p className="text-sm text-muted-foreground">
+            Typical reply time is within 24 hours. If you’re on a tight timeline, include it in the comments.
+          </p>
+        </div>
+
         <div className="grid md:grid-cols-2 gap-6">
           <FormField
             control={form.control}
             name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Name *</FormLabel>
+                <FormLabel>Name</FormLabel>
                 <FormControl>
                   <Input placeholder="Your full name" {...field} />
                 </FormControl>
+                <FormDescription>So we know what to call you.</FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -145,10 +129,11 @@ export function QuoteForm() {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Email *</FormLabel>
+                <FormLabel>Email</FormLabel>
                 <FormControl>
                   <Input placeholder="your.email@example.com" type="email" {...field} />
                 </FormControl>
+                <FormDescription>We’ll send your estimate here.</FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -159,7 +144,7 @@ export function QuoteForm() {
             name="city"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>City *</FormLabel>
+                <FormLabel>City</FormLabel>
                 <FormControl>
                   <Input placeholder="Your city" {...field} />
                 </FormControl>
@@ -173,7 +158,7 @@ export function QuoteForm() {
             name="address"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Service Address *</FormLabel>
+                <FormLabel>Service address</FormLabel>
                 <FormControl>
                   <Input placeholder="Where service is needed" {...field} />
                 </FormControl>
@@ -187,10 +172,11 @@ export function QuoteForm() {
             name="phone"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Phone Number *</FormLabel>
+                <FormLabel>Phone number</FormLabel>
                 <FormControl>
                   <Input placeholder="Your phone number" type="tel" {...field} />
                 </FormControl>
+                <FormDescription>Optional, but helps us reach you faster.</FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -201,10 +187,10 @@ export function QuoteForm() {
             name="service"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Service Interest *</FormLabel>
+                <FormLabel>Service interest</FormLabel>
                 <Select onValueChange={field.onChange} defaultValue={field.value}>
                   <FormControl>
-                    <SelectTrigger className="bg-background text-foreground/90 hover:bg-background data-[state=open]:bg-background focus:bg-background">
+                    <SelectTrigger className="bg-background text-foreground hover:bg-background data-[state=open]:bg-background focus:bg-background">
                       <SelectValue placeholder="Choose a service type" />
                     </SelectTrigger>
                   </FormControl>
@@ -216,6 +202,7 @@ export function QuoteForm() {
                     <SelectItem value="other">Other</SelectItem>
                   </SelectContent>
                 </Select>
+                <FormDescription>Pick the closest match, we’ll confirm details after.</FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -231,12 +218,16 @@ export function QuoteForm() {
               <FormControl>
                 <Textarea placeholder="Tell us more about your project" rows={4} {...field} />
               </FormControl>
+              <FormDescription>Timeline, measurements, photos, anything helpful.</FormDescription>
               <FormMessage />
             </FormItem>
           )}
         />
 
-        <div className="text-right">
+        <div className="flex flex-col-reverse gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-xs text-muted-foreground">
+            By submitting, you agree we can contact you about this request.
+          </p>
           <Button 
             type="submit" 
             variant="accent"

@@ -12,7 +12,7 @@ import { ScrollIndicator } from "@/components/ui/scroll-indicator";
 
 export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col font-body bg-background text-foreground will-change-transform">
+    <div className="min-h-screen flex flex-col font-body bg-background text-foreground">
       <ScrollIndicator height={4} />
 
       <Header />

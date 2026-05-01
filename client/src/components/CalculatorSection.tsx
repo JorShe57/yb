@@ -91,10 +91,10 @@ export default function CalculatorSection() {
   return (
     <AnimatedSection 
       id="calculator" 
-      className="py-16 bg-gradient-to-tr from-gray-100 to-neutral"
+      className="py-16 bg-gradient-to-tr from-background to-muted"
       animation="fade"
     >
-      <div className="container mx-auto px-4 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-6 rounded-lg shadow-lg">
+      <div className="container mx-auto px-4 bg-card/80 backdrop-blur-sm p-6 rounded-lg shadow-lg border border-border/60">
         <div className="flex items-center mb-8">
           <h2 className="text-3xl font-heading font-bold">Topsoil Calculator</h2>
         </div>
@@ -105,13 +105,13 @@ export default function CalculatorSection() {
 
         <div className="flex flex-wrap gap-4 mb-8">
           <button 
-            className={`${activeCalculator === 'lengthWidth' ? 'bg-primary' : 'bg-gray-400'} hover:bg-primary/80 text-white font-semibold py-3 px-6 rounded-lg transition-colors shadow-md`}
+            className={`${activeCalculator === 'lengthWidth' ? 'bg-primary text-primary-foreground' : 'bg-muted text-foreground'} hover:bg-primary/90 hover:text-primary-foreground font-semibold py-3 px-6 rounded-lg transition-colors shadow-md`}
             onClick={() => setActiveCalculator('lengthWidth')}
           >
             Length & Width
           </button>
           <button 
-            className={`${activeCalculator === 'area' ? 'bg-primary' : 'bg-gray-400'} ${activeCalculator === 'area' ? 'hover:bg-primary/80' : 'hover:bg-gray-500'} text-white font-semibold py-3 px-6 rounded-lg transition-colors shadow-md`}
+            className={`${activeCalculator === 'area' ? 'bg-primary text-primary-foreground' : 'bg-muted text-foreground'} hover:bg-primary/90 hover:text-primary-foreground font-semibold py-3 px-6 rounded-lg transition-colors shadow-md`}
             onClick={() => setActiveCalculator('area')}
           >
             Area
@@ -124,11 +124,11 @@ export default function CalculatorSection() {
           ref={calculatorRef as React.RefObject<HTMLDivElement>}
         >
           {/* Length & Width Calculator */}
-          <div className={`calculator-container bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md dark:shadow-gray-900 ${activeCalculator === 'lengthWidth' ? '' : 'hidden'}`}>
-            <h3 className="text-xl font-heading font-semibold mb-4 dark:text-white">Calculate by Length & Width</h3>
+          <div className={`calculator-container bg-card p-6 rounded-lg shadow-md ${activeCalculator === 'lengthWidth' ? '' : 'hidden'}`}>
+            <h3 className="text-xl font-heading font-semibold mb-4">Calculate by Length & Width</h3>
 
             <div className="mb-6">
-              <p className="mb-4 dark:text-gray-200">Please enter the dimensions of your area and the desired depth of topsoil:</p>
+              <p className="mb-4 text-muted-foreground">Please enter the dimensions of your area and the desired depth of topsoil:</p>
 
               <div className="space-y-4">
                 <div className="grid md:grid-cols-3 gap-4">
@@ -175,7 +175,7 @@ export default function CalculatorSection() {
                   <button 
                     type="button" 
                     onClick={calculateLw}
-                    className="bg-accent hover:bg-yellow-500 hover:text-primary text-white font-semibold py-2 px-6 rounded-lg transition-colors"
+                    className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold py-2 px-6 rounded-lg transition-colors"
                   >
                     Calculate
                   </button>
@@ -184,20 +184,20 @@ export default function CalculatorSection() {
             </div>
 
             {lwResults.visible && (
-              <div className="bg-neutral dark:bg-gray-700 p-4 rounded-lg border border-gray-300 dark:border-gray-600">
-                <h4 className="font-heading font-semibold mb-2 dark:text-white">Results:</h4>
-                <p className="dark:text-gray-200">You will need approximately <span className="font-bold text-primary dark:text-accent">{lwResults.cubicYards}</span> cubic yards of topsoil.</p>
-                <p className="mt-2 text-sm dark:text-gray-300">This is equivalent to approximately <span className="font-semibold dark:text-white">{lwResults.cubicFeet}</span> cubic feet.</p>
+              <div className="bg-muted/50 p-4 rounded-lg border border-border">
+                <h4 className="font-heading font-semibold mb-2">Results</h4>
+                <p>You will need approximately <span className="font-bold text-primary">{lwResults.cubicYards}</span> cubic yards of topsoil.</p>
+                <p className="mt-2 text-sm text-muted-foreground">This is equivalent to approximately <span className="font-semibold text-foreground">{lwResults.cubicFeet}</span> cubic feet.</p>
               </div>
             )}
           </div>
 
           {/* Area Calculator */}
-          <div className={`calculator-container bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md dark:shadow-gray-900 ${activeCalculator === 'area' ? '' : 'hidden'}`}>
-            <h3 className="text-xl font-heading font-semibold mb-4 dark:text-white">Calculate by Area</h3>
+          <div className={`calculator-container bg-card p-6 rounded-lg shadow-md ${activeCalculator === 'area' ? '' : 'hidden'}`}>
+            <h3 className="text-xl font-heading font-semibold mb-4">Calculate by Area</h3>
 
             <div className="mb-6">
-              <p className="mb-4 dark:text-gray-200">Please enter the area and the desired depth of topsoil:</p>
+              <p className="mb-4 text-muted-foreground">Please enter the area and the desired depth of topsoil:</p>
 
               <div className="space-y-4">
                 <div className="grid md:grid-cols-2 gap-4">
@@ -232,7 +232,7 @@ export default function CalculatorSection() {
                   <button 
                     type="button" 
                     onClick={calculateArea}
-                    className="bg-accent hover:bg-yellow-500 hover:text-primary text-white font-semibold py-2 px-6 rounded-lg transition-colors"
+                    className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold py-2 px-6 rounded-lg transition-colors"
                   >
                     Calculate
                   </button>
@@ -241,22 +241,22 @@ export default function CalculatorSection() {
             </div>
 
             {areaResults.visible && (
-              <div className="bg-neutral dark:bg-gray-700 p-4 rounded-lg border border-gray-300 dark:border-gray-600">
-                <h4 className="font-heading font-semibold mb-2 dark:text-white">Results:</h4>
-                <p className="dark:text-gray-200">You will need approximately <span className="font-bold text-primary dark:text-accent">{areaResults.cubicYards}</span> cubic yards of topsoil.</p>
-                <p className="mt-2 text-sm dark:text-gray-300">This is equivalent to approximately <span className="font-semibold dark:text-white">{areaResults.cubicFeet}</span> cubic feet.</p>
+              <div className="bg-muted/50 p-4 rounded-lg border border-border">
+                <h4 className="font-heading font-semibold mb-2">Results</h4>
+                <p>You will need approximately <span className="font-bold text-primary">{areaResults.cubicYards}</span> cubic yards of topsoil.</p>
+                <p className="mt-2 text-sm text-muted-foreground">This is equivalent to approximately <span className="font-semibold text-foreground">{areaResults.cubicFeet}</span> cubic feet.</p>
               </div>
             )}
           </div>
         </div>
 
         <div 
-          className="mt-8 bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md dark:shadow-gray-900 animate-from-right"
+          className="mt-8 bg-card p-6 rounded-lg shadow-md animate-from-right border border-border"
           style={{ transitionDelay: '0.5s' }}
           ref={helpSectionRef as React.RefObject<HTMLDivElement>}>
-          <h3 className="text-xl font-heading font-semibold mb-4 dark:text-white">Need Help with Your Topsoil?</h3>
-          <p className="mb-4 dark:text-gray-200">Once you've calculated your topsoil needs, let us handle the delivery and spreading. We provide premium topsoil that's perfect for establishing new lawns and gardens.</p>
-          <a href="#quotes" className="bg-primary hover:bg-primary/80 hover:text-white text-white font-semibold py-2 px-6 rounded-lg transition-colors inline-block shadow-md">
+          <h3 className="text-xl font-heading font-semibold mb-4">Need help with topsoil?</h3>
+          <p className="mb-4 text-muted-foreground">Once you’ve calculated your topsoil needs, we can deliver and spread premium material suited for new lawns and beds.</p>
+          <a href="#quotes" className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold py-2 px-6 rounded-lg transition-colors inline-block shadow-md">
             Request Topsoil Delivery Quote
           </a>
         </div>

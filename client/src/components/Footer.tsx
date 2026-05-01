@@ -46,7 +46,7 @@ export default function Footer() {
           </div>
         </div>
         
-        <div className="mt-8 pt-6 border-t border-green-700 text-center">
+        <div className="mt-8 pt-6 border-t border-white/15 text-center">
           <p>&copy; {new Date().getFullYear()} Yard Bros Landscaping. All Rights Reserved.</p>
         </div>
       </div>

@@ -3,6 +3,7 @@ import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { Menu, X } from "lucide-react";
 import { motion } from "framer-motion";
 import yardBrosLogo from "@/assets/yardbros-logo.png";
+import { Button } from "@/components/ui/button";
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -60,12 +61,9 @@ export default function Header() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
           >
-            <a 
-              href="#quotes"
-              className="hidden md:inline-flex mr-4 bg-accent hover:bg-yellow-500 hover:text-primary text-white font-medium py-2 px-4 rounded text-sm transition-colors"
-            >
-              Get a Free Quote
-            </a>
+            <Button asChild variant="accent" size="sm" className="hidden md:inline-flex mr-4">
+              <a href="#quotes">Get a Free Quote</a>
+            </Button>
           </motion.div>
           
           <ThemeToggle />
@@ -99,7 +97,7 @@ export default function Header() {
           <div className="flex flex-col space-y-3">
             <a 
               href="#quotes" 
-              className="flex items-center justify-center py-3 px-4 bg-accent text-white hover:bg-yellow-500 hover:text-primary rounded-md shadow-sm transition-colors"
+              className="flex items-center justify-center py-3 px-4 bg-accent text-accent-foreground hover:bg-accent/90 rounded-md shadow-sm transition-colors"
               onClick={closeMobileMenu}
             >
               Get a Free Quote

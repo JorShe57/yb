@@ -2,6 +2,8 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist/public",
   "routes": [
+    { "handle": "filesystem" },
+
     { "src": "/webhook/quote", "methods": ["POST"], "dest": "/api/webhook/quote" },
 
     { "src": "/api/(.*)", "dest": "/api/$1" },

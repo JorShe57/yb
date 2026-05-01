@@ -11,7 +11,6 @@ type Props = {
 
 export function GoogleReviewButton({ surface = "footer", className }: Props) {
   const href = getGoogleReviewUrl();
-  if (!href) return null;
 
   return (
     <a

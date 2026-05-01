@@ -7,7 +7,6 @@ import {
   MotionListItem
 } from '@/components/ui/motion';
 import { GoogleReviewButton } from '@/components/GoogleReviewButton';
-import { getGoogleReviewUrl } from '@/lib/googleReview';
 
 // Animation variants for this component
 const animations = {
@@ -29,7 +28,6 @@ export default function HomeSection() {
   const [scrollIndicator, setScrollIndicator] = useState(true);
   const [heroVideoVisible, setHeroVideoVisible] = useState(false);
   const { scrollY } = useScroll();
-  const googleReviewUrl = getGoogleReviewUrl();
   
   // Parallax effect for video background
   const backgroundY = useTransform(scrollY, [0, 500], [0, 100]);
@@ -202,11 +200,9 @@ export default function HomeSection() {
                   <span className="text-sm">Trusted by over 500+ homeowners in your area</span>
                 </div>
 
-                {googleReviewUrl ? (
-                  <div className="mt-4 flex justify-center">
-                    <GoogleReviewButton surface="hero" />
-                  </div>
-                ) : null}
+                <div className="mt-4 flex justify-center">
+                  <GoogleReviewButton surface="hero" />
+                </div>
                 
                 <div className="border-t border-white/10 pt-3 mt-4 text-center italic text-sm font-light">
                   "Whatever you do, work at it with all your heart, as working for the Lord, not for human masters."

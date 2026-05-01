@@ -1,16 +1,10 @@
 {
   "buildCommand": "npm run build",
-  "version": 2,
-  "builds": [
-    { "src": "api/[...all].ts", "use": "@vercel/node" },
-    { "src": "dist/public/**", "use": "@vercel/static" }
-  ],
+  "outputDirectory": "dist/public",
   "routes": [
     { "handle": "filesystem" },
 
-    { "src": "/webhook/quote", "methods": ["POST"], "dest": "/api/[...all].ts" },
-
-    { "src": "/api/(.*)", "dest": "/api/[...all].ts" },
+    { "src": "/webhook/quote", "methods": ["POST"], "dest": "/api/webhook/quote" },
 
     { "src": "/(.*)", "methods": ["GET", "HEAD"], "dest": "/index.html" }
   ]
